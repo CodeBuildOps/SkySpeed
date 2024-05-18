@@ -11,12 +11,10 @@
     <releaseNotes />
     <description>Shared libraries that provide common functionality for SkySpeed Service</description>
     <dependencies>
-      <group targetFramework=".NETFramework4.8">
-        <dependency id="Microsoft.SqlServer.SqlManagementObjects" version="171.30.0" />
-      </group>
+      <group targetFramework=".NETFramework4.8"/>
     </dependencies>
   </metadata>
   <files>
-    <file src="..\..\Sources\RestoreService\bin\RestoreService.dll" target="lib\net48" />
+    <file src="..\..\bin\SkySpeedService.dll" target="lib\net48" />
   </files>
 </package>
