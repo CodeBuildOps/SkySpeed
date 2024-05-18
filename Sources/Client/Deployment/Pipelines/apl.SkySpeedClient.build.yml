@@ -7,7 +7,7 @@ trigger:
     - main
   paths:
     include:
-      - Sources/Service/*
+      - Sources/Client/*
 
 pool:
   vmImage: windows-latest
@@ -15,60 +15,42 @@ pool:
 variables:
   - group: 'Pipelines Global'
   - name: Sources
-    value: Sources/Service/Sources
+    value: Sources/Client/Sources
   - name: Solution
-    value: $(Sources)/SkySpeedService.sln
-  - name: SkySpeedServiceNugetPath
-    value: Sources/Service/Deployment/Nuget
+    value: $(Sources)/SkySpeed.sln
   - name: BuildTarget
-    value: Sources/Service/bin
+    value: Sources/Client/bin
   - name: ismain
     value: $[eq(variables['Build.SourceBranch'], 'refs/heads/main')]
 
 jobs:
 #------------------------------------------------> Build
 - job: Build
-  displayName: 'Build SkySpeedService.sln'
+  displayName: 'Build SkySpeed.sln'
   steps:
   - checkout: self
     lfs: true
 
   - task: NuGetCommand@2
-    displayName: 'Restore SkySpeedService.sln'
+    displayName: 'Restore SkySpeed.sln'
     inputs:
       command: 'restore'
       restoreSolution: '$(Solution)'
       feedsToUse: 'select'
+      vstsFeed: '7a41d38d-d7f1-43d0-8cca-5d18c0fbaa38/9e686431-a607-4e44-aa7e-16730dfc0f71'
 
   - task: VSBuild@1
-    displayName: 'Build SkySpeedService.sln'
+    displayName: 'Build SkySpeed.sln'
     inputs:
       solution: '$(Solution)'
       platform: '$(BuildPlatform)'
       configuration: '$(BuildConfiguration)'
       clean: true
       maximumCpuCount: true
-  
-  - task: NuGetCommand@2
-    displayName: 'SkySpeedService NuGets pack'
-    inputs:
-      command: 'pack'
-      packagesToPack: '$(SkySpeedServiceNugetPath)/*.nuspec'
-      packDestination: '$(Build.ArtifactStagingDirectory)\packages'
-      versioningScheme: 'byBuildNumber'
-
-  - task: NuGetCommand@2
-    displayName: 'SkySpeedService NuGets push'
-    condition: and(succeeded(), eq(variables.ismain, true))
-    inputs:
-      command: 'push'
-      packagesToPush: '$(Build.ArtifactStagingDirectory)\packages\*.nupkg'
-      nuGetFeedType: 'internal'
-      publishVstsFeed: '7a41d38d-d7f1-43d0-8cca-5d18c0fbaa38/9e686431-a607-4e44-aa7e-16730dfc0f71'
 
   - publish: $(BuildTarget)
-    artifact: PublishSkySpeedService
-    displayName: 'Publish SkySpeedService artifacts'
+    artifact: PublishSkySpeed
+    displayName: 'Publish SkySpeed artifacts'
 
 #------------------------------------------------>  Set Git Tag on success (only main)
 - job: GitTag
