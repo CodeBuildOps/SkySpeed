@@ -1,0 +1,70 @@
+﻿<Page x:Class="SkySpeed.FlightResults.FlightResultsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:local="clr-namespace:SkySpeed.FlightResults"
+      Title="FlightResultsPage">
+
+    <StackPanel>
+        <Label Content="Flight Results" FontWeight="SemiBold" FontSize="14" Background="{StaticResource HeaderBackgroundBrush}" />
+        <Border Margin="0,3,0,0" BorderBrush="{StaticResource HeaderBackgroundBrush}" BorderThickness="1">
+            <StackPanel Background="{StaticResource SectionBackgroundBrush}">
+                <Label Content="Flight" FontWeight="DemiBold" Foreground="White" Background="{StaticResource HeaderBackgroundBrush}" />
+                <DataGrid GridLinesVisibility="None" IsReadOnly="True" SelectionChanged="FlightDetailsGrid_SelectionChanged" Name="FlightDetailsGrid" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" MaxHeight="500" MinHeight="200">
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="Designator">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding Designator}"  Width="15" Height="15" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTextColumn Header="Flight Number" Binding="{Binding FlightNumber}" />
+                        <DataGridTextColumn Header="Day and Date" Binding="{Binding DayAndDate}" />
+                        <DataGridTextColumn Header="Sector" Binding="{Binding Sector}" />
+                        <DataGridTextColumn Header="Depart/Arrival" Binding="{Binding DepartArrival}" />
+                        <DataGridTextColumn Header="Stop" Binding="{Binding Stop}" />
+                        <DataGridTextColumn Header="Seats Left" Binding="{Binding SeatsLeft}" />
+                        <DataGridTextColumn Header="Fare" Binding="{Binding Fare}" />
+                        <DataGridTextColumn Header="Duration" Binding="{Binding Duration}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+        </Border>
+
+        <Grid Margin="0,3,0,0" Background="{StaticResource SectionBackgroundBrush}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Label Content="Details" FontWeight="DemiBold" Foreground="White" Background="{StaticResource HeaderBackgroundBrush}" Grid.Row="0" />
+
+            <Grid Grid.Row="1" Margin="0,5,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Label Content="Total Passengers:" FontWeight="DemiBold" Grid.Column="0" />
+                <Label Content="0"  Name="NumberOfPassengersLabel" FontWeight="DemiBold" HorizontalAlignment="Left" Margin="100,0,0,0" Width="17" />
+
+                <Label Content="Price per ADT:" FontWeight="DemiBold" Grid.Column="2" />
+                <Label Content="0 INR" Name="PricePerADTLabel" FontWeight="DemiBold" Grid.Column="3" />
+            </Grid>
+
+            <Grid Grid.Row="2" Margin="0,0,0,5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Label Content="Total Cost:" FontWeight="DemiBold" Grid.Column="0" />
+                <Label Content="0 INR" Name="TotalCostLabel" Foreground="Red" FontWeight="DemiBold" Grid.Column="1" />
+            </Grid>
+        </Grid>
+    </StackPanel>
+</Page>

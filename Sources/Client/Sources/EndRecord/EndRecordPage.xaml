@@ -1,0 +1,48 @@
+﻿<Page x:Class="SkySpeed.EndRecords.EndRecordPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:local="clr-namespace:SkySpeed.EndRecords"
+      Title="EndRecordPage">
+
+    <StackPanel>
+        <Label Content="End Record" FontWeight="SemiBold" FontSize="14" Background="{StaticResource HeaderBackgroundBrush}" />
+        <Grid Margin="0,3,0,0" Background="{StaticResource SectionBackgroundBrush}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Label Content="Action to perform" FontWeight="DemiBold" Foreground="White" Background="{StaticResource HeaderBackgroundBrush}" Grid.Row="0" />
+            <StackPanel Orientation="Vertical" Grid.Row="1" Margin="5">
+                <RadioButton Content="End Record" Margin="0,2,0,0" />
+                <RadioButton Content="End Record and Clear" Margin="0,2,0,0" />
+                <RadioButton Content="Ignore Changes" Margin="0,2,0,0" />
+                <RadioButton Content="Ignore Changes and Clear" Margin="0,2,0,0" />
+            </StackPanel>
+        </Grid>
+
+        <Grid Margin="0,3,0,3" Background="{StaticResource SectionBackgroundBrush}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Label Content="Itinerary details" FontWeight="DemiBold" Foreground="White" Background="{StaticResource HeaderBackgroundBrush}" Grid.Row="0" />
+
+            <Grid Grid.Row="1" Margin="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Label Content="Send Itinerary via:" Grid.Column="0" />
+                <ComboBox Name="SendItineraryComboBox" Width="80" Grid.Column="1" >
+                    <ComboBoxItem>None</ComboBoxItem>
+                    <ComboBoxItem>Email</ComboBoxItem>
+                    <ComboBoxItem>Print</ComboBoxItem>
+                </ComboBox>
+
+            </Grid>
+        </Grid>
+    </StackPanel>
+</Page>

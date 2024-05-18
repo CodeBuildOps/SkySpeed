@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace SkySpeedService
 {
-    class SkySpeedServices
+    public class SkySpeedServices
     {
         private DatabaseHandler _dbHandler;
 
