@@ -1,0 +1,88 @@
+name: $(Build.DefinitionName)_$(Build.SourceBranchName)_1.00.00$(rev:.rrrr)
+
+trigger:
+  batch: true
+  branches:
+    include:
+    - master
+  paths:
+    include:
+      - Sources/RestoreLogin_v2/Deployment/Pipelines/apl.RestoreService.v2.build.yml
+      - Sources/RestoreLogin_v2/Sources/RestoreService/*
+    exclude:
+      - Sources/RestoreLogin_v2/Sources/RestoreClient/*
+
+pool:
+  vmImage: windows-latest
+
+variables:
+  - group: 'Pipelines Global'
+  - name: Sources
+    value: Sources/RestoreLogin_v2/Sources
+  - name: Solution
+    value: $(Sources)/RestoreService/RestoreService.sln
+  - name: RestoreServiceNugetPath
+    value: 'Sources/RestoreLogin_v2/Deployment/Nuget'
+  - name: BuildTarget
+    value: $(Sources)/RestoreService/bin
+  - name: isMaster
+    value: $[eq(variables['Build.SourceBranch'], 'refs/heads/master')]
+
+jobs:
+#------------------------------------------------> Build
+- job: Build
+  displayName: 'Build RestoreService.sln'
+  steps:
+  - checkout: self
+    lfs: true
+
+  - task: NuGetCommand@2
+    displayName: 'Restore RestoreService.sln'
+    inputs:
+      command: 'restore'
+      restoreSolution: '$(Solution)'
+      feedsToUse: 'select'
+
+  - task: VSBuild@1
+    displayName: 'Build RestoreService.sln'
+    inputs:
+      solution: '$(Solution)'
+      platform: '$(BuildPlatform)'
+      configuration: '$(BuildConfiguration)'
+      clean: true
+      maximumCpuCount: true
+  
+  - task: NuGetCommand@2
+    displayName: 'RestoreService NuGets pack'
+    inputs:
+      command: 'pack'
+      packagesToPack: '$(RestoreServiceNugetPath)/*.nuspec'
+      packDestination: '$(Build.ArtifactStagingDirectory)\packages'
+      versioningScheme: 'byBuildNumber'
+
+  - task: NuGetCommand@2
+    displayName: 'RestoreService NuGets push'
+    condition: and(succeeded(), eq(variables.isMaster, true))
+    inputs:
+      command: 'push'
+      packagesToPush: '$(Build.ArtifactStagingDirectory)\packages\*.nupkg'
+      nuGetFeedType: 'internal'
+      publishVstsFeed: '740c55a9-a442-417b-928d-d179aaf29bb5/363c5466-eb09-4ba4-b3f3-d2a6e0f24b4f'
+
+  - publish: $(BuildTarget)
+    artifact: PublishRestoreService
+    displayName: 'Publish RestoreService artifacts'
+
+#------------------------------------------------>  Set Git Tag on success (only master)
+- job: GitTag
+  dependsOn: Build
+  displayName: Set Tag on Success
+  condition: and(succeeded(), eq(variables.isMaster, true))
+  steps:
+    - checkout: self
+      persistCredentials: true
+    - powershell: |
+        Write-Host "Tagging Build with: $env:BUILD_BUILDNUMBER"
+        $env:GIT_REDIRECT_STDERR` = '2>&1'
+        git tag $env:BUILD_BUILDNUMBER
+        git push origin $env:BUILD_BUILDNUMBER
