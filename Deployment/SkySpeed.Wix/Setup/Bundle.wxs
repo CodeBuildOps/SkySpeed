@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:bal="http://schemas.microsoft.com/wix/BalExtension"
+     xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+
+  <?include $(var.SolutionDir)Includes\Common.wxi?>
+
+  <?define NetFx48MinRelease = 528040?>
+
+  <?ifndef ProductVersion?>
+  <?define var.ProductVersion =$(var.MSIProductVersion)?>
+  <?endif ?>
+
+  <?ifndef BaseMajorVersion?>
+  <?define var.BaseMajorVersion ="1.00.00.0000"?>
+  <?endif ?>
+
+  <?ifndef NextMajorVersion?>
+  <?define var.NextMajorVersion ="2.00.00.0000"?>
+  <?endif ?>
+
+  <Bundle Name="SkySpeed"
+           Version="$(var.ProductVersion)"
+           Manufacturer="Chandigarh University"
+           DisableRemove="no"
+           DisableModify="yes"
+           UpgradeCode="{460F8305-FE33-44C5-9859-537DF1DE2DFF}"
+           Copyright="Copyright © 2024. All rights reserved."
+           IconSourceFile="Resources\SkySpeed.ico">
+
+    <!--.NET 4.8 as Prerequisites-->
+    <!--<bal:Condition Message="This Setup requires .NET Framework 4.8, please download and install it to proceed further.">
+      <![CDATA[NETFRAMEWORK45 >= $(var.NetFx48MinRelease)]]>
+    </bal:Condition>-->
+
+    <RelatedBundle Id="{121AB785-DE6A-476C-B111-284DC32F64A2}"  Action="Detect"/>
+
+    <!--Region BootstrapperApplicationRef-->
+    <BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.RtfLicense">
+      <Payload Id="ApplicationIcon" SourceFile="Resources\SkySpeed.ico"/>
+      <Payload SourceFile="Resources\SkySpeed.ico"/>
+    </BootstrapperApplicationRef>
+    <!--EndRegion BootstrapperApplicationRef-->
+
+    <Chain>
+      <PackageGroupRef Id="SkySpeed" />
+    </Chain>
+
+    <!--Region Detecting previous version-->
+    <util:RegistrySearch Id="SetupInstalledSearch"
+                         Root="HKLM"
+                         Key="SOFTWARE\ChandigarhUniversity\SkySpeed"
+                         Value="Version"
+                         Variable="SetupInstalled" Win64="no" />
+
+    <!--<ingr:GixSequencing InstallCondition="NOT SetupInstalled"
+                        FailedConditionMessageType ="igrRemoveRequired" />-->
+
+    <!--<ingr:GixSequencing InstallCondition="( SetupInstalled &gt; v$(var.ProductVersion) OR v$(var.ProductVersion) &gt; v$(var.NextMajorVersion) ) OR NOT SetupInstalled OR ( SetupInstalled &lt; v$(var.BaseMajorVersion) )"
+                        FailedConditionMessageType ="igrSoftwareDetected" />-->
+    <!--EndRegion Detecting previous version-->
+
+    <!--Region Product Information-->
+    <!--<ingr:GixProductInfo
+                     ShowLicense="yes"
+                     ProductIcon="SkySpeed.ico"
+                     ReadMeUrl="SkySpeed.pdf"
+                     EnableModify="no"
+                     ProductReleaseType="igrMajorRelease"
+                     MultiLanguage="yes"
+                     ProductHelpLink="SkySpeed.pdf"
+                     HideUpgrade="yes"/>-->
+    <!--EndRegion Product Information-->
+
+    <!-- Region Main feature definition on the features page-->
+    <!--<ingr:GixExtendedFeatureInfo
+                           Feature ="SkySpeed"
+                           AssociatedConfigurableDirectoryProperty ="INSTALLFOLDER" MainInstallFeature="yes"/>-->
+    <!-- EndRegion Main feature definition on the features page-->
+
+    <!--Region Variables Definition-->
+    <Variable Name="INSTALLFOLDER" Type="string" Value="[ProgramFilesFolder]" Persisted="yes"/>
+    <!--EndRegion Variables Definition-->
+
+	</Bundle>
+</Wix>

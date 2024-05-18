@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <?include $(var.SolutionDir)Includes\Common.wxi?>
+
+  <Product Id="{86C376E4-FCF1-44A0-8C1C-916462D3D0EB}"
+           Name="SkySpeed"
+           Language="1033"
+           Version="$(var.ProductVersion)"
+           Manufacturer="Chandigarh University"
+           UpgradeCode="{A3C392E1-A759-44DF-9E91-0D81E6909D7D}">
+
+    <Package Comments="SkySpeed"
+             Description="SkySpeed"
+             InstallerVersion="200"
+             Keywords="Installer,MSI"
+             Languages="1033"
+             Manufacturer="Chandigarh University"
+             Platform="x86"
+             Compressed="yes"
+             InstallScope="perMachine"/>
+
+    <Media Id="1"  DiskPrompt="1" EmbedCab="yes" Cabinet="Data1.cab" VolumeLabel="DISK1" />
+
+    <DirectoryRef Id="TARGETDIR" />
+    <FeatureRef Id="SkySpeed" />
+
+    <Property Id="DiskPrompt" Value="[1]" />
+    <Property Id="INSTALLLEVEL" Value="1" />
+    <Property Id="INSTALLDIR" Secure="yes" />
+  </Product>
+
+  <Fragment>
+    <Feature Id="SkySpeed"
+             ConfigurableDirectory="INSTALLFOLDER"
+             Description="SkySpeed"
+             Display="1"
+             InstallDefault="local"
+             Absent="disallow"
+             AllowAdvertise='no'
+             Level="1"
+             Title="SkySpeed">
+      <ComponentGroupRef Id="CG_SkySpeedHarvest"/>
+      <ComponentRef Id="CG_SkySpeedRegistry"/>
+    </Feature>
+  </Fragment>
+</Wix>

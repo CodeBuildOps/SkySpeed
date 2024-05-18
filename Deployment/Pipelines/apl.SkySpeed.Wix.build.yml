@@ -1,0 +1,74 @@
+name: $(Build.DefinitionName)_$(Build.SourceBranchName)_01.00.00$(rev:.rrrr)
+
+trigger:
+  batch: true
+  branches:
+    include:
+    - main
+  paths:
+    include:
+      - Deployment/*
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  - group: 'Pipelines Global'
+  - name: WixSolution
+    value: Deployment/SkySpeed.Wix/SkySpeed.Wix.sln
+  - name: ismain
+    value: $[eq(variables['Build.SourceBranch'], 'refs/heads/main')]
+
+jobs:
+#------------------------------------------------> Create Wix setup
+- job: Wix
+  displayName: 'Build SkySpeed.Wix.sln'
+  steps:
+  
+    - checkout: self
+      lfs: true
+
+    - task: DownloadPipelineArtifact@2
+      displayName: 'Download artifact from SkySpeed.Client.Build'
+      inputs:
+        buildType: 'specific'
+        project: '7a41d38d-d7f1-43d0-8cca-5d18c0fbaa38'
+        definition: '52'
+        buildVersionToDownload: 'latestFromBranch'
+        branchName: 'refs/heads/main'
+        artifactName: 'PublishSkySpeed'
+        targetPath: '$(Pipeline.Workspace)\PublishSkySpeed'
+
+    - task: NuGetCommand@2
+      displayName: 'Restore SkySpeed.Wix.sln'
+      inputs:
+        command: 'restore'
+        restoreSolution: '$(WixSolution)'
+        feedsToUse: 'select'
+
+    - task: VSBuild@1
+      displayName: 'Build SkySpeed.Wix.sln'
+      inputs:
+        solution: '$(WixSolution)'
+        platform: '$(BuildPlatformx86)'
+        configuration: '$(BuildConfiguration)'
+        clean: true
+        maximumCpuCount: true
+
+    - publish: Deployment/SkySpeed.Wix/DVD Layout
+      displayName : 'Publish DVD Layout artifact'
+      artifact: DVD Layout
+
+#------------------------------------------------>  Set Git Tag on success (only main)
+- job: GitTag
+  dependsOn: Wix
+  displayName: Set Tag on Success
+  condition: and(succeeded(), eq(variables.ismain, true))
+  steps:
+    - checkout: self
+      persistCredentials: true
+    - powershell: |
+        Write-Host "Tagging Build with: $env:BUILD_BUILDNUMBER"
+        $env:GIT_REDIRECT_STDERR` = '2>&1'
+        git tag $env:BUILD_BUILDNUMBER
+        git push origin $env:BUILD_BUILDNUMBER

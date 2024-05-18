@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <?include $(var.SolutionDir)Includes\Common.wxi?>
+  <Fragment>
+    <Component Id="CG_SkySpeedRegistry" Directory="SkySpeed">
+      <RegistryKey Root="HKLM" Key="SOFTWARE\ChandigarhUniversity\SkySpeed">
+        <RegistryValue Name="UserName" Value="[USERNAME]" Type="string"/>
+        <RegistryValue Name="Company" Value="[COMPANYNAME]" Type="string"/>
+        <RegistryValue Name="Version" Value="$(var.ProductVersion)" Type="string" />
+        <RegistryValue Name="InstallPath" Value="[SkySpeed]" Type="string"/>
+      </RegistryKey>
+    </Component>
+  </Fragment>
+</Wix>

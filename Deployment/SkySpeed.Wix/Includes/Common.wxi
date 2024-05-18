@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Include>
+  <?ifndef ProductVersion?>
+  <?define var.ProductVersion ="$(var.MSIProductVersion)"?>
+  <?endif?>
+
+  <?ifndef SourcesBinDirSkySpeed?>
+  <?define var.SourcesBinDirSkySpeed=$(var.ProjectDir)\HarvestSkySpeed?>
+  <?endif?>
+</Include>

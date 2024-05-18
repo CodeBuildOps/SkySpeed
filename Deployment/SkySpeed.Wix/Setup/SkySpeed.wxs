@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+
+  <Fragment>
+    <PackageGroup Id="SkySpeed">
+      <MsiPackage Id="SkySpeed"
+                  Cache="yes"
+                  Compressed="yes"
+                  Name="SkySpeed Package"
+                  ForcePerMachine="yes"
+                  SourceFile="..\bin\SkySpeed.msi"
+                  Vital="yes"
+                  EnableFeatureSelection="yes">
+
+        <MsiProperty Name="ARPSYSTEMCOMPONENT" Value="1"/>
+        <MsiProperty Name="INSTALLFOLDER" Value="[INSTALLFOLDER]"/>
+        <MsiProperty Name="SLAACCEPT" Value="[SLAACCEPT]" />
+        <MsiProperty Name="USERNAME" Value="[USERNAME]" />
+        <MsiProperty Name="COMPANYNAME" Value="[COMPANYNAME]"/>
+        <MsiProperty Name="ARPINSTALLLOCATION" Value="[INSTALLFOLDER]\SkySpeed"/>
+        <MsiProperty Name="ARPCOMMENTS" Value="SkySpeed"/>
+        <MsiProperty Name="ARPCONTACT" Value="Customer Support"/>
+        <MsiProperty Name="BUNDLE_PROVIDERKEY"        Value="[WixBundleProviderKey]"/>
+        <MsiProperty Name="ARPREADME" Value="[INSTALLFOLDER]\SkySpeed\SkySpeed.pdf"/>
+        <MsiProperty Name ="DVDFOLDER" Value="[WixBundleSourceProcessFolder]"/>
+      </MsiPackage>
+    </PackageGroup>
+  </Fragment>
+</Wix>
