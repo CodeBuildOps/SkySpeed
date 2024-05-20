@@ -6,7 +6,7 @@
     <DockPanel Background="{StaticResource SectionBackgroundBrush}">
         <Label DockPanel.Dock="Top" Content="Seat Map" FontWeight="SemiBold" FontSize="14" Background="{StaticResource HeaderBackgroundBrush}" />
 
-        <Grid Margin="0,3,0,0" DockPanel.Dock="Left" Width="200">
+        <Grid Margin="0,3,0,0" DockPanel.Dock="Left" Width="220">
             <StackPanel>
                 <Border BorderBrush="{StaticResource HeaderBackgroundBrush}" BorderThickness="1">
                     <StackPanel Background="{StaticResource SectionBackgroundBrush}">
@@ -15,6 +15,7 @@
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Passenger" Binding="{Binding FullName}" />
                                 <DataGridTextColumn Header="Seat" Binding="{Binding Seat}" />
+                                <DataGridTextColumn Header="Seat Price" Binding="{Binding SeatPrice}" />
                             </DataGrid.Columns>
                         </DataGrid>
                     </StackPanel>
@@ -43,9 +44,10 @@
                         <Grid.Background>
                             <ImageBrush ImageSource="..\Images\SeatLayout.png" Stretch="Fill"/>
                         </Grid.Background>
+                    <Grid Margin="25,260,0,0">
                         <Grid.Resources>
                             <Style TargetType="Button">
-                                <!-- Default style -->
+                                 <!--Default style-->
                                 <Setter Property="Background" Value="{StaticResource HeaderBackgroundBrush}"/>
                                 <Setter Property="Foreground" Value="White"/>
 
@@ -56,18 +58,16 @@
                                 <Setter Property="Height" Value="25"/>
 
                                 <Setter Property="Margin" Value="3"/>
-                                <!-- Hover effect -->
+                                 <!--Hover effect-->
                                 <Style.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="Blue"/>
+                                        <Setter Property="Background" Value="Yellow"/>
                                         <Setter Property="Foreground" Value="White"/>
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>
                         </Grid.Resources>
-
-                        <Grid Margin="25,260,0,0">
-                            <Grid.RowDefinitions>
+                        <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />

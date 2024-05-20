@@ -40,7 +40,7 @@
             FirstName = firstName;
             MiddleName = middleName;
             LastName = lastName;
-            FullName = $"{Title} {FirstName} {MiddleName} {LastName}";
+            FullName = string.IsNullOrEmpty(MiddleName) ? $"{Title} {FirstName} {LastName}" : $"{Title} {FirstName} {MiddleName} {LastName}";
             DOB = dob;
             Nationality = nationality;
             Country = country;

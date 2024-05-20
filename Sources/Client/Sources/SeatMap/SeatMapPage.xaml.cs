@@ -2,6 +2,7 @@
 using SkySpeed.MessageLog;
 using SkySpeed.Passengers;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -151,21 +152,17 @@ namespace SkySpeed.SeatMap
             {
                 Button clickedButton = (Button)sender;
 
-                // Deselect the previously selected seat, if any
                 DeselectPreviousSeat();
 
-                // Update the selected seat
                 selectedSeat = clickedButton;
 
-                // Highlight the selected seat
                 HighlightSelectedSeat(selectedSeat);
 
-                // Todo: Get the selected seat price and handle further actions
-                SaveSeat(selectedSeat.Content.ToString(), 100);
+                SaveSeat(selectedSeat.Content.ToString());
             }
             else
             {
-                _displayMessage.ShowWarningMessageBox("Select passenger first.");
+                _displayMessage.ShowErrorMessageBox("Select a passenger from the passenger seat list first.");
             }
         }
 
@@ -180,17 +177,24 @@ namespace SkySpeed.SeatMap
 
         private void HighlightSelectedSeat(Button seat)
         {
-            // Set the appearance of the selected seat
-            seat.Background = Brushes.Red;
+            seat.Background = Brushes.Green;
         }
 
-        private void SaveSeat(string selectedSeat, double selectedSeatPrice)
+        private void SaveSeat(string selectedSeat)
         {
             if (_selectedPassenger != null)
             {
-                // Update the selected passenger's seat
-                _selectedPassenger.Seat = selectedSeat;
-                _selectedPassenger.SeatPrice = selectedSeatPrice;
+                var seatGroupAndPrice = SeatGroupDetailsGrid.Items.Cast<SeatMapPriceDetails>().FirstOrDefault(x => x.Seat == $"Seat{selectedSeat}");
+                if (seatGroupAndPrice != null)
+                {
+                    _selectedPassenger.Seat = selectedSeat;
+                    _selectedPassenger.SeatPrice = seatGroupAndPrice.SeatPrice;
+                }
+
+                _displayMessage.ShowSuccessMessageBox($"" +
+                    $"Seat: {_selectedPassenger.Seat}\n" +
+                    $"SeatPrice: {_selectedPassenger.SeatPrice}\n" +
+                    $"Passenger: {_selectedPassenger.FullName}");
 
                 // Refresh the DataGrid to reflect the changes
                 PassengerSeatListDetailsGrid.Items.Refresh();
