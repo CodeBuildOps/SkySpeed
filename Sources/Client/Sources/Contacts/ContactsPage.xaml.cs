@@ -1,4 +1,5 @@
-﻿using SharedData;
+﻿using Constant;
+using SharedData;
 using SkySpeed.MessageLog;
 using SkySpeed.Passengers;
 using System;
@@ -13,20 +14,6 @@ namespace SkySpeed.Contacts
     /// </summary>
     public partial class ContactsPage : Page
     {
-        private enum Countries
-        {
-            China,
-            India,
-            Japan,
-            Indonesia,
-            Pakistan,
-            Bangladesh,
-            Russia,
-            Philippines,
-            Vietnam,
-            Turkey
-        }
-
         private DisplayMessage _displayMessage;
         private PassengersDetails _selectedPassenger;
         private Window _parentWindow;
@@ -54,7 +41,7 @@ namespace SkySpeed.Contacts
 
         private void SetComboBoxWithCountries()
         {
-            var countries = Enum.GetNames(typeof(Countries));
+            var countries = Enum.GetNames(typeof(ConstantHandler.Countries));
             CountryComboBox.ItemsSource = countries;
         }
 

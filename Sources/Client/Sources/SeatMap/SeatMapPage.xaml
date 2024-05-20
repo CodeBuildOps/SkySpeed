@@ -44,7 +44,7 @@
                             <ImageBrush ImageSource="..\Images\SeatLayout.png" Stretch="Fill"/>
                         </Grid.Background>
                         <Grid.Resources>
-                            <Style TargetType="ToggleButton">
+                            <Style TargetType="Button">
                                 <!-- Default style -->
                                 <Setter Property="Background" Value="{StaticResource HeaderBackgroundBrush}"/>
                                 <Setter Property="Foreground" Value="White"/>
@@ -90,25 +90,25 @@
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <ToggleButton Grid.Row="0" Grid.Column="0" Content="1A" Name="Seat1A" />
-                                <ToggleButton Grid.Row="0" Grid.Column="1" Content="1B" Name="Seat1B"/>
-                                <ToggleButton Grid.Row="0" Grid.Column="2" Content="1C" Name="Seat1C"/>
+                                <Button Grid.Row="0" Grid.Column="0" Content="1A" Name="Seat1A" />
+                                <Button Grid.Row="0" Grid.Column="1" Content="1B" Name="Seat1B"/>
+                                <Button Grid.Row="0" Grid.Column="2" Content="1C" Name="Seat1C"/>
 
-                                <ToggleButton Grid.Row="1" Grid.Column="0" Content="2A" Name="Seat2A"/>
-                                <ToggleButton Grid.Row="1" Grid.Column="1" Content="2B" Name="Seat2B"/>
-                                <ToggleButton Grid.Row="1" Grid.Column="2" Content="2C" Name="Seat2C"/>
+                                <Button Grid.Row="1" Grid.Column="0" Content="2A" Name="Seat2A"/>
+                                <Button Grid.Row="1" Grid.Column="1" Content="2B" Name="Seat2B"/>
+                                <Button Grid.Row="1" Grid.Column="2" Content="2C" Name="Seat2C"/>
 
-                                <ToggleButton Grid.Row="2" Grid.Column="0" Content="3A" Name="Seat3A"/>
-                                <ToggleButton Grid.Row="2" Grid.Column="1" Content="3B" Name="Seat3B"/>
-                                <ToggleButton Grid.Row="2" Grid.Column="2" Content="3C" Name="Seat3C"/>
+                                <Button Grid.Row="2" Grid.Column="0" Content="3A" Name="Seat3A"/>
+                                <Button Grid.Row="2" Grid.Column="1" Content="3B" Name="Seat3B"/>
+                                <Button Grid.Row="2" Grid.Column="2" Content="3C" Name="Seat3C"/>
 
-                                <ToggleButton Grid.Row="3" Grid.Column="0" Content="4A" Name="Seat4A"/>
-                                <ToggleButton Grid.Row="3" Grid.Column="1" Content="4B" Name="Seat4B"/>
-                                <ToggleButton Grid.Row="3" Grid.Column="2" Content="4C" Name="Seat4C"/>
+                                <Button Grid.Row="3" Grid.Column="0" Content="4A" Name="Seat4A"/>
+                                <Button Grid.Row="3" Grid.Column="1" Content="4B" Name="Seat4B"/>
+                                <Button Grid.Row="3" Grid.Column="2" Content="4C" Name="Seat4C"/>
 
-                                <ToggleButton Grid.Row="4" Grid.Column="0" Content="5A" Name="Seat5A"/>
-                                <ToggleButton Grid.Row="4" Grid.Column="1" Content="5B" Name="Seat5B"/>
-                                <ToggleButton Grid.Row="4" Grid.Column="2" Content="5C" Name="Seat5C"/>
+                                <Button Grid.Row="4" Grid.Column="0" Content="5A" Name="Seat5A"/>
+                                <Button Grid.Row="4" Grid.Column="1" Content="5B" Name="Seat5B"/>
+                                <Button Grid.Row="4" Grid.Column="2" Content="5C" Name="Seat5C"/>
                             </Grid>
                             <Grid Grid.Row="0" Grid.Column="1">
                                 <Grid.RowDefinitions>
@@ -123,25 +123,25 @@
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <ToggleButton Grid.Row="0" Grid.Column="0" Content="1D" Name="Seat1D"/>
-                                <ToggleButton Grid.Row="0" Grid.Column="1" Content="1E" Name="Seat1E"/>
-                                <ToggleButton Grid.Row="0" Grid.Column="2" Content="1F" Name="Seat1F"/>
+                                <Button Grid.Row="0" Grid.Column="0" Content="1D" Name="Seat1D"/>
+                                <Button Grid.Row="0" Grid.Column="1" Content="1E" Name="Seat1E"/>
+                                <Button Grid.Row="0" Grid.Column="2" Content="1F" Name="Seat1F"/>
 
-                                <ToggleButton Grid.Row="1" Grid.Column="0" Content="2D" Name="Seat2D"/>
-                                <ToggleButton Grid.Row="1" Grid.Column="1" Content="2E" Name="Seat2E"/>
-                                <ToggleButton Grid.Row="1" Grid.Column="2" Content="2F" Name="Seat2F"/>
+                                <Button Grid.Row="1" Grid.Column="0" Content="2D" Name="Seat2D"/>
+                                <Button Grid.Row="1" Grid.Column="1" Content="2E" Name="Seat2E"/>
+                                <Button Grid.Row="1" Grid.Column="2" Content="2F" Name="Seat2F"/>
 
-                                <ToggleButton Grid.Row="2" Grid.Column="0" Content="3D" Name="Seat3D"/>
-                                <ToggleButton Grid.Row="2" Grid.Column="1" Content="3E" Name="Seat3E"/>
-                                <ToggleButton Grid.Row="2" Grid.Column="2" Content="3F" Name="Seat3F"/>
+                                <Button Grid.Row="2" Grid.Column="0" Content="3D" Name="Seat3D"/>
+                                <Button Grid.Row="2" Grid.Column="1" Content="3E" Name="Seat3E"/>
+                                <Button Grid.Row="2" Grid.Column="2" Content="3F" Name="Seat3F"/>
 
-                                <ToggleButton Grid.Row="3" Grid.Column="0" Content="4D" Name="Seat4D"/>
-                                <ToggleButton Grid.Row="3" Grid.Column="1" Content="4E" Name="Seat4E"/>
-                                <ToggleButton Grid.Row="3" Grid.Column="2" Content="4F" Name="Seat4F"/>
+                                <Button Grid.Row="3" Grid.Column="0" Content="4D" Name="Seat4D"/>
+                                <Button Grid.Row="3" Grid.Column="1" Content="4E" Name="Seat4E"/>
+                                <Button Grid.Row="3" Grid.Column="2" Content="4F" Name="Seat4F"/>
 
-                                <ToggleButton Grid.Row="4" Grid.Column="0" Content="5D" Name="Seat5D"/>
-                                <ToggleButton Grid.Row="4" Grid.Column="1" Content="5E" Name="Seat5E"/>
-                                <ToggleButton Grid.Row="4" Grid.Column="2" Content="5F" Name="Seat5F"/>
+                                <Button Grid.Row="4" Grid.Column="0" Content="5D" Name="Seat5D"/>
+                                <Button Grid.Row="4" Grid.Column="1" Content="5E" Name="Seat5E"/>
+                                <Button Grid.Row="4" Grid.Column="2" Content="5F" Name="Seat5F"/>
                             </Grid>
 
                             <Grid Grid.Row="1" Grid.Column="0" Margin="0,12,12,0">
@@ -153,9 +153,9 @@
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <ToggleButton Grid.Row="0" Grid.Column="0" Content="0A" Name="Seat0A"/>
-                                <ToggleButton Grid.Row="0" Grid.Column="1" Content="0B" Name="Seat0B"/>
-                                <ToggleButton Grid.Row="0" Grid.Column="2" Content="0C" Name="Seat0C"/>
+                                <Button Grid.Row="0" Grid.Column="0" Content="0A" Name="Seat0A"/>
+                                <Button Grid.Row="0" Grid.Column="1" Content="0B" Name="Seat0B"/>
+                                <Button Grid.Row="0" Grid.Column="2" Content="0C" Name="Seat0C"/>
                             </Grid>
                             <Grid Grid.Row="1" Grid.Column="1" Margin="0,12,0,0">
                                 <Grid.RowDefinitions>
@@ -166,9 +166,9 @@
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <ToggleButton Grid.Row="0" Grid.Column="0" Content="0D" Name="Seat0D"/>
-                                <ToggleButton Grid.Row="0" Grid.Column="1" Content="0E" Name="Seat0E"/>
-                                <ToggleButton Grid.Row="0" Grid.Column="2" Content="0F" Name="Seat0F"/>
+                                <Button Grid.Row="0" Grid.Column="0" Content="0D" Name="Seat0D"/>
+                                <Button Grid.Row="0" Grid.Column="1" Content="0E" Name="Seat0E"/>
+                                <Button Grid.Row="0" Grid.Column="2" Content="0F" Name="Seat0F"/>
                             </Grid>
 
                             <Grid Grid.Row="2" Grid.Column="0" Margin="0,12,12,0">
@@ -184,21 +184,21 @@
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <ToggleButton Grid.Row="0" Grid.Column="0" Content="6A" Name="Seat6A"/>
-                                <ToggleButton Grid.Row="0" Grid.Column="1" Content="6B" Name="Seat6B"/>
-                                <ToggleButton Grid.Row="0" Grid.Column="2" Content="6C" Name="Seat6C"/>
+                                <Button Grid.Row="0" Grid.Column="0" Content="6A" Name="Seat6A"/>
+                                <Button Grid.Row="0" Grid.Column="1" Content="6B" Name="Seat6B"/>
+                                <Button Grid.Row="0" Grid.Column="2" Content="6C" Name="Seat6C"/>
 
-                                <ToggleButton Grid.Row="1" Grid.Column="0" Content="7A" Name="Seat7A"/>
-                                <ToggleButton Grid.Row="1" Grid.Column="1" Content="7B" Name="Seat7B"/>
-                                <ToggleButton Grid.Row="1" Grid.Column="2" Content="7C" Name="Seat7C"/>
+                                <Button Grid.Row="1" Grid.Column="0" Content="7A" Name="Seat7A"/>
+                                <Button Grid.Row="1" Grid.Column="1" Content="7B" Name="Seat7B"/>
+                                <Button Grid.Row="1" Grid.Column="2" Content="7C" Name="Seat7C"/>
 
-                                <ToggleButton Grid.Row="2" Grid.Column="0" Content="8A" Name="Seat8A"/>
-                                <ToggleButton Grid.Row="2" Grid.Column="1" Content="8B" Name="Seat8B"/>
-                                <ToggleButton Grid.Row="2" Grid.Column="2" Content="8C" Name="Seat8C"/>
+                                <Button Grid.Row="2" Grid.Column="0" Content="8A" Name="Seat8A"/>
+                                <Button Grid.Row="2" Grid.Column="1" Content="8B" Name="Seat8B"/>
+                                <Button Grid.Row="2" Grid.Column="2" Content="8C" Name="Seat8C"/>
 
-                                <ToggleButton Grid.Row="3" Grid.Column="0" Content="9A" Name="Seat9A"/>
-                                <ToggleButton Grid.Row="3" Grid.Column="1" Content="9B" Name="Seat9B"/>
-                                <ToggleButton Grid.Row="3" Grid.Column="2" Content="9C" Name="Seat9C"/>
+                                <Button Grid.Row="3" Grid.Column="0" Content="9A" Name="Seat9A"/>
+                                <Button Grid.Row="3" Grid.Column="1" Content="9B" Name="Seat9B"/>
+                                <Button Grid.Row="3" Grid.Column="2" Content="9C" Name="Seat9C"/>
                             </Grid>
                             <Grid Grid.Row="2" Grid.Column="1" Margin="0,12,0,0">
                                 <Grid.RowDefinitions>
@@ -213,21 +213,21 @@
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <ToggleButton Grid.Row="0" Grid.Column="0" Content="6D" Name="Seat6D"/>
-                                <ToggleButton Grid.Row="0" Grid.Column="1" Content="6E" Name="Seat6E"/>
-                                <ToggleButton Grid.Row="0" Grid.Column="2" Content="6F" Name="Seat6F"/>
+                                <Button Grid.Row="0" Grid.Column="0" Content="6D" Name="Seat6D"/>
+                                <Button Grid.Row="0" Grid.Column="1" Content="6E" Name="Seat6E"/>
+                                <Button Grid.Row="0" Grid.Column="2" Content="6F" Name="Seat6F"/>
 
-                                <ToggleButton Grid.Row="1" Grid.Column="0" Content="7D" Name="Seat7D"/>
-                                <ToggleButton Grid.Row="1" Grid.Column="1" Content="7E" Name="Seat7E"/>
-                                <ToggleButton Grid.Row="1" Grid.Column="2" Content="7F" Name="Seat7F"/>
+                                <Button Grid.Row="1" Grid.Column="0" Content="7D" Name="Seat7D"/>
+                                <Button Grid.Row="1" Grid.Column="1" Content="7E" Name="Seat7E"/>
+                                <Button Grid.Row="1" Grid.Column="2" Content="7F" Name="Seat7F"/>
 
-                                <ToggleButton Grid.Row="2" Grid.Column="0" Content="8D" Name="Seat8D"/>
-                                <ToggleButton Grid.Row="2" Grid.Column="1" Content="8E" Name="Seat8E"/>
-                                <ToggleButton Grid.Row="2" Grid.Column="2" Content="8F" Name="Seat8F"/>
+                                <Button Grid.Row="2" Grid.Column="0" Content="8D" Name="Seat8D"/>
+                                <Button Grid.Row="2" Grid.Column="1" Content="8E" Name="Seat8E"/>
+                                <Button Grid.Row="2" Grid.Column="2" Content="8F" Name="Seat8F"/>
 
-                                <ToggleButton Grid.Row="3" Grid.Column="0" Content="9D" Name="Seat9D"/>
-                                <ToggleButton Grid.Row="3" Grid.Column="1" Content="9E" Name="Seat9E"/>
-                                <ToggleButton Grid.Row="3" Grid.Column="2" Content="9F" Name="Seat9F"/>
+                                <Button Grid.Row="3" Grid.Column="0" Content="9D" Name="Seat9D"/>
+                                <Button Grid.Row="3" Grid.Column="1" Content="9E" Name="Seat9E"/>
+                                <Button Grid.Row="3" Grid.Column="2" Content="9F" Name="Seat9F"/>
                             </Grid>
 
                         </Grid>

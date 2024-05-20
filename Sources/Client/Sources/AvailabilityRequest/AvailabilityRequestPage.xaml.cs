@@ -1,4 +1,5 @@
-﻿using SharedData;
+﻿using Constant;
+using SharedData;
 using SkySpeed.MessageLog;
 using System;
 using System.Collections.Generic;
@@ -13,36 +14,6 @@ namespace SkySpeed.AvailabilityRequest
     public partial class AvailabilityRequestPage : Page
     {
         private DisplayMessage _displayMessage;
-        private enum Capital
-        {
-            Amaravati,
-            Itanagar,
-            Dispur,
-            Patna,
-            Raipur,
-            Panaji,
-            Gandhinagar,
-            Chandigarh,
-            Shimla,
-            Ranchi,
-            Bengaluru,
-            Thiruvananthapuram,
-            Bhopal,
-            Mumbai,
-            Imphal,
-            Shillong,
-            Aizawl,
-            Kohima,
-            Bhubaneswar,
-            Jaipur,
-            Gangtok,
-            Chennai,
-            Hyderabad,
-            Agartala,
-            Lucknow,
-            Dehradun,
-            Kolkata
-        }
 
         public AvailabilityRequestPage()
         {
@@ -76,7 +47,7 @@ namespace SkySpeed.AvailabilityRequest
 
         private void SetComboBoxWithCaptials()
         {
-            var capitals = Enum.GetNames(typeof(Capital));
+            var capitals = Enum.GetNames(typeof(ConstantHandler.Capital));
             FromComboBox.ItemsSource = capitals;
             ToComboBox.ItemsSource = capitals;
         }

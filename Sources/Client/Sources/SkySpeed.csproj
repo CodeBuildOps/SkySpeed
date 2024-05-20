@@ -38,6 +38,9 @@
     <ApplicationIcon>Images\SkySpeed.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Constant">
+      <HintPath>..\..\bin\Constant.dll</HintPath>
+    </Reference>
     <Reference Include="Handler, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\bin\Handler.dll</HintPath>
@@ -96,6 +99,7 @@
     <Compile Include="SeatMap\SeatMapPage.xaml.cs">
       <DependentUpon>SeatMapPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SeatMap\SeatMapPriceDetails.cs" />
     <Compile Include="SkySpeedMainWindow\SkySpeedWindow.xaml.cs">
       <DependentUpon>SkySpeedWindow.xaml</DependentUpon>
     </Compile>

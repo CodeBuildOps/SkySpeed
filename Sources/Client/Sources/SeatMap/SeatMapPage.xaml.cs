@@ -4,29 +4,16 @@ using SkySpeed.Passengers;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 
 namespace SkySpeed.SeatMap
 {
-    class SeatMapPriceDetails
-    {
-        public string Seat { get; set; }
-        public double SeatPrice { get; set; }
-
-        public SeatMapPriceDetails(string seat, double seatPrice)
-        {
-            Seat = seat;
-            SeatPrice = seatPrice;
-        }
-    }
-
     /// <summary>
     /// Interaction logic for SeatMapPage.xaml
     /// </summary>
     public partial class SeatMapPage : Page
     {
-        private ToggleButton selectedSeat = null;
+        private Button selectedSeat = null;
 
         private DisplayMessage _displayMessage;
         private PassengersDetails _selectedPassenger;
@@ -74,7 +61,9 @@ namespace SkySpeed.SeatMap
                             row.AddressState,
                             row.AddressCountry,
                             row.Mobile,
-                            row.Email
+                            row.Email,
+
+                            row.Seat
                             )
                     );
                 }
@@ -107,12 +96,12 @@ namespace SkySpeed.SeatMap
                     string seatName = $"Seat{row}{col}";
 
                     // Get the ToggleButton object using FindName
-                    ToggleButton seatButton = (ToggleButton)this.FindName(seatName);
+                    Button seatButton = (Button)this.FindName(seatName);
 
                     // Check if seatButton is found
                     if (seatButton != null)
                     {
-                        seatButton.Checked += ToggleSeat_Checked;
+                        seatButton.Click += ButtonSeat_Clicked;
 
                         // Calculate seat price based on location
                         double price = CalculateSeatPrice(row, col);
@@ -156,38 +145,40 @@ namespace SkySpeed.SeatMap
             // Todo: Get some validation like seat available, or enable seat selection
         }
 
-        private void ToggleSeat_Checked(object sender, RoutedEventArgs e)
+        private void ButtonSeat_Clicked(object sender, RoutedEventArgs e)
         {
-            ToggleButton clickedButton = (ToggleButton)sender;
+            if (_selectedPassenger != null)
+            {
+                Button clickedButton = (Button)sender;
 
-            // Deselect the previously selected seat, if any
-            DeselectPreviousSeat();
+                // Deselect the previously selected seat, if any
+                DeselectPreviousSeat();
 
-            // Update the selected seat
-            selectedSeat = clickedButton;
+                // Update the selected seat
+                selectedSeat = clickedButton;
 
-            // Highlight the selected seat
-            HighlightSelectedSeat(selectedSeat);
+                // Highlight the selected seat
+                HighlightSelectedSeat(selectedSeat);
 
-            // Todo: Get the selected seat price and handle further actions
-
-            SaveSeat(selectedSeat.Content.ToString(),100);
+                // Todo: Get the selected seat price and handle further actions
+                SaveSeat(selectedSeat.Content.ToString(), 100);
+            }
+            else
+            {
+                _displayMessage.ShowWarningMessageBox("Select passenger first.");
+            }
         }
 
         private void DeselectPreviousSeat()
         {
-            if (selectedSeat != null && selectedSeat.IsChecked == true)
+            if (selectedSeat != null)
             {
-                // Deselect the previously selected seat
-                selectedSeat.IsChecked = false;
-
                 // Revert back the appearance of the previously selected seat
-                //selectedSeat.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#6699CC"));
-                selectedSeat.Background = Brushes.Purple;
+                selectedSeat.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#6699CC"));
             }
         }
 
-        private void HighlightSelectedSeat(ToggleButton seat)
+        private void HighlightSelectedSeat(Button seat)
         {
             // Set the appearance of the selected seat
             seat.Background = Brushes.Red;
@@ -203,6 +194,9 @@ namespace SkySpeed.SeatMap
 
                 // Refresh the DataGrid to reflect the changes
                 PassengerSeatListDetailsGrid.Items.Refresh();
+
+                // Need to work here
+                //SharedDataPage.PassengersDetailsGrid = PassengerSeatListDetailsGrid;
 
                 // Deselect the selected passenger
                 PassengerSeatListDetailsGrid.SelectedItem = null;
