@@ -37,6 +37,12 @@ namespace SkySpeedService
             return registration.CreateRegistration();
         }
 
+        public bool InsertFlightDetails(string flightDetailFilePath)
+        {
+            var flightDetails = new FlightDetails();
+            return flightDetails.InsertFlightDetails(flightDetailFilePath);
+        }
+
         public bool DoLogin(string userId, string empPassword)
         {
             var login = new RegistrationAndLogin(userId, empPassword, null);
