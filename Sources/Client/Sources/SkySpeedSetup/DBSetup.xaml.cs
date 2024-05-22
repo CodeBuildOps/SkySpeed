@@ -48,16 +48,33 @@ namespace SkySpeedSetup
 
         private void CreateButton_Click(object sender, RoutedEventArgs e)
         {
-            Cursor = Cursors.Wait;
-            if (File.Exists(INIHandler.INIFilePath))
+            if (!File.Exists(INIHandler.INIFilePath))
             {
-                bool isDBExists = _skySpeedServices.DatabaseExists(INIHandler.INIFilePath);
-                if (!isDBExists)
+                _displayMessage.ShowErrorMessageBox($"{INIHandler.SkySpeedIni} not found. Create a profile first.");
+                return;
+            }
+
+            if (!File.Exists(INIHandler.FlightDetailsPath))
+            {
+                _displayMessage.ShowErrorMessageBox($"{INIHandler.FlightDetailsTxt} not found. Contact support.");
+                return;
+            }
+
+            Cursor = Cursors.Wait;
+
+            bool isDBExists = _skySpeedServices.DatabaseExists(INIHandler.INIFilePath);
+            if (isDBExists)
+            {
+                _displayMessage.ShowWarningMessageBox("Database already exists. Please log in to SkySpeed.");
+            }
+            else
+            {
+                bool isDBSetupDone = _skySpeedServices.CreateDBSetup();
+                if (isDBSetupDone)
                 {
-                    bool isDBSetupDone = _skySpeedServices.CreateDBSetup();
-                    if (isDBSetupDone)
+                    if (_skySpeedServices.InsertFlightDetails(INIHandler.FlightDetailsPath))
                     {
-                        _displayMessage.ShowSuccessMessageBox("Database created successfully.");
+                        _displayMessage.ShowSuccessMessageBox("Database created successfully. Please log in to SkySpeed.");
                     }
                     else
                     {
@@ -66,13 +83,10 @@ namespace SkySpeedSetup
                 }
                 else
                 {
-                    _displayMessage.ShowWarningMessageBox("Database exists.");
+                    _displayMessage.ShowErrorMessageBox("Error occurred in creating the database.");
                 }
             }
-            else
-            {
-                _displayMessage.ShowErrorMessageBox("Create a profile first.");
-            }
+
             Cursor = Cursors.Arrow;
         }
 

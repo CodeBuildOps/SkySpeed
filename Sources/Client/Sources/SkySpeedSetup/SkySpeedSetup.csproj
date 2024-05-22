@@ -108,8 +108,13 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="SkySpeed.Service">
-      <Version>1.0.0.3</Version>
+      <Version>1.0.0.6</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Flight_Details.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
