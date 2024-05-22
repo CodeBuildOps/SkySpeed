@@ -54,7 +54,8 @@ try
 
 	$exclude = @(
 		'*.pdb',
-		'*.config'
+		'*.config',
+		'*.ini'
 	)
     New-Item $dirForHarvest -Type Directory
 	Copy-Item -Path $binDirectory\* -Destination $dirForHarvest -Exclude $exclude -force -Recurse
