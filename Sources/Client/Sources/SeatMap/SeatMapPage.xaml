@@ -91,6 +91,8 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
                                 <Button Grid.Row="0" Grid.Column="0" Content="1A" Name="Seat1A" />
+                                <Image Grid.Row="0" Grid.Column="0" Width="40" Height="40" Name="sharedSittingPersonImage" Source="../Images/sittingPerson.png" Visibility="Hidden" />
+
                                 <Button Grid.Row="0" Grid.Column="1" Content="1B" Name="Seat1B"/>
                                 <Button Grid.Row="0" Grid.Column="2" Content="1C" Name="Seat1C"/>
 

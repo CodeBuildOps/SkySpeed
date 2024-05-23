@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 
 namespace SkySpeed.SeatMap
 {
@@ -210,14 +209,27 @@ namespace SkySpeed.SeatMap
         {
             if (selectedSeat != null)
             {
-                // Revert back the appearance of the previously selected seat
-                selectedSeat.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#6699CC"));
+                // Get the selected button's grid position and move the sharedSittingPersonImage to the button's position
+                Grid.SetRow(sharedSittingPersonImage, Grid.GetRow(selectedSeat));
+                Grid.SetColumn(sharedSittingPersonImage, Grid.GetColumn(selectedSeat));
+
+                // Make the image visible
+                sharedSittingPersonImage.Visibility = Visibility.Hidden;
             }
         }
 
         private void HighlightSelectedSeat(Button seat)
         {
-            seat.Background = Brushes.Green;
+            // Get the selected button's grid position and move the sharedSittingPersonImage to the button's position
+            Grid.SetRow(sharedSittingPersonImage, Grid.GetRow(seat));
+            Grid.SetColumn(sharedSittingPersonImage, Grid.GetColumn(seat));
+
+            // Bring the image to the front
+            Panel.SetZIndex(sharedSittingPersonImage, 2);
+            Panel.SetZIndex(seat, 1);
+
+            // Make the image visible
+            sharedSittingPersonImage.Visibility = Visibility.Visible;
         }
 
         private void SaveSeat(string selectedSeat)
