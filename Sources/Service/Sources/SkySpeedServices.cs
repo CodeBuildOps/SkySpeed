@@ -1,4 +1,5 @@
 ﻿using SkySpeedService.DatabaseAndTables;
+using SkySpeedService.Email;
 using SkySpeedService.Flight;
 using SkySpeedService.Handler;
 using SkySpeedService.SignupAndLogin;
@@ -53,6 +54,12 @@ namespace SkySpeedService
         {
             var flightDetails = new FlightDetails();
             return flightDetails.GetAllFlightDetails();
+        }
+
+        public bool SendEmail(string toMail)
+        {
+            var sendEmail = new SendEmail(toMail);
+            return sendEmail.IsEmailSent();
         }
     }
 }
