@@ -37,40 +37,80 @@ namespace SkySpeed.SeatMap
 
         private void SetPassengerSeatListDetailsGrid()
         {
-            var passengersDetailsList = new List<PassengersDetails>();
+            var detailsList = new List<PassengersDetails>();
 
-            foreach (var rowItem in SharedDataPage.PassengersDetailsGrid.Items)
+            var gridItems = SharedDataPage.PassengerSeatListDetailsGrid?.Items ?? SharedDataPage.PassengersDetailsGrid.Items;
+
+            if (SharedDataPage.PassengerSeatListDetailsGrid != null)
             {
-                if (rowItem is PassengersDetails row)
+                foreach (var rowItem in SharedDataPage.PassengerSeatListDetailsGrid.Items)
                 {
-                    passengersDetailsList.Add(
-                        new PassengersDetails(
-                            row.Type,
-                            row.Gender,
-                            row.Title,
-                            row.FirstName,
-                            row.MiddleName,
-                            row.LastName,
-                            row.DOB,
-                            row.Nationality,
-                            row.Country,
+                    if (rowItem is PassengersDetails row)
+                    {
+                        detailsList.Add(
+                            new PassengersDetails(
+                                row.Type,
+                                row.Gender,
+                                row.Title,
+                                row.FirstName,
+                                row.MiddleName,
+                                row.LastName,
+                                row.DOB,
+                                row.Nationality,
+                                row.Country,
 
-                            row.AddressLine1,
-                            row.AddressLine2,
-                            row.AddressPostal,
-                            row.AddressTown,
-                            row.AddressState,
-                            row.AddressCountry,
-                            row.Mobile,
-                            row.Email,
+                                row.AddressLine1,
+                                row.AddressLine2,
+                                row.AddressPostal,
+                                row.AddressTown,
+                                row.AddressState,
+                                row.AddressCountry,
+                                row.Mobile,
+                                row.Email,
 
-                            row.Seat
-                            )
-                    );
+                                row.Seat,
+                                row.SeatPrice
+                                )
+                        );
+                    }
+                }
+            }
+            else
+            {
+                foreach (var rowItem in SharedDataPage.PassengersDetailsGrid.Items)
+                {
+                    if (rowItem is PassengersDetails row)
+                    {
+                        detailsList.Add(
+                            new PassengersDetails(
+                                row.Type,
+                                row.Gender,
+                                row.Title,
+                                row.FirstName,
+                                row.MiddleName,
+                                row.LastName,
+                                row.DOB,
+                                row.Nationality,
+                                row.Country,
+
+                                row.AddressLine1,
+                                row.AddressLine2,
+                                row.AddressPostal,
+                                row.AddressTown,
+                                row.AddressState,
+                                row.AddressCountry,
+                                row.Mobile,
+                                row.Email,
+
+                                row.Seat,
+                                row.SeatPrice
+                                )
+                        );
+                    }
                 }
             }
 
-            FillPassengerSeatListDetailsGrid(passengersDetailsList);
+            FillPassengerSeatListDetailsGrid(detailsList);
         }
 
         private void FillPassengerSeatListDetailsGrid(List<PassengersDetails> passengerData)
@@ -199,16 +239,15 @@ namespace SkySpeed.SeatMap
                 // Refresh the DataGrid to reflect the changes
                 PassengerSeatListDetailsGrid.Items.Refresh();
 
-                // Need to work here
-                //SharedDataPage.PassengersDetailsGrid = PassengerSeatListDetailsGrid;
-
                 // Deselect the selected passenger
                 PassengerSeatListDetailsGrid.SelectedItem = null;
 
-                // Update the Main Parent window
+                // Todo: Update the Main Parent window like in ExpanderTextBlock
                 //_parentWindow = Window.GetWindow(this);
                 //TextBlock textBlock = (TextBlock)_parentWindow.FindName("PassengersExpanderTextBlock");
                 //textBlock.Text += $"\nSeat: {selectedSeat}";
+
+                SharedDataPage.PassengerSeatListDetailsGrid = PassengerSeatListDetailsGrid;
             }
         }
     }

@@ -77,7 +77,10 @@ namespace SkySpeed.Contacts
                                 row.AddressState,
                                 row.AddressCountry,
                                 row.Mobile,
-                                row.Email
+                                row.Email,
+
+                                row.Seat,
+                                row.SeatPrice
                                 )
                         );
                     }
@@ -108,7 +111,10 @@ namespace SkySpeed.Contacts
                                 row.AddressState,
                                 row.AddressCountry,
                                 row.Mobile,
-                                row.Email
+                                row.Email,
+
+                                 row.Seat,
+                                row.SeatPrice
                                 )
                         );
                     }

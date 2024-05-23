@@ -9,5 +9,6 @@ namespace SharedData
         public static int NumberOfCHD { get; set; }
         public static DataGrid PassengersDetailsGrid { get; set; }
         public static DataGrid ContactDetailsGrid { get; set; }
+        public static DataGrid PassengerSeatListDetailsGrid { get; set; }
     }
 }

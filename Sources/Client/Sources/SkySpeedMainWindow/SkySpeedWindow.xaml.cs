@@ -53,15 +53,55 @@ namespace SkySpeed.SkySpeedMainWindow
 
         private void Calculator_Click(object sender, RoutedEventArgs e)
         {
-            Process.Start(@"C:\Windows\System32\calc.exe");
+            OpenApplication(@"C:\Windows\System32\calc.exe", "Calculator");
         }
 
         private void Notepad_Click(object sender, RoutedEventArgs e)
         {
-            Process.Start(@"C:\Windows\System32\notepad.exe");
+            OpenApplication(@"C:\Windows\System32\notepad.exe", "Notepad");
+        }
+
+        private void OpenApplication(string appPath, string appName)
+        {
+            if (File.Exists(appPath))
+            {
+                Process.Start(appPath);
+            }
+            else
+            {
+                _displayMessage.ShowErrorMessageBox($"Unable to open {appName}. Contact support.");
+            }
         }
 
         private void NextButton_Click(object sender, RoutedEventArgs e)
+        {
+            ExecuteNextButtonAction();
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            ExecuteBackButtonAction();
+        }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if ((Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
+            {
+                switch (e.Key)
+                {
+                    case Key.N:
+                        ExecuteNextButtonAction();
+                        break;
+                    case Key.B:
+                        ExecuteBackButtonAction();
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        private void ExecuteNextButtonAction()
         {
             Cursor = Cursors.Wait;
             // Navigate next page
@@ -105,7 +145,7 @@ namespace SkySpeed.SkySpeedMainWindow
             Cursor = Cursors.Arrow;
         }
 
-        private void BackButton_Click(object sender, RoutedEventArgs e)
+        private void ExecuteBackButtonAction()
         {
             Cursor = Cursors.Arrow;
             // Navigate back page
