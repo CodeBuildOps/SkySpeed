@@ -13,11 +13,18 @@ namespace SkySpeed.SeatMap
     /// </summary>
     public partial class SeatMapPage : Page
     {
-        private Button selectedSeat = null;
+        private Button _selectedSeat = null;
+        private Image _selectedSittingPersonImage = null;
 
         private DisplayMessage _displayMessage;
         private PassengersDetails _selectedPassenger;
         private List<SeatMapPriceDetails> _seatGroupPrice;
+        private List<string> _seatLeftTop;
+        private List<string> _seatRightTop;
+        private List<string> _seatLeftMiddle;
+        private List<string> _seatRightMiddle;
+        private List<string> _seatLeftBottom;
+        private List<string> _seatRightBottom;
 
         public SeatMapPage()
         {
@@ -38,6 +45,7 @@ namespace SkySpeed.SeatMap
         {
             var detailsList = new List<PassengersDetails>();
 
+            // Once Parent datagrid contains all the records of Child datagrid then we need to modify below methods
             var gridItems = SharedDataPage.PassengerSeatListDetailsGrid?.Items ?? SharedDataPage.PassengersDetailsGrid.Items;
 
             if (SharedDataPage.PassengerSeatListDetailsGrid != null)
@@ -124,6 +132,13 @@ namespace SkySpeed.SeatMap
         {
             _seatGroupPrice = new List<SeatMapPriceDetails>();
 
+            _seatLeftTop = new List<string>();
+            _seatRightTop = new List<string>();
+            _seatLeftMiddle = new List<string>();
+            _seatRightMiddle = new List<string>();
+            _seatLeftBottom = new List<string>();
+            _seatRightBottom = new List<string>();
+
             // Define seat range
             int startRow = 0, endRow = 9;
             char startColumn = 'A', endColumn = 'F';
@@ -148,6 +163,29 @@ namespace SkySpeed.SeatMap
 
                         // Add seat details to the list
                         _seatGroupPrice.Add(new SeatMapPriceDetails(seatName, price));
+
+                        // Add seats in respective seat list
+                        if ( row >= 1 && row <=5 )
+                        {
+                            if ( col >= 'A' && col <= 'C' )
+                                _seatLeftTop.Add($"{row}{col}");
+                            else if ( col >= 'D' && col <= 'F')
+                                _seatRightTop.Add($"{row}{col}");
+                        }
+                        else if ( row == 0 )
+                        {
+                            if ( col >= 'A' && col <= 'C' )
+                                _seatLeftMiddle.Add($"{row}{col}");
+                            else if ( col >= 'D' && col <= 'F' )
+                                _seatRightMiddle.Add($"{row}{col}");
+                        }
+                        else if ( row >= 6 && row <= 9 )
+                        {
+                            if ( col >= 'A' && col <= 'C' )
+                                _seatLeftBottom.Add($"{row}{col}");
+                            else if ( col >= 'D' && col <= 'F' )
+                                _seatRightBottom.Add($"{row}{col}");
+                        }
                     }
                 }
             }
@@ -193,11 +231,11 @@ namespace SkySpeed.SeatMap
 
                 DeselectPreviousSeat();
 
-                selectedSeat = clickedButton;
+                _selectedSeat = clickedButton;
 
-                HighlightSelectedSeat(selectedSeat);
+                HighlightSelectedSeat(_selectedSeat);
 
-                SaveSeat(selectedSeat.Content.ToString());
+                SaveSeat(_selectedSeat.Content.ToString());
             }
             else
             {
@@ -207,29 +245,66 @@ namespace SkySpeed.SeatMap
 
         private void DeselectPreviousSeat()
         {
-            if (selectedSeat != null)
+            if (_selectedSeat != null)
             {
-                // Get the selected button's grid position and move the sharedSittingPersonImage to the button's position
-                Grid.SetRow(sharedSittingPersonImage, Grid.GetRow(selectedSeat));
-                Grid.SetColumn(sharedSittingPersonImage, Grid.GetColumn(selectedSeat));
+                GetSittingPersonImage(_selectedSeat);
 
-                // Make the image visible
-                sharedSittingPersonImage.Visibility = Visibility.Hidden;
+                if (_selectedSittingPersonImage != null)
+                {
+                    // Get the selected button's grid position and move the sharedSittingPersonImage to the button's position
+                    Grid.SetRow(_selectedSittingPersonImage, Grid.GetRow(_selectedSeat));
+                    Grid.SetColumn(_selectedSittingPersonImage, Grid.GetColumn(_selectedSeat));
+
+                    // Make the image hidden
+                    _selectedSittingPersonImage.Visibility = Visibility.Hidden;
+                }
             }
         }
 
         private void HighlightSelectedSeat(Button seat)
         {
-            // Get the selected button's grid position and move the sharedSittingPersonImage to the button's position
-            Grid.SetRow(sharedSittingPersonImage, Grid.GetRow(seat));
-            Grid.SetColumn(sharedSittingPersonImage, Grid.GetColumn(seat));
+            GetSittingPersonImage(seat);
 
-            // Bring the image to the front
-            Panel.SetZIndex(sharedSittingPersonImage, 2);
-            Panel.SetZIndex(seat, 1);
+            if (_selectedSittingPersonImage != null)
+            {
+                // Get the selected button's grid position and move the sharedSittingPersonImage to the button's position
+                Grid.SetRow(_selectedSittingPersonImage, Grid.GetRow(seat));
+                Grid.SetColumn(_selectedSittingPersonImage, Grid.GetColumn(seat));
 
-            // Make the image visible
-            sharedSittingPersonImage.Visibility = Visibility.Visible;
+                // Bring the image to the front
+                Panel.SetZIndex(_selectedSittingPersonImage, 2);
+                Panel.SetZIndex(seat, 1);
+
+                // Make the image visible
+                _selectedSittingPersonImage.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void GetSittingPersonImage(Button seat)
+        {
+            // Combined dictionary to map seat lists to their corresponding images
+            var seatImageMap = new Dictionary<List<string>, Image>()
+            {
+                { _seatLeftTop, sittingPersonImageLeftTop },
+                { _seatRightTop, sittingPersonImageRightTop },
+                { _seatLeftMiddle, sittingPersonImageLeftMiddle },
+                { _seatRightMiddle, sittingPersonImageRightMiddle },
+                { _seatLeftBottom, sittingPersonImageLeftBottom },
+                { _seatRightBottom, sittingPersonImageRightBottom }
+            };
+
+            // Reset _selectedSittingPersonImage
+            _selectedSittingPersonImage = null;
+
+            // Search in all seat lists
+            foreach (var kvp in seatImageMap)
+            {
+                if (kvp.Key.Contains(seat.Content.ToString()))
+                {
+                    _selectedSittingPersonImage = kvp.Value;
+                    break;
+                }
+            }
         }
 
         private void SaveSeat(string selectedSeat)

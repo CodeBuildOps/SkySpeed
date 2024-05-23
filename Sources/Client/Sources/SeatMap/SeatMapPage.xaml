@@ -44,7 +44,7 @@
                         <Grid.Background>
                             <ImageBrush ImageSource="..\Images\SeatLayout.png" Stretch="Fill"/>
                         </Grid.Background>
-                    <Grid Margin="25,260,0,0">
+                    <Grid Margin="15,260,0,0">
                         <Grid.Resources>
                             <Style TargetType="Button">
                                  <!--Default style-->
@@ -91,8 +91,7 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
                                 <Button Grid.Row="0" Grid.Column="0" Content="1A" Name="Seat1A" />
-                                <Image Grid.Row="0" Grid.Column="0" Width="40" Height="40" Name="sharedSittingPersonImage" Source="../Images/sittingPerson.png" Visibility="Hidden" />
-
+                                <Image Grid.Row="0" Grid.Column="0" Width="40" Height="40" Name="sittingPersonImageLeftTop" Source="../Images/sittingPerson.png" Visibility="Hidden" />
                                 <Button Grid.Row="0" Grid.Column="1" Content="1B" Name="Seat1B"/>
                                 <Button Grid.Row="0" Grid.Column="2" Content="1C" Name="Seat1C"/>
 
@@ -125,6 +124,7 @@
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
+                                <Image Grid.Row="0" Grid.Column="0" Width="40" Height="40" Name="sittingPersonImageRightTop" Source="../Images/sittingPerson.png" Visibility="Hidden" />
                                 <Button Grid.Row="0" Grid.Column="0" Content="1D" Name="Seat1D"/>
                                 <Button Grid.Row="0" Grid.Column="1" Content="1E" Name="Seat1E"/>
                                 <Button Grid.Row="0" Grid.Column="2" Content="1F" Name="Seat1F"/>
@@ -155,6 +155,7 @@
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
+                                <Image Grid.Row="0" Grid.Column="0" Width="40" Height="40" Name="sittingPersonImageLeftMiddle" Source="../Images/sittingPerson.png" Visibility="Hidden" />
                                 <Button Grid.Row="0" Grid.Column="0" Content="0A" Name="Seat0A"/>
                                 <Button Grid.Row="0" Grid.Column="1" Content="0B" Name="Seat0B"/>
                                 <Button Grid.Row="0" Grid.Column="2" Content="0C" Name="Seat0C"/>
@@ -168,6 +169,7 @@
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
+                                <Image Grid.Row="0" Grid.Column="0" Width="40" Height="40" Name="sittingPersonImageRightMiddle" Source="../Images/sittingPerson.png" Visibility="Hidden" />
                                 <Button Grid.Row="0" Grid.Column="0" Content="0D" Name="Seat0D"/>
                                 <Button Grid.Row="0" Grid.Column="1" Content="0E" Name="Seat0E"/>
                                 <Button Grid.Row="0" Grid.Column="2" Content="0F" Name="Seat0F"/>
@@ -186,6 +188,7 @@
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
+                                <Image Grid.Row="0" Grid.Column="0" Width="40" Height="40" Name="sittingPersonImageLeftBottom" Source="../Images/sittingPerson.png" Visibility="Hidden" />
                                 <Button Grid.Row="0" Grid.Column="0" Content="6A" Name="Seat6A"/>
                                 <Button Grid.Row="0" Grid.Column="1" Content="6B" Name="Seat6B"/>
                                 <Button Grid.Row="0" Grid.Column="2" Content="6C" Name="Seat6C"/>
@@ -215,6 +218,7 @@
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
+                                <Image Grid.Row="0" Grid.Column="0" Width="40" Height="40" Name="sittingPersonImageRightBottom" Source="../Images/sittingPerson.png" Visibility="Hidden" />
                                 <Button Grid.Row="0" Grid.Column="0" Content="6D" Name="Seat6D"/>
                                 <Button Grid.Row="0" Grid.Column="1" Content="6E" Name="Seat6E"/>
                                 <Button Grid.Row="0" Grid.Column="2" Content="6F" Name="Seat6F"/>
