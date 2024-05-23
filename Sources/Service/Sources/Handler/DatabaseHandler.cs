@@ -1,22 +1,20 @@
 ﻿using System.Collections.Generic;
-using System.IO;
-using System.Text;
 
 namespace SkySpeedService.Handler
 {
     class DatabaseHandler
     {
+        private INIHandler _iniFile;
         public const string DATABASENAME = "SKYSPEED";
         private string ServerUserId { get; set; }
         private string ServerName { get; set; }
         private string ServerPassword { get; set; }
-        private string INIFilePath { get; set; }
         public static string MasterDBParam { get; set; }
         public static string DBParam { get; set; }
 
         public DatabaseHandler(string iniFilePath)
         {
-            INIFilePath = iniFilePath;
+            _iniFile = new INIHandler(iniFilePath);
         }
 
         public DatabaseHandler(string serverUserId, string serverName, string serverPassword, string iniFilePath)
@@ -24,7 +22,7 @@ namespace SkySpeedService.Handler
             ServerUserId = serverUserId;
             ServerName = serverName;
             ServerPassword = serverPassword;
-            INIFilePath = iniFilePath;
+            _iniFile = new INIHandler(iniFilePath);
 
             DBParam = $"server={ServerName};initial catalog={DATABASENAME};user id={ServerUserId};password={ServerPassword}";
             MasterDBParam = $"server={ServerName};initial catalog=master;user id={ServerUserId};password={ServerPassword}";
@@ -32,45 +30,39 @@ namespace SkySpeedService.Handler
 
         public bool CreateINI()
         {
-            bool isIniCreated = false;
-            using (StreamWriter writer = new StreamWriter(INIFilePath))
+            var entries = new List<(string Key, string Value)>
             {
-                StringBuilder content = new StringBuilder();
-                content.AppendLine($"[DATABASE]");
-                content.AppendLine($"SERVERUSERID={ServerUserId}");
-                content.AppendLine($"SERVERNAME={ServerName}");
-                content.AppendLine($"SERVERPASSWORD={ServerPassword}");
-                content.AppendLine($"DATABASE={DATABASENAME}");
-                content.AppendLine($"MASTERDBPARAM={MasterDBParam}");
-                content.AppendLine($"DBPARM={DBParam}");
-                writer.Write(content.ToString());
+                ("SERVERUSERID", ServerUserId),
+                ("SERVERNAME", ServerName),
+                ("SERVERPASSWORD", ServerPassword),
+                ("DATABASE", DATABASENAME),
+                ("MASTERDBPARAM", MasterDBParam),
+                ("DBPARM", DBParam)
+            };
 
-                isIniCreated = true;
+            bool isIniCreated = true;
+
+            foreach (var (key, value) in entries)
+            {
+                if (!_iniFile.Write("DATABASE", key, value))
+                {
+                    isIniCreated = false;
+                    break;
+                }
             }
+
             return isIniCreated;
         }
 
         public Dictionary<string, string> ReadINI()
         {
             var iniValues = new Dictionary<string, string>();
-            using (StreamReader reader = new StreamReader(INIFilePath))
-            {
-                string line = string.Empty;
-                while ((line = reader.ReadLine()) != null)
-                {
-                    if (!(line == "[DATABASE]"))
-                    {
-                        int startIndex = line.IndexOf('=') + 1;
-                        iniValues[line.Substring(0, startIndex - 1)] = line.Substring(startIndex).Trim();
-                    }
-                }
-            }
 
-            ServerUserId = iniValues["SERVERUSERID"];
-            ServerName = iniValues["SERVERNAME"];
-            ServerPassword = iniValues["SERVERPASSWORD"];
-            MasterDBParam = iniValues["MASTERDBPARAM"];
-            DBParam = iniValues["DBPARM"];
+            ServerUserId = iniValues["SERVERUSERID"] = _iniFile.Read("DATABASE", "SERVERUSERID");
+            ServerName = iniValues["SERVERNAME"] = _iniFile.Read("DATABASE", "SERVERNAME");
+            ServerPassword = iniValues["SERVERPASSWORD"] = _iniFile.Read("DATABASE", "SERVERPASSWORD");
+            MasterDBParam = iniValues["MASTERDBPARAM"] = _iniFile.Read("DATABASE", "MASTERDBPARAM");
+            DBParam = iniValues["DBPARM"] = _iniFile.Read("DATABASE", "DBPARM");
 
             return iniValues;
         }

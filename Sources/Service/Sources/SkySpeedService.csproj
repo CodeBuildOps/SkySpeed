@@ -44,6 +44,7 @@
     <Compile Include="DatabaseAndTables\DBSetup.cs" />
     <Compile Include="Flight\FlightDetails.cs" />
     <Compile Include="Handler\DatabaseHandler.cs" />
+    <Compile Include="Handler\INIHandler.cs" />
     <Compile Include="SignupAndLogin\RegistrationAndLogin.cs" />
     <Compile Include="SkySpeedServices.cs" />
     <Compile Include="ExecuteQuery\ExecuteQueries.cs" />
