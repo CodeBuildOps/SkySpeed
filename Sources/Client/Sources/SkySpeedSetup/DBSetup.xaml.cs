@@ -74,7 +74,10 @@ namespace SkySpeedSetup
                 {
                     if (_skySpeedServices.InsertFlightDetails(INIHandler.FlightDetailsPath))
                     {
-                        _displayMessage.ShowSuccessMessageBox("Database created successfully. Please log in to SkySpeed.");
+                        _displayMessage.ShowSuccessMessageBox("Database setup has been successfully completed. Please log in to SkySpeed.");
+
+                        // Todo: Enable the message box once it's been tested.
+                        //_displayMessage.ShowSuccessMessageBox("Manually copy the SkySpeed.INI file from this client machine to all other client machines to distribute the database parameters.");
                     }
                     else
                     {
