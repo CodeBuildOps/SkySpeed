@@ -21,5 +21,9 @@ namespace SkySpeed.MessageLog
         {
             MessageBox.Show(message, MSGHEADER, MessageBoxButton.OK, MessageBoxImage.Information);
         }
+        public MessageBoxResult ShowQuestionMessageBox(string message)
+        {
+            return MessageBox.Show(message, MSGHEADER, MessageBoxButton.YesNo, MessageBoxImage.Question);
+        }
     }
 }

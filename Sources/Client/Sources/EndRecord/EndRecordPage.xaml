@@ -36,8 +36,7 @@
                 </Grid.ColumnDefinitions>
 
                 <Label Content="Send Itinerary via:" Grid.Column="0" />
-                <ComboBox Name="SendItineraryComboBox" Width="80" Grid.Column="1" >
-                    <ComboBoxItem>None</ComboBoxItem>
+                <ComboBox Name="SendItineraryComboBox" Width="80" Grid.Column="1" SelectionChanged="SendItineraryComboBox_SelectionChanged" >
                     <ComboBoxItem>Email</ComboBoxItem>
                     <ComboBoxItem>Print</ComboBoxItem>
                 </ComboBox>
