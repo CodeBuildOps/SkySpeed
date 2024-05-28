@@ -4,6 +4,7 @@ using SkySpeedService.Flight;
 using SkySpeedService.Handler;
 using SkySpeedService.SignupAndLogin;
 using System.Collections.Generic;
+using SkySpeedService.Print;
 
 namespace SkySpeedService
 {
@@ -60,6 +61,12 @@ namespace SkySpeedService
         {
             var sendEmail = new SendEmail(toMail);
             return sendEmail.IsEmailSent();
+        }
+
+        public bool PrintDocument()
+        {
+            var documentPrinter = new DocumentPrinter();
+            return documentPrinter.PrintDocument();
         }
     }
 }

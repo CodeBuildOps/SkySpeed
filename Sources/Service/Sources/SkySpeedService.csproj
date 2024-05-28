@@ -46,10 +46,20 @@
     <Compile Include="Flight\FlightDetails.cs" />
     <Compile Include="Handler\DatabaseHandler.cs" />
     <Compile Include="Handler\INIHandler.cs" />
+    <Compile Include="PNR\HTMLBody.cs" />
+    <Compile Include="Print\DocumentPrinter.cs" />
     <Compile Include="SignupAndLogin\RegistrationAndLogin.cs" />
     <Compile Include="SkySpeedServices.cs" />
     <Compile Include="ExecuteQuery\ExecuteQueries.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="DocumentFormat.OpenXml">
+      <Version>3.0.2</Version>
+    </PackageReference>
+    <PackageReference Include="HtmlToOpenXml.dll">
+      <Version>2.4.2</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
