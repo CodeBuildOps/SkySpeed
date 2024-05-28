@@ -13,15 +13,14 @@ namespace SkySpeed.EndRecords
     public partial class EndRecordPage : Page
     {
         private readonly DisplayMessage _displayMessage;
-        private readonly SkySpeedServices _skySpeedServices;
+        private SkySpeedServices _skySpeedServices;
         private readonly string _toMail;
 
         public EndRecordPage()
         {
             InitializeComponent();
-            _displayMessage = new DisplayMessage("End record");
-            _skySpeedServices = new SkySpeedServices();
 
+            _displayMessage = new DisplayMessage("End record");
             _toMail = GetEmailId();
         }
 
@@ -36,6 +35,7 @@ namespace SkySpeed.EndRecords
             if (!(SendItineraryComboBox.SelectedItem is ContentControl selectedItemControl))
                 return;
 
+            _skySpeedServices = new SkySpeedServices();
             switch (selectedItemControl.Content.ToString().ToUpper())
             {
                 case "EMAIL":

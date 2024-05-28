@@ -13,7 +13,7 @@ namespace SkySpeed.AvailabilityRequest
     /// </summary>
     public partial class AvailabilityRequestPage : Page
     {
-        private DisplayMessage _displayMessage;
+        private readonly DisplayMessage _displayMessage;
 
         public AvailabilityRequestPage()
         {

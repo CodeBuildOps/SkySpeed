@@ -15,15 +15,12 @@ namespace SkySpeed.Registration
     {
         private DisplayMessage _displayMessage;
         private SkySpeedServices _skySpeedServices;
-        private INIHandler _iniHandler;
 
         public Signup()
         {
             InitializeComponent();
 
             _displayMessage = new DisplayMessage("SkySpeed");
-            _iniHandler = new INIHandler();
-            _skySpeedServices = new SkySpeedServices();
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
@@ -48,6 +45,7 @@ namespace SkySpeed.Registration
             }
             else if (File.Exists(INIHandler.INIFilePath))
             {
+                _skySpeedServices = new SkySpeedServices();
                 bool isDBExists = _skySpeedServices.DatabaseExists(INIHandler.INIFilePath);
                 if (isDBExists)
                 {
@@ -71,7 +69,6 @@ namespace SkySpeed.Registration
             {
                 _displayMessage.ShowErrorMessageBox("SkySpeed.ini not found. Run DBSetup.");
             }
-
             Cursor = Cursors.Arrow;
         }
     }

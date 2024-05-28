@@ -1,7 +1,6 @@
 ﻿using Constant;
 using SharedData;
 using SkySpeed.MessageLog;
-using SkySpeedService;
 using System;
 using System.Collections.Generic;
 using System.Windows;
@@ -15,7 +14,6 @@ namespace SkySpeed.Passengers
     public partial class PassengersPage : Page
     {
         private DisplayMessage _displayMessage;
-        private SkySpeedServices _skySpeedServices;
         private PassengersDetails _selectedPassenger;
         private Window _parentWindow;
 
@@ -24,7 +22,6 @@ namespace SkySpeed.Passengers
             InitializeComponent();
 
             _displayMessage = new DisplayMessage("Passenger");
-            _skySpeedServices = new SkySpeedServices();
 
             if (SharedDataPage.PassengersDetailsGrid != null)
                 SetPassengersDetailsGrid();

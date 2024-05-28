@@ -14,7 +14,7 @@ namespace SkySpeed.Contacts
     /// </summary>
     public partial class ContactsPage : Page
     {
-        private DisplayMessage _displayMessage;
+        private readonly DisplayMessage _displayMessage;
         private PassengersDetails _selectedPassenger;
         private Window _parentWindow;
 

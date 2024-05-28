@@ -8,7 +8,8 @@
         Title="SkySpeed - Airport Agent (APT)"
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized"
-        KeyDown="Window_KeyDown">
+        KeyDown="Window_KeyDown"
+        Closing="MainWindow_Closing">
 
     <DockPanel >
         <Menu DockPanel.Dock="Top" FontWeight="DemiBold" Background="{StaticResource MainMenuBrush}">

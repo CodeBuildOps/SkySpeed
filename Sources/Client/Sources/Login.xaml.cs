@@ -19,21 +19,19 @@ namespace SkySpeed
         private DisplayMessage _displayMessage;
         private SkySpeedServices _skySpeedServices;
         private SkySpeedWindow _mainSkySpeed;
-        private INIHandler _iniHandler;
 
         public Login()
         {
             InitializeComponent();
 
-            _signup = new Signup();
-
+            // Simply to initialize
+            var iniHandler = new INIHandler();
             _displayMessage = new DisplayMessage("SkySpeed");
-            _iniHandler = new INIHandler();
-            _skySpeedServices = new SkySpeedServices();
         }
 
         private void SignupButton_Click(object sender, RoutedEventArgs e)
         {
+            _signup = new Signup();
             _signup.ShowDialog();
         }
         private void LoginButton_Click(object sender, RoutedEventArgs e)
@@ -51,6 +49,7 @@ namespace SkySpeed
             {
                 if (File.Exists(INIHandler.INIFilePath))
                 {
+                    _skySpeedServices = new SkySpeedServices();
                     bool isDBExists = _skySpeedServices.DatabaseExists(INIHandler.INIFilePath);
                     if (isDBExists)
                     {

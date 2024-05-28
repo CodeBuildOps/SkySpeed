@@ -8,6 +8,7 @@ using SkySpeed.Payments;
 using SkySpeed.ReservationSummary;
 using SkySpeed.SeatMap;
 using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Windows;
@@ -22,7 +23,7 @@ namespace SkySpeed.SkySpeedMainWindow
     {
         private const string README_FILE_NAME = "Readme\\SkySpeed.pptx";
         private readonly string README_FILE_PATH;
-        private DisplayMessage _displayMessage;
+        private readonly DisplayMessage _displayMessage;
 
         public SkySpeedWindow()
         {
@@ -188,6 +189,15 @@ namespace SkySpeed.SkySpeedMainWindow
                 NextButton.IsEnabled = true;
             }
             Cursor = Cursors.Arrow;
+        }
+
+        private void MainWindow_Closing(object sender, CancelEventArgs e)
+        {
+            // Cancel the closing event
+            if (_displayMessage.ShowQuestionMessageBox("Do you want to end your SkySpeed session?") == MessageBoxResult.No)
+            {
+                e.Cancel = true;
+            }
         }
     }
 }

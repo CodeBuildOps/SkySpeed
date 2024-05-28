@@ -14,7 +14,7 @@ namespace SkySpeed.FlightResults
     /// </summary>
     public partial class FlightResultsPage : Page
     {
-        private DisplayMessage _displayMessage;
+        private readonly DisplayMessage _displayMessage;
         private SkySpeedServices _skySpeedServices;
         private Window _parentWindow;
 
@@ -23,7 +23,6 @@ namespace SkySpeed.FlightResults
             InitializeComponent();
 
             _displayMessage = new DisplayMessage("Flight Result");
-            _skySpeedServices = new SkySpeedServices();
 
             NumberOfPassengersLabel.Content = SharedDataPage.NumberOfPassengers;
             GetDataFromSource();
@@ -53,6 +52,8 @@ namespace SkySpeed.FlightResults
             string seatLeft = null;
             string fare = null;
             string duration = null;
+
+            _skySpeedServices = new SkySpeedServices();
 
             foreach (var kvp in _skySpeedServices.GetAllFlightDetails())
             {
