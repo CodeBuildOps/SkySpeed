@@ -33,30 +33,23 @@ namespace SkySpeed.EndRecords
 
         private void SendItineraryComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (SendItineraryComboBox.SelectedItem is ContentControl selectedItemControl)
-            {
-                string selectedItem = selectedItemControl.Content.ToString().ToUpper();
+            if (!(SendItineraryComboBox.SelectedItem is ContentControl selectedItemControl))
+                return;
 
-                switch (selectedItem)
-                {
-                    case "EMAIL":
-                        HandleEndRecordSelection("Would you like to send an email?", () => _skySpeedServices.SendEmail(_toMail));
-                        break;
-                    case "PRINT":
-                        //HandleEndRecordSelection("Would you like to print?", () => _skySpeedServices.Print());
-                        break;
-                    default:
-                        SendItineraryComboBox.SelectedItem = null;
-                        break;
-                }
+            switch (selectedItemControl.Content.ToString().ToUpper())
+            {
+                case "EMAIL":
+                    HandleEndRecordSelection("Would you like to send an email?", () => _skySpeedServices.SendEmail(_toMail));
+                    break;
+                case "PRINT":
+                    HandleEndRecordSelection("Would you like to print?", () => _skySpeedServices.PrintDocument());
+                    break;
             }
         }
 
         private void HandleEndRecordSelection(string message, Action action)
         {
-            MessageBoxResult result = _displayMessage.ShowQuestionMessageBox(message);
-
-            if (result == MessageBoxResult.Yes)
+            if (_displayMessage.ShowQuestionMessageBox(message) == MessageBoxResult.Yes)
             {
                 Cursor = Cursors.Wait;
                 action();
@@ -64,6 +57,5 @@ namespace SkySpeed.EndRecords
             }
             SendItineraryComboBox.SelectedItem = null;
         }
-
     }
 }
