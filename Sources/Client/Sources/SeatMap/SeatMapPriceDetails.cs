@@ -2,11 +2,13 @@
 {
     class SeatMapPriceDetails
     {
+        public int PassengerId { get; set; }
         public string Seat { get; set; }
         public double SeatPrice { get; set; }
 
-        public SeatMapPriceDetails(string seat, double seatPrice)
+        public SeatMapPriceDetails(int passengerId, string seat, double seatPrice)
         {
+            PassengerId = passengerId;
             Seat = seat;
             SeatPrice = seatPrice;
         }

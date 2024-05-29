@@ -3,6 +3,7 @@ using SharedData;
 using SkySpeed.MessageLog;
 using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -13,21 +14,22 @@ namespace SkySpeed.Passengers
     /// </summary>
     public partial class PassengersPage : Page
     {
-        private DisplayMessage _displayMessage;
+        private readonly DisplayMessage _displayMessage;
         private PassengersDetails _selectedPassenger;
         private Window _parentWindow;
+        private int _passengerDetailId;
 
         public PassengersPage()
         {
             InitializeComponent();
 
+            _passengerDetailId = 0;
             _displayMessage = new DisplayMessage("Passenger");
 
             if (SharedDataPage.PassengersDetailsGrid != null)
                 SetPassengersDetailsGrid();
 
             SetComboBoxWithCountries();
-            SetComboBoxWithNationalities();
             SetDatePickerDateRanges();
 
             // Disable group boxes and buttons initially
@@ -42,14 +44,15 @@ namespace SkySpeed.Passengers
 
         private void SetPassengersDetailsGrid()
         {
-            var passengersDetailsList = new List<PassengersDetails>();
+            var passengerUpdatedDetailsList = new List<PassengersDetails>();
 
             foreach (var rowItem in SharedDataPage.PassengersDetailsGrid.Items)
             {
                 if (rowItem is PassengersDetails row)
                 {
-                    passengersDetailsList.Add(
+                    passengerUpdatedDetailsList.Add(
                         new PassengersDetails(
+                            row.PassengerId,
                             row.Type,
                             row.Gender,
                             row.Title,
@@ -57,14 +60,25 @@ namespace SkySpeed.Passengers
                             row.MiddleName,
                             row.LastName,
                             row.DOB,
-                            row.Nationality,
-                            row.Country
+                            row.Country,
+
+                            row.AddressLine1,
+                            row.AddressLine2,
+                            row.AddressPostal,
+                            row.AddressTown,
+                            row.AddressState,
+                            row.AddressCountry,
+                            row.Mobile,
+                            row.Email,
+
+                            row.Seat,
+                            row.SeatPrice
                             )
                     );
                 }
             }
 
-            FillPassengersDetailsGrid(passengersDetailsList);
+            FillPassengersDetailsGrid(passengerUpdatedDetailsList);
         }
 
         private void SetComboBoxWithCountries()
@@ -72,13 +86,6 @@ namespace SkySpeed.Passengers
             var countries = Enum.GetNames(typeof(ConstantHandler.Countries));
             CountryComboBox.ItemsSource = countries;
             InfantCountryComboBox.ItemsSource = countries;
-        }
-
-        private void SetComboBoxWithNationalities()
-        {
-            var nationalities = Enum.GetNames(typeof(ConstantHandler.Nationality));
-            NatonalityComboBox.ItemsSource = nationalities;
-            InfantNatonalityComboBox.ItemsSource = nationalities;
         }
 
         private void SetDatePickerDateRanges()
@@ -113,9 +120,8 @@ namespace SkySpeed.Passengers
                 if (!ValidatePassengerFields(LastNameTextBox.Text, FirstNameTextBox.Text, TitleComboBox.Text, GenderComboBox.Text))
                     return;
 
-                SaveOrUpdatePassenger("ADT", _selectedPassenger, LastNameTextBox.Text, FirstNameTextBox.Text, MiddleNameTextBox.Text,
-                                      TitleComboBox.Text, GenderComboBox.Text, DOBDatePicker.Text, NatonalityComboBox.SelectedItem?.ToString(),
-                                      CountryComboBox.SelectedItem?.ToString());
+                SaveOrUpdatePassenger("ADT", LastNameTextBox.Text, FirstNameTextBox.Text, MiddleNameTextBox.Text,
+                                      TitleComboBox.Text, GenderComboBox.Text, DOBDatePicker.Text, CountryComboBox.SelectedItem?.ToString());
                 ClearAllFields("ADT");
             }
 
@@ -124,9 +130,8 @@ namespace SkySpeed.Passengers
                 if (!ValidatePassengerFields(InfantLastNameTextBox.Text, InfantFirstNameTextBox.Text, InfantTitleComboBox.Text, InfantGenderComboBox.Text))
                     return;
 
-                SaveOrUpdatePassenger("CHD", _selectedPassenger, InfantLastNameTextBox.Text, InfantFirstNameTextBox.Text, InfantMiddleNameTextBox.Text,
-                                      InfantTitleComboBox.Text, InfantGenderComboBox.Text, InfantDOBDatePicker.Text, InfantNatonalityComboBox.SelectedItem?.ToString(),
-                                      InfantCountryComboBox.SelectedItem?.ToString());
+                SaveOrUpdatePassenger("CHD", InfantLastNameTextBox.Text, InfantFirstNameTextBox.Text, InfantMiddleNameTextBox.Text,
+                                      InfantTitleComboBox.Text, InfantGenderComboBox.Text, InfantDOBDatePicker.Text, InfantCountryComboBox.SelectedItem?.ToString());
                 ClearAllFields();
             }
 
@@ -158,31 +163,34 @@ namespace SkySpeed.Passengers
             return true;
         }
 
-        private void SaveOrUpdatePassenger(string passengerType, PassengersDetails selectedPassenger, string lastName, string firstName, string middleName,
-                                           string title, string gender, string dob, string nationality, string country)
+        private void SaveOrUpdatePassenger(string passengerType, string lastName, string firstName, string middleName, string title, string gender, string dob, string country)
         {
             // Update the selected passenger's data
-            if (selectedPassenger != null)
+            if (_selectedPassenger != null)
             {
-                selectedPassenger.Type = passengerType;
-                selectedPassenger.Gender = gender;
-                selectedPassenger.FullName = $"{title} {firstName} {middleName} {lastName}";
-                selectedPassenger.DOB = dob;
-                selectedPassenger.Nationality = nationality;
-                selectedPassenger.Country = country;
+                _selectedPassenger.Type = passengerType;
+                _selectedPassenger.LastName = lastName;
+                _selectedPassenger.FirstName = firstName;
+                _selectedPassenger.MiddleName = middleName;
+                _selectedPassenger.Title = title;
+                _selectedPassenger.Gender = gender;
+                _selectedPassenger.FullName = $"{title} {firstName} {middleName} {lastName}";
+                _selectedPassenger.DOB = dob;
+                _selectedPassenger.Country = country;
 
                 // Refresh the DataGrid to reflect the changes
                 PassengersDetailsGrid.Items.Refresh();
 
                 // Deselect the selected passenger
                 PassengersDetailsGrid.SelectedItem = null;
-
             }
             // Add a new passenger
             else
             {
+                _passengerDetailId = PassengersDetailsGrid.Items.Count + 1;
                 FillPassengersDetailsGrid(new List<PassengersDetails>() {
                     new PassengersDetails (
+                        _passengerDetailId,
                         passengerType,
                         gender,
                         title,
@@ -190,16 +198,13 @@ namespace SkySpeed.Passengers
                         middleName,
                         lastName,
                         dob,
-                        nationality,
                         country
                      )
                 });
             }
 
-            // Update the Main Parent window
-            _parentWindow = Window.GetWindow(this);
-            TextBlock textBlock = (TextBlock)_parentWindow.FindName("PassengersExpanderTextBlock");
-            textBlock.Text += $"{passengerType}\t{gender}\n{$"{title} {firstName} {middleName} {lastName}"}  {dob}  {nationality}  {country}\n\n";
+            SharedDataPage.PassengersDetailsGrid = PassengersDetailsGrid;
+            UpdateMainParentWindow();
         }
 
         private void FillPassengersDetailsGrid(List<PassengersDetails> passengerData)
@@ -224,19 +229,19 @@ namespace SkySpeed.Passengers
 
             if (_selectedPassenger.Type == "ADT")
             {
-                PopulatePassengerDetails(_selectedPassenger, LastNameTextBox, FirstNameTextBox, MiddleNameTextBox, TitleComboBox, GenderComboBox, DOBDatePicker, NatonalityComboBox, CountryComboBox);
+                PopulatePassengerDetails(_selectedPassenger, LastNameTextBox, FirstNameTextBox, MiddleNameTextBox, TitleComboBox, GenderComboBox, DOBDatePicker, CountryComboBox);
                 PassengerDetailsGroupBox.IsEnabled = true;
                 InfantDetailsGroupBox.IsEnabled = false;
             }
             else
             {
-                PopulatePassengerDetails(_selectedPassenger, InfantLastNameTextBox, InfantFirstNameTextBox, InfantMiddleNameTextBox, InfantTitleComboBox, InfantGenderComboBox, InfantDOBDatePicker, InfantNatonalityComboBox, InfantCountryComboBox);
+                PopulatePassengerDetails(_selectedPassenger, InfantLastNameTextBox, InfantFirstNameTextBox, InfantMiddleNameTextBox, InfantTitleComboBox, InfantGenderComboBox, InfantDOBDatePicker, InfantCountryComboBox);
                 PassengerDetailsGroupBox.IsEnabled = false;
                 InfantDetailsGroupBox.IsEnabled = true;
             }
         }
 
-        private void PopulatePassengerDetails(PassengersDetails selectedPassenger, TextBox lastNameTextBox, TextBox firstNameTextBox, TextBox middleNameTextBox, ComboBox titleComboBox, ComboBox genderComboBox, DatePicker dobDatePicker, ComboBox nationalityComboBox, ComboBox countryComboBox)
+        private void PopulatePassengerDetails(PassengersDetails selectedPassenger, TextBox lastNameTextBox, TextBox firstNameTextBox, TextBox middleNameTextBox, ComboBox titleComboBox, ComboBox genderComboBox, DatePicker dobDatePicker, ComboBox countryComboBox)
         {
             lastNameTextBox.Text = selectedPassenger.LastName;
             firstNameTextBox.Text = selectedPassenger.FirstName;
@@ -244,7 +249,6 @@ namespace SkySpeed.Passengers
             titleComboBox.Text = selectedPassenger.Title;
             genderComboBox.Text = selectedPassenger.Gender;
             dobDatePicker.Text = selectedPassenger.DOB;
-            nationalityComboBox.Text = selectedPassenger.Nationality;
             countryComboBox.Text = selectedPassenger.Country;
         }
 
@@ -252,12 +256,12 @@ namespace SkySpeed.Passengers
         {
             if (type == "ADT")
             {
-                ClearPassengerFields(LastNameTextBox, FirstNameTextBox, MiddleNameTextBox, TitleComboBox, GenderComboBox, DOBDatePicker, NatonalityComboBox, CountryComboBox);
+                ClearPassengerFields(LastNameTextBox, FirstNameTextBox, MiddleNameTextBox, TitleComboBox, GenderComboBox, DOBDatePicker, CountryComboBox);
                 PassengerDetailsGroupBox.IsEnabled = false;
             }
             else
             {
-                ClearPassengerFields(InfantLastNameTextBox, InfantFirstNameTextBox, InfantMiddleNameTextBox, InfantTitleComboBox, InfantGenderComboBox, InfantDOBDatePicker, InfantNatonalityComboBox, InfantCountryComboBox);
+                ClearPassengerFields(InfantLastNameTextBox, InfantFirstNameTextBox, InfantMiddleNameTextBox, InfantTitleComboBox, InfantGenderComboBox, InfantDOBDatePicker, InfantCountryComboBox);
                 InfantDetailsGroupBox.IsEnabled = false;
             }
 
@@ -281,6 +285,32 @@ namespace SkySpeed.Passengers
                 {
                     datePicker.SelectedDate = null;
                 }
+            }
+        }
+
+        private void UpdateMainParentWindow()
+        {
+            if (SharedDataPage.PassengersDetailsGrid != null)
+            {
+                _parentWindow = Window.GetWindow(this);
+                TextBlock textBlock = _parentWindow.FindName("PassengersExpanderTextBlock") as TextBlock;
+
+                // Clear the existing text
+                textBlock.Text = string.Empty;
+
+                StringBuilder textBuilder = new StringBuilder();
+                foreach (var rowItem in SharedDataPage.PassengersDetailsGrid.Items)
+                {
+                    if (rowItem is PassengersDetails row)
+                    {
+                        textBuilder.AppendLine($"{row.Type}\t{row.Gender}");
+                        textBuilder.AppendLine($"{row.Title} {row.FirstName} {row.MiddleName} {row.LastName}  {row.DOB}  {row.Country}");
+                        textBuilder.AppendLine();
+                    }
+                }
+
+                // Update the TextBlock with the new text
+                textBlock.Text = textBuilder.ToString();
             }
         }
     }

@@ -79,6 +79,7 @@
     <Compile Include="AvailabilityRequest\AvailabilityRequestPage.xaml.cs">
       <DependentUpon>AvailabilityRequestPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Contacts\ContactDetails.cs" />
     <Compile Include="Contacts\ContactsPage.xaml.cs">
       <DependentUpon>ContactsPage.xaml</DependentUpon>
     </Compile>

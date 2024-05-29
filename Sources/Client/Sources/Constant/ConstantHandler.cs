@@ -16,20 +16,6 @@
             Turkey
         }
 
-        public enum Nationality
-        {
-            Chinese,
-            Indian,
-            Japanese,
-            Indonesian,
-            Pakistani,
-            Bangladeshi,
-            Russian,
-            Filipino,
-            Vietnamese,
-            Thai
-        }
-
         public enum Capital
         {
             Amaravati,

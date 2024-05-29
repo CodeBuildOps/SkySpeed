@@ -22,12 +22,29 @@
                     <StackPanel Background="{StaticResource SectionBackgroundBrush}">
                         <DataGrid GridLinesVisibility="None" IsReadOnly="True" SelectionChanged="PassengerDetailsGrid_SelectionChanged" Height="150" Name="PassengersDetailsGrid" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" MaxHeight="300">
                             <DataGrid.Columns>
+                                <DataGridTextColumn Header="Id" Binding="{Binding PassengerId}" />
                                 <DataGridTextColumn Header="Type" Binding="{Binding Type}" />
                                 <DataGridTextColumn Header="Gender" Binding="{Binding Gender}" />
+                                <DataGridTextColumn Visibility="Hidden" Header="Title" Binding="{Binding Title}" />
+                                <DataGridTextColumn Visibility="Hidden" Header="FirstName" Binding="{Binding FirstName}" />
+                                <DataGridTextColumn Visibility="Hidden" Header="MiddleName" Binding="{Binding MiddleName}" />
+                                <DataGridTextColumn Visibility="Hidden" Header="LastName" Binding="{Binding LastName}" />
                                 <DataGridTextColumn Header="Name" Binding="{Binding FullName}" />
                                 <DataGridTextColumn Header="Date of birth" Binding="{Binding DOB}" />
-                                <DataGridTextColumn Header="Nationality" Binding="{Binding Nationality}" />
                                 <DataGridTextColumn Header="Country" Binding="{Binding Country}" />
+                                <!--From ContactsPage-->
+                                <DataGridTextColumn Visibility="Hidden" Header="AddressLine1" Binding="{Binding AddressLine1}" />
+                                <DataGridTextColumn Visibility="Hidden" Header="AddressLine2" Binding="{Binding AddressLine2}" />
+                                <DataGridTextColumn Visibility="Hidden" Header="AddressPostal" Binding="{Binding AddressPostal}" />
+                                <DataGridTextColumn Visibility="Hidden" Header="AddressTown" Binding="{Binding AddressTown}" />
+                                <DataGridTextColumn Visibility="Hidden" Header="AddressState" Binding="{Binding AddressState}" />
+                                <DataGridTextColumn Visibility="Hidden" Header="AddressCountry" Binding="{Binding AddressCountry}" />
+                                <DataGridTextColumn Visibility="Hidden" Header="Mobile" Binding="{Binding Mobile}" />
+                                <DataGridTextColumn Visibility="Hidden" Header="Email" Binding="{Binding Email}" />
+                                <DataGridTextColumn Visibility="Hidden" Header="FullAddress" Binding="{Binding FullAddress}" />
+                                <!--From SeatMapPage-->
+                                <DataGridTextColumn Visibility="Hidden" Header="Seat" Binding="{Binding Seat}" />
+                                <DataGridTextColumn Visibility="Hidden" Header="SeatPrice" Binding="{Binding SeatPrice}" />
                             </DataGrid.Columns>
                         </DataGrid>
                     </StackPanel>
@@ -103,11 +120,8 @@
                             <Label Content="Date of Birth:" Grid.Row="1" Grid.Column="2" />
                             <DatePicker SelectedDate="{Binding DateHelper}" IsTodayHighlighted="True" Name="DOBDatePicker" Width="150" Grid.Row="1" Grid.Column="3" />
 
-                            <Label Content="Nationality:" Grid.Row="0" Grid.Column="4" />
-                            <ComboBox Name="NatonalityComboBox" Width="150" Grid.Row="0" Grid.Column="5"/>
-
-                            <Label Content="Country:" Grid.Row="1" Grid.Column="4" />
-                            <ComboBox Name="CountryComboBox" Width="150" Grid.Row="1" Grid.Column="5"/>
+                            <Label Content="Country:" Grid.Row="0" Grid.Column="4" />
+                            <ComboBox Name="CountryComboBox" Width="150" Grid.Row="0" Grid.Column="5"/>
 
                         </Grid>
                     </GroupBox>
@@ -156,11 +170,8 @@
                             <Label Content="Date of Birth:" Grid.Row="1" Grid.Column="2" />
                             <DatePicker SelectedDate="{Binding DateHelper}" IsTodayHighlighted="True" Name="InfantDOBDatePicker" Width="150" Grid.Row="1" Grid.Column="3" />
 
-                            <Label Content="Nationality:" Grid.Row="0" Grid.Column="4" />
-                            <ComboBox Name="InfantNatonalityComboBox" Width="150" Grid.Row="0" Grid.Column="5"/>
-
-                            <Label Content="Country:" Grid.Row="1" Grid.Column="4" />
-                            <ComboBox Name="InfantCountryComboBox" Width="150" Grid.Row="1" Grid.Column="5"/>
+                            <Label Content="Country:" Grid.Row="0" Grid.Column="4" />
+                            <ComboBox Name="InfantCountryComboBox" Width="150" Grid.Row="0" Grid.Column="5"/>
 
                         </Grid>
                     </GroupBox>

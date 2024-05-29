@@ -13,6 +13,7 @@
                         <Label Content="Passenger Seat List" FontWeight="DemiBold" Foreground="White" Background="{StaticResource HeaderBackgroundBrush}" />
                         <DataGrid GridLinesVisibility="None" IsReadOnly="True" Height="150" Name="PassengerSeatListDetailsGrid" SelectionChanged="PassengerSeatListDetailsGrid_SelectionChanged" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" MaxHeight="300" MinHeight="100">
                             <DataGrid.Columns>
+                                <DataGridTextColumn Header="Id" Binding="{Binding PassengerId}" />
                                 <DataGridTextColumn Header="Passenger" Binding="{Binding FullName}" />
                                 <DataGridTextColumn Header="Seat" Binding="{Binding Seat}" />
                                 <DataGridTextColumn Header="Seat Price" Binding="{Binding SeatPrice}" />

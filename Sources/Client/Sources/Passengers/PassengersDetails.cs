@@ -3,6 +3,7 @@
     class PassengersDetails
     {
         // From PassengerPage
+        public int PassengerId { get; set; }
         public string Type { get; set; }
         public string Gender { get; set; }
         public string Title { get; set; }
@@ -11,7 +12,6 @@
         public string LastName { get; set; }
         public string FullName { get; set; }
         public string DOB { get; set; }
-        public string Nationality { get; set; }
         public string Country { get; set; }
 
         // From ContactsPage
@@ -29,11 +29,12 @@
         public string Seat { get; set; }
         public double SeatPrice { get; set; }
 
-        public PassengersDetails(string type, string gender, string title, string firstName, string middleName, string lastName, string dob, string nationality, string country,
+        public PassengersDetails(int passengerId, string type, string gender, string title, string firstName, string middleName, string lastName, string dob, string country,
             string addressLine1 = null, string addressLine2 = null, string addressPostal = null, string addressTown = null, string addressState = null, string addressCountry = null, string mobile = null, string email = null,
             string seat = null, double seatPrice = 0)
         {
             // For PassengerPage
+            PassengerId = passengerId;
             Type = type;
             Gender = gender;
             Title = title;
@@ -42,7 +43,6 @@
             LastName = lastName;
             FullName = string.IsNullOrEmpty(MiddleName) ? $"{Title} {FirstName} {LastName}" : $"{Title} {FirstName} {MiddleName} {LastName}";
             DOB = dob;
-            Nationality = nationality;
             Country = country;
 
             // For ContactsPage

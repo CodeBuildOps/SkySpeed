@@ -4,6 +4,7 @@ using SkySpeed.MessageLog;
 using SkySpeed.Passengers;
 using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -47,19 +48,16 @@ namespace SkySpeed.Contacts
 
         private void SetContactDetailsGrid()
         {
-            // ContactGrid contains more information than PassengerGrid
-            var detailsList = new List<PassengersDetails>();
-
-            var gridItems = SharedDataPage.ContactDetailsGrid?.Items ?? SharedDataPage.PassengersDetailsGrid.Items;
-
-            if (SharedDataPage.ContactDetailsGrid != null)
+            var passengerDetailsList = new List<PassengersDetails>();
+            if (SharedDataPage.PassengersDetailsGrid != null)
             {
-                foreach (var rowItem in SharedDataPage.ContactDetailsGrid.Items)
+                foreach (var rowItem in SharedDataPage.PassengersDetailsGrid.Items)
                 {
                     if (rowItem is PassengersDetails row)
                     {
-                        detailsList.Add(
+                        passengerDetailsList.Add(
                             new PassengersDetails(
+                                row.PassengerId,
                                 row.Type,
                                 row.Gender,
                                 row.Title,
@@ -67,7 +65,6 @@ namespace SkySpeed.Contacts
                                 row.MiddleName,
                                 row.LastName,
                                 row.DOB,
-                                row.Nationality,
                                 row.Country,
 
                                 row.AddressLine1,
@@ -85,43 +82,8 @@ namespace SkySpeed.Contacts
                         );
                     }
                 }
+                FillContactDetailsGrid(passengerDetailsList);
             }
-            else
-            {
-                foreach (var rowItem in SharedDataPage.PassengersDetailsGrid.Items)
-                {
-                    if (rowItem is PassengersDetails row)
-                    {
-                        detailsList.Add(
-                            new PassengersDetails(
-                                row.Type,
-                                row.Gender,
-                                row.Title,
-                                row.FirstName,
-                                row.MiddleName,
-                                row.LastName,
-                                row.DOB,
-                                row.Nationality,
-                                row.Country,
-                                row.AddressLine1,
-
-                                row.AddressLine2,
-                                row.AddressPostal,
-                                row.AddressTown,
-                                row.AddressState,
-                                row.AddressCountry,
-                                row.Mobile,
-                                row.Email,
-
-                                 row.Seat,
-                                row.SeatPrice
-                                )
-                        );
-                    }
-                }
-            }
-
-            FillContactDetailsGrid(detailsList);
         }
 
         private void FillContactDetailsGrid(List<PassengersDetails> passengerData)
@@ -142,7 +104,6 @@ namespace SkySpeed.Contacts
         {
             SaveButton.IsEnabled = true;
             ContactDetailsGroupBox.IsEnabled = true;
-
             PopulateContactDetailsInFields(_selectedPassenger);
         }
 
@@ -174,6 +135,8 @@ namespace SkySpeed.Contacts
             ClearAllFields();
 
             SharedDataPage.ContactDetailsGrid = ContactDetailsGrid;
+            SharedDataPage.PassengersDetailsGrid = ContactDetailsGrid;
+            UpdateMainParentWindow();
         }
 
         private bool ValidatePassengerFields(string addressLine1, string addressLine2, string addressPostal, string addressTown, string addressState, string addressCountry,
@@ -205,11 +168,13 @@ namespace SkySpeed.Contacts
             //    _displayMessage.ShowWarningMessageBox("Address state must not remain empty.");
             //    return false;
             //}
-            else if (string.IsNullOrEmpty(addressCountry))
-            {
-                _displayMessage.ShowWarningMessageBox("Address country must not remain empty.");
-                return false;
-            }
+
+            // Country is optional
+            //else if (string.IsNullOrEmpty(addressCountry))
+            //{
+            //    _displayMessage.ShowWarningMessageBox("Address country must not remain empty.");
+            //    return false;
+            //}
 
             // Mobile is optional
             //else if (string.IsNullOrEmpty(mobile))
@@ -227,33 +192,21 @@ namespace SkySpeed.Contacts
 
         private void SaveContact(string email, string mobile, string addressLine1, string addressLine2, string addressPostal, string addressTown, string addressState, string addressCountry)
         {
-            string fullAddress = $"{Line1TextBox.Text}, {Line2TextBox.Text}, {PostalTextBox.Text}, {TownTextBox.Text}, {AddressStateTextBox.Text}, {CountryComboBox.Text}";
+            var selectedPassengerInContactDetailGrid = ContactDetailsGrid.Items[ContactDetailsGrid.SelectedIndex] as PassengersDetails;
+            selectedPassengerInContactDetailGrid.AddressLine1 = addressLine1;
+            selectedPassengerInContactDetailGrid.AddressLine2 = addressLine2;
+            selectedPassengerInContactDetailGrid.AddressPostal = addressPostal;
+            selectedPassengerInContactDetailGrid.AddressTown = addressTown;
+            selectedPassengerInContactDetailGrid.AddressState = addressState;
+            selectedPassengerInContactDetailGrid.AddressCountry = addressCountry;
+            selectedPassengerInContactDetailGrid.FullAddress = $"{addressLine1}, {addressLine2}, {addressPostal}, {addressTown}, {addressState}, {addressCountry}";
+            selectedPassengerInContactDetailGrid.Mobile = mobile;
+            selectedPassengerInContactDetailGrid.Email = email;
 
-            // Update the selected passenger's contact data
-            _selectedPassenger.Email = email;
-            _selectedPassenger.Mobile = mobile;
-            _selectedPassenger.FullAddress = fullAddress;
-
-            // Hidden columns
-            _selectedPassenger.AddressLine1 = addressLine1;
-            _selectedPassenger.AddressLine2 = addressLine2;
-            _selectedPassenger.AddressPostal = addressPostal;
-            _selectedPassenger.AddressTown = addressTown;
-            _selectedPassenger.AddressState = addressState;
-            _selectedPassenger.AddressCountry = addressCountry;
-
-            // Refresh the DataGrid to reflect the changes
             ContactDetailsGrid.Items.Refresh();
 
             // Deselect the selected passenger
             ContactDetailsGrid.SelectedItem = null;
-
-            // Update the Main Parent window
-            _parentWindow = Window.GetWindow(this);
-            TextBlock textBlock = (TextBlock)_parentWindow.FindName("ContactExpanderTextBlock");
-            textBlock.Text += $"{mobile}\n{email}\n{fullAddress}\n\n";
-
-            SharedDataPage.ContactDetailsGrid = ContactDetailsGrid;
         }
 
         private void ClearAllFields()
@@ -278,6 +231,34 @@ namespace SkySpeed.Contacts
                 {
                     comboBox.SelectedItem = null;
                 }
+            }
+        }
+
+        private void UpdateMainParentWindow()
+        {
+            if (SharedDataPage.ContactDetailsGrid != null)
+            {
+                _parentWindow = Window.GetWindow(this);
+                TextBlock textBlock = _parentWindow.FindName("ContactExpanderTextBlock") as TextBlock;
+
+                // Clear the existing text
+                textBlock.Text = string.Empty;
+
+                StringBuilder textBuilder = new StringBuilder();
+                foreach (var rowItem in SharedDataPage.ContactDetailsGrid.Items)
+                {
+                    if (rowItem is PassengersDetails row)
+                    {
+                        textBuilder.AppendLine($"Passenger - {row.PassengerId}");
+                        textBuilder.AppendLine($"{row.Mobile}");
+                        textBuilder.AppendLine($"{row.Email}");
+                        textBuilder.AppendLine($"{row.FullAddress}");
+                        textBuilder.AppendLine();
+                    }
+                }
+
+                // Update the TextBlock with the new text
+                textBlock.Text = textBuilder.ToString();
             }
         }
     }

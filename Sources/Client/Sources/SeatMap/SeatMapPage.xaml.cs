@@ -16,7 +16,7 @@ namespace SkySpeed.SeatMap
         private Button _selectedSeat = null;
         private Image _selectedSittingPersonImage = null;
 
-        private DisplayMessage _displayMessage;
+        private readonly DisplayMessage _displayMessage;
         private PassengersDetails _selectedPassenger;
         private List<SeatMapPriceDetails> _seatGroupPrice;
         private List<string> _seatLeftTop;
@@ -45,9 +45,6 @@ namespace SkySpeed.SeatMap
         {
             var detailsList = new List<PassengersDetails>();
 
-            // Once Parent datagrid contains all the records of Child datagrid then we need to modify below methods
-            var gridItems = SharedDataPage.PassengerSeatListDetailsGrid?.Items ?? SharedDataPage.PassengersDetailsGrid.Items;
-
             if (SharedDataPage.PassengerSeatListDetailsGrid != null)
             {
                 foreach (var rowItem in SharedDataPage.PassengerSeatListDetailsGrid.Items)
@@ -56,6 +53,7 @@ namespace SkySpeed.SeatMap
                     {
                         detailsList.Add(
                             new PassengersDetails(
+                                row.PassengerId,
                                 row.Type,
                                 row.Gender,
                                 row.Title,
@@ -63,7 +61,6 @@ namespace SkySpeed.SeatMap
                                 row.MiddleName,
                                 row.LastName,
                                 row.DOB,
-                                row.Nationality,
                                 row.Country,
 
                                 row.AddressLine1,
@@ -90,6 +87,7 @@ namespace SkySpeed.SeatMap
                     {
                         detailsList.Add(
                             new PassengersDetails(
+                                row.PassengerId,
                                 row.Type,
                                 row.Gender,
                                 row.Title,
@@ -97,7 +95,6 @@ namespace SkySpeed.SeatMap
                                 row.MiddleName,
                                 row.LastName,
                                 row.DOB,
-                                row.Nationality,
                                 row.Country,
 
                                 row.AddressLine1,
@@ -162,7 +159,8 @@ namespace SkySpeed.SeatMap
                         double price = CalculateSeatPrice(row, col);
 
                         // Add seat details to the list
-                        _seatGroupPrice.Add(new SeatMapPriceDetails(seatName, price));
+                        // Need to check
+                        _seatGroupPrice.Add(new SeatMapPriceDetails(0,seatName, price));
 
                         // Add seats in respective seat list
                         if ( row >= 1 && row <=5 )
