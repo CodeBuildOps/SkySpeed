@@ -2,6 +2,7 @@
 {
     public class FlightDetails
     {
+        public int SelectedFlightIndex { get; set; }
         public string Designator { get; set; }
         public string FlightNumber { get; set; }
         public string DayAndDate { get; set; }
@@ -12,8 +13,9 @@
         public string Fare { get; set; }
         public string Duration { get; set; }
 
-        public FlightDetails(string designator, string flightNumber, string dayAndDate, string sector, string departArrival, string stop, string seatsLeft, string fare, string duration)
+        public FlightDetails(int selectedFlightIndex, string designator, string flightNumber, string dayAndDate, string sector, string departArrival, string stop, string seatsLeft, string fare, string duration)
         {
+            SelectedFlightIndex = selectedFlightIndex;
             Designator = designator;
             FlightNumber = flightNumber;
             DayAndDate = dayAndDate;

@@ -10,6 +10,17 @@
             <StackPanel Background="{StaticResource SectionBackgroundBrush}">
                 <Label Content="Flight" FontWeight="DemiBold" Foreground="White" Background="{StaticResource HeaderBackgroundBrush}" />
                 <DataGrid GridLinesVisibility="None" IsReadOnly="True" SelectionChanged="FlightDetailsGrid_SelectionChanged" Name="FlightDetailsGrid" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" MaxHeight="500" MinHeight="200">
+                    <DataGrid.Resources>
+                        <Style TargetType="DataGridCell">
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="FontWeight" Value="SemiBold"/>
+                                    <Setter Property="FontSize" Value="15"/>
+                                    <Setter Property="Background" Value="{StaticResource HeaderBackgroundBrush}"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.Resources>
                     <DataGrid.Columns>
                         <DataGridTemplateColumn Header="Designator">
                             <DataGridTemplateColumn.CellTemplate>

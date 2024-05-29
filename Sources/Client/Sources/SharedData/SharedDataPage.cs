@@ -10,5 +10,6 @@ namespace SharedData
         public static DataGrid PassengersDetailsGrid { get; set; }
         public static DataGrid ContactDetailsGrid { get; set; }
         public static DataGrid PassengerSeatListDetailsGrid { get; set; }
+        public static object FlightDetails { get; set; }
     }
 }
