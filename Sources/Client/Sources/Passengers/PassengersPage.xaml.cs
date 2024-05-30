@@ -101,6 +101,13 @@ namespace SkySpeed.Passengers
 
         private void AddPassengerButton_Click(object sender, RoutedEventArgs e)
         {
+            // Check if there is a selected passenger and deselect if necessary
+            if (_selectedPassenger != null)
+            {
+                // Deselect the selected passenger
+                PassengersDetailsGrid.SelectedItem = null;
+            }
+
             Add_Edit_Passenger.Content = "Add Passenger";
 
             // Enable Passenger Details Group Box if there are adult passengers
