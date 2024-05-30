@@ -34,94 +34,15 @@ namespace SkySpeed.SeatMap
 
             if (SharedDataPage.PassengersDetailsGrid != null)
             {
-                SetPassengerSeatListDetailsGrid();
                 InitializeSeats();
+                SetPassengerSeatListDetailsGrid();
+
+                // Todo: Populate seat availability
             }
             else
+            {
                 PassengerSeatListDetailsGrid.IsEnabled = false;
-        }
-
-        private void SetPassengerSeatListDetailsGrid()
-        {
-            var detailsList = new List<PassengersDetails>();
-
-            if (SharedDataPage.PassengerSeatListDetailsGrid != null)
-            {
-                foreach (var rowItem in SharedDataPage.PassengerSeatListDetailsGrid.Items)
-                {
-                    if (rowItem is PassengersDetails row)
-                    {
-                        detailsList.Add(
-                            new PassengersDetails(
-                                row.PassengerId,
-                                row.Type,
-                                row.Gender,
-                                row.Title,
-                                row.FirstName,
-                                row.MiddleName,
-                                row.LastName,
-                                row.DOB,
-                                row.Country,
-
-                                row.AddressLine1,
-                                row.AddressLine2,
-                                row.AddressPostal,
-                                row.AddressTown,
-                                row.AddressState,
-                                row.AddressCountry,
-                                row.Mobile,
-                                row.Email,
-
-                                row.Seat,
-                                row.SeatPrice
-                                )
-                        );
-                    }
-                }
-            }
-            else
-            {
-                foreach (var rowItem in SharedDataPage.PassengersDetailsGrid.Items)
-                {
-                    if (rowItem is PassengersDetails row)
-                    {
-                        detailsList.Add(
-                            new PassengersDetails(
-                                row.PassengerId,
-                                row.Type,
-                                row.Gender,
-                                row.Title,
-                                row.FirstName,
-                                row.MiddleName,
-                                row.LastName,
-                                row.DOB,
-                                row.Country,
-
-                                row.AddressLine1,
-                                row.AddressLine2,
-                                row.AddressPostal,
-                                row.AddressTown,
-                                row.AddressState,
-                                row.AddressCountry,
-                                row.Mobile,
-                                row.Email,
-
-                                row.Seat,
-                                row.SeatPrice
-                                )
-                        );
-                    }
-                }
-            }
-
-            FillPassengerSeatListDetailsGrid(detailsList);
-        }
-
-        private void FillPassengerSeatListDetailsGrid(List<PassengersDetails> passengerData)
-        {
-            foreach (var item in passengerData)
-            {
-                PassengerSeatListDetailsGrid.Items.Add(item);
+                _displayMessage.ShowErrorMessageBox("No passengers to select. Please add a passenger.");
             }
         }
 
@@ -147,7 +68,7 @@ namespace SkySpeed.SeatMap
                 {
                     string seatName = $"Seat{row}{col}";
 
-                    // Get the ToggleButton object using FindName
+                    // Get the Button object using FindName
                     Button seatButton = (Button)this.FindName(seatName);
 
                     // Check if seatButton is found
@@ -158,32 +79,11 @@ namespace SkySpeed.SeatMap
                         // Calculate seat price based on location
                         double price = CalculateSeatPrice(row, col);
 
-                        // Add seat details to the list
-                        // Need to check
-                        _seatGroupPrice.Add(new SeatMapPriceDetails(0,seatName, price));
+                        // Add seat price details to the list
+                        _seatGroupPrice.Add(new SeatMapPriceDetails(seatName, price));
 
                         // Add seats in respective seat list
-                        if ( row >= 1 && row <=5 )
-                        {
-                            if ( col >= 'A' && col <= 'C' )
-                                _seatLeftTop.Add($"{row}{col}");
-                            else if ( col >= 'D' && col <= 'F')
-                                _seatRightTop.Add($"{row}{col}");
-                        }
-                        else if ( row == 0 )
-                        {
-                            if ( col >= 'A' && col <= 'C' )
-                                _seatLeftMiddle.Add($"{row}{col}");
-                            else if ( col >= 'D' && col <= 'F' )
-                                _seatRightMiddle.Add($"{row}{col}");
-                        }
-                        else if ( row >= 6 && row <= 9 )
-                        {
-                            if ( col >= 'A' && col <= 'C' )
-                                _seatLeftBottom.Add($"{row}{col}");
-                            else if ( col >= 'D' && col <= 'F' )
-                                _seatRightBottom.Add($"{row}{col}");
-                        }
+                        AddSeatToGroupList(row, col);
                     }
                 }
             }
@@ -192,6 +92,31 @@ namespace SkySpeed.SeatMap
             foreach (var item in _seatGroupPrice)
             {
                 SeatGroupDetailsGrid.Items.Add(item);
+            }
+        }
+
+        private void AddSeatToGroupList(int row, char col)
+        {
+            if (row >= 1 && row <= 5)
+            {
+                if (col >= 'A' && col <= 'C')
+                    _seatLeftTop.Add($"{row}{col}");
+                else if (col >= 'D' && col <= 'F')
+                    _seatRightTop.Add($"{row}{col}");
+            }
+            else if (row == 0)
+            {
+                if (col >= 'A' && col <= 'C')
+                    _seatLeftMiddle.Add($"{row}{col}");
+                else if (col >= 'D' && col <= 'F')
+                    _seatRightMiddle.Add($"{row}{col}");
+            }
+            else if (row >= 6 && row <= 9)
+            {
+                if (col >= 'A' && col <= 'C')
+                    _seatLeftBottom.Add($"{row}{col}");
+                else if (col >= 'D' && col <= 'F')
+                    _seatRightBottom.Add($"{row}{col}");
             }
         }
 
@@ -214,11 +139,61 @@ namespace SkySpeed.SeatMap
             }
         }
 
+        private void SetPassengerSeatListDetailsGrid()
+        {
+            var detailsList = new List<PassengersDetails>();
+
+            foreach (var rowItem in SharedDataPage.PassengersDetailsGrid.Items)
+            {
+                if (rowItem is PassengersDetails row)
+                {
+                    detailsList.Add(new PassengersDetails(
+                        row.PassengerId,
+                        row.Type,
+                        row.Gender,
+                        row.Title,
+                        row.FirstName,
+                        row.MiddleName,
+                        row.LastName,
+                        row.DOB,
+                        row.Country,
+
+                        row.AddressLine1,
+                        row.AddressLine2,
+                        row.AddressPostal,
+                        row.AddressTown,
+                        row.AddressState,
+                        row.AddressCountry,
+                        row.Mobile,
+                        row.Email,
+
+                        row.Seat,
+                        row.SeatPrice));
+                }
+            }
+
+            FillPassengerSeatListDetailsGrid(detailsList);
+        }
+
+        private void FillPassengerSeatListDetailsGrid(List<PassengersDetails> passengerData)
+        {
+            foreach (var item in passengerData)
+            {
+                if (item.Seat != null)
+                {
+                    // Preserve the spot where the seating person image will be set for each passenger.
+                    // Locate the button
+                    Button seatButton = (Button)this.FindName($"Seat{item.Seat}");
+                    GetSittingPersonImage(seatButton);
+                    SetSittingPersonImage(seatButton);
+                }
+                PassengerSeatListDetailsGrid.Items.Add(item);
+            }
+        }
+
         private void PassengerSeatListDetailsGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             _selectedPassenger = PassengerSeatListDetailsGrid.SelectedItem as PassengersDetails;
-
-            // Todo: Get some validation like seat available, or enable seat selection
         }
 
         private void ButtonSeat_Clicked(object sender, RoutedEventArgs e)
@@ -246,36 +221,15 @@ namespace SkySpeed.SeatMap
             if (_selectedSeat != null)
             {
                 GetSittingPersonImage(_selectedSeat);
-
-                if (_selectedSittingPersonImage != null)
-                {
-                    // Get the selected button's grid position and move the sharedSittingPersonImage to the button's position
-                    Grid.SetRow(_selectedSittingPersonImage, Grid.GetRow(_selectedSeat));
-                    Grid.SetColumn(_selectedSittingPersonImage, Grid.GetColumn(_selectedSeat));
-
-                    // Make the image hidden
-                    _selectedSittingPersonImage.Visibility = Visibility.Hidden;
-                }
+                SetSittingPersonImage(_selectedSeat);
             }
         }
 
         private void HighlightSelectedSeat(Button seat)
         {
             GetSittingPersonImage(seat);
+            SetSittingPersonImage(seat);
 
-            if (_selectedSittingPersonImage != null)
-            {
-                // Get the selected button's grid position and move the sharedSittingPersonImage to the button's position
-                Grid.SetRow(_selectedSittingPersonImage, Grid.GetRow(seat));
-                Grid.SetColumn(_selectedSittingPersonImage, Grid.GetColumn(seat));
-
-                // Bring the image to the front
-                Panel.SetZIndex(_selectedSittingPersonImage, 2);
-                Panel.SetZIndex(seat, 1);
-
-                // Make the image visible
-                _selectedSittingPersonImage.Visibility = Visibility.Visible;
-            }
         }
 
         private void GetSittingPersonImage(Button seat)
@@ -305,35 +259,44 @@ namespace SkySpeed.SeatMap
             }
         }
 
+        private void SetSittingPersonImage(Button seat)
+        {
+            if (_selectedSittingPersonImage != null)
+            {
+                // Get the selected button's grid position and move the sharedSittingPersonImage to the button's position
+                Grid.SetRow(_selectedSittingPersonImage, Grid.GetRow(seat));
+                Grid.SetColumn(_selectedSittingPersonImage, Grid.GetColumn(seat));
+
+                // Bring the image to the front
+                Panel.SetZIndex(_selectedSittingPersonImage, 2);
+                Panel.SetZIndex(seat, 1);
+
+                // Make the image visible
+                _selectedSittingPersonImage.Visibility = Visibility.Visible;
+            }
+        }
+
         private void SaveSeat(string selectedSeat)
         {
-            if (_selectedPassenger != null)
+            var seatGroupAndPrice = SeatGroupDetailsGrid.Items.Cast<SeatMapPriceDetails>().FirstOrDefault(x => x.Seat == $"Seat{selectedSeat}");
+            if (seatGroupAndPrice != null)
             {
-                var seatGroupAndPrice = SeatGroupDetailsGrid.Items.Cast<SeatMapPriceDetails>().FirstOrDefault(x => x.Seat == $"Seat{selectedSeat}");
-                if (seatGroupAndPrice != null)
-                {
-                    _selectedPassenger.Seat = selectedSeat;
-                    _selectedPassenger.SeatPrice = seatGroupAndPrice.SeatPrice;
-                }
-
-                _displayMessage.ShowSuccessMessageBox($"" +
-                    $"Seat: {_selectedPassenger.Seat}\n" +
-                    $"SeatPrice: {_selectedPassenger.SeatPrice}\n" +
-                    $"Passenger: {_selectedPassenger.FullName}");
-
-                // Refresh the DataGrid to reflect the changes
-                PassengerSeatListDetailsGrid.Items.Refresh();
-
-                // Deselect the selected passenger
-                PassengerSeatListDetailsGrid.SelectedItem = null;
-
-                // Todo: Update the Main Parent window like in ExpanderTextBlock
-                //_parentWindow = Window.GetWindow(this);
-                //TextBlock textBlock = (TextBlock)_parentWindow.FindName("PassengersExpanderTextBlock");
-                //textBlock.Text += $"\nSeat: {selectedSeat}";
-
-                SharedDataPage.PassengerSeatListDetailsGrid = PassengerSeatListDetailsGrid;
+                _selectedPassenger.Seat = selectedSeat;
+                _selectedPassenger.SeatPrice = seatGroupAndPrice.SeatPrice;
             }
+
+            _displayMessage.ShowSuccessMessageBox($"" +
+                $"Seat: {_selectedPassenger.Seat}\n" +
+                $"SeatPrice: {_selectedPassenger.SeatPrice}\n" +
+                $"Passenger: {_selectedPassenger.FullName}");
+
+            // Refresh the DataGrid to reflect the changes
+            PassengerSeatListDetailsGrid.Items.Refresh();
+
+            // Deselect the selected passenger
+            PassengerSeatListDetailsGrid.SelectedItem = null;
+
+            SharedDataPage.PassengersDetailsGrid = PassengerSeatListDetailsGrid;
         }
     }
 }
