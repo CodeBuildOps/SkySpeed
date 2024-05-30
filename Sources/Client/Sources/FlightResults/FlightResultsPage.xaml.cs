@@ -84,16 +84,15 @@ namespace SkySpeed.FlightResults
 
         private void FillFlightDetailsGrid(List<FlightDetails> flightData)
         {
-            if (flightData != null && flightData.Any())
-            {
-                foreach (var item in flightData)
-                {
-                    FlightDetailsGrid.Items.Add(item);
-                }
-            }
-            else
+            if (flightData == null || !flightData.Any())
             {
                 _displayMessage.ShowWarningMessageBox("There are no flights currently available.");
+                return;
+            }
+
+            foreach (var item in flightData)
+            {
+                FlightDetailsGrid.Items.Add(item);
             }
         }
 
@@ -106,8 +105,10 @@ namespace SkySpeed.FlightResults
 
         private void CalculateTotalCost()
         {
-            double fareAmount;
-            if (double.TryParse(_selectedFlight.Fare.Replace("INR", ""), out fareAmount))
+            if (_selectedFlight == null)
+                return;
+
+            if (double.TryParse(_selectedFlight.Fare.Replace("INR", "").Trim(), out double fareAmount))
             {
                 PricePerADTLabel.Content = fareAmount;
                 TotalCostLabel.Content = SharedDataPage.NumberOfPassengers == 0 ? fareAmount : fareAmount * SharedDataPage.NumberOfPassengers;
@@ -115,9 +116,11 @@ namespace SkySpeed.FlightResults
 
             // Update the Main Parent window
             _parentWindow = Window.GetWindow(this);
-            TextBlock textBlock = (TextBlock)_parentWindow.FindName("FlightInformationExpanderTextBlock");
-            textBlock.Text = $"{_selectedFlight.DayAndDate}\t{_selectedFlight.Fare}\n{_selectedFlight.FlightNumber}  {_selectedFlight.Sector}  {_selectedFlight.DepartArrival}";
-
+            if (_parentWindow != null)
+            {
+                TextBlock textBlock = (TextBlock)_parentWindow.FindName("FlightInformationExpanderTextBlock");
+                textBlock.Text = $"{_selectedFlight.DayAndDate}\t{_selectedFlight.Fare}\n{_selectedFlight.FlightNumber}  {_selectedFlight.Sector}  {_selectedFlight.DepartArrival}";
+            }
             SharedDataPage.FlightDetails = _selectedFlight;
         }
     }
