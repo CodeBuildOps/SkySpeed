@@ -5,29 +5,29 @@
       Title="EndRecordPage">
 
     <StackPanel>
-        <Label Content="End Record" FontWeight="SemiBold" FontSize="14" Background="{StaticResource HeaderBackgroundBrush}" />
-        <Grid Margin="0,3,0,0" Background="{StaticResource SectionBackgroundBrush}">
+        <Label Content="End Record" FontWeight="SemiBold" FontSize="14" Background="{DynamicResource HeaderBackgroundBrush}" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
+        <Grid Margin="0,3,0,0" Background="{DynamicResource SectionBackgroundBrush}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <Label Content="Action to perform" FontWeight="DemiBold" Foreground="White" Background="{StaticResource HeaderBackgroundBrush}" Grid.Row="0" />
+            <Label Content="Action to perform" FontWeight="DemiBold" Foreground="{DynamicResource ForegroundWhiteBrush}" Background="{DynamicResource HeaderBackgroundBrush}" Grid.Row="0" />
             <StackPanel Orientation="Vertical" Grid.Row="1" Margin="5">
-                <RadioButton Content="End Record" Margin="0,2,0,0" />
-                <RadioButton Content="End Record and Clear" Margin="0,2,0,0" />
-                <RadioButton Content="Ignore Changes" Margin="0,2,0,0" />
-                <RadioButton Content="Ignore Changes and Clear" Margin="0,2,0,0" />
+                <RadioButton Content="End Record" Margin="0,2,0,0" Foreground="{DynamicResource ForegroundBlackBrushSecondary}" />
+                <RadioButton Content="End Record and Clear" Margin="0,2,0,0" Foreground="{DynamicResource ForegroundBlackBrushSecondary}" />
+                <RadioButton Content="Ignore Changes" Margin="0,2,0,0" Foreground="{DynamicResource ForegroundBlackBrushSecondary}" />
+                <RadioButton Content="Ignore Changes and Clear" Margin="0,2,0,0" Foreground="{DynamicResource ForegroundBlackBrushSecondary}" />
             </StackPanel>
         </Grid>
 
-        <Grid Margin="0,3,0,3" Background="{StaticResource SectionBackgroundBrush}">
+        <Grid Margin="0,3,0,3" Background="{DynamicResource SectionBackgroundBrush}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <Label Content="Itinerary details" FontWeight="DemiBold" Foreground="White" Background="{StaticResource HeaderBackgroundBrush}" Grid.Row="0" />
+            <Label Content="Itinerary details" FontWeight="DemiBold" Foreground="{DynamicResource ForegroundWhiteBrush}" Background="{DynamicResource HeaderBackgroundBrush}" Grid.Row="0" />
 
             <Grid Grid.Row="1" Margin="3">
                 <Grid.ColumnDefinitions>
@@ -35,7 +35,7 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
-                <Label Content="Send Itinerary via:" Grid.Column="0" />
+                <Label Content="Send Itinerary via:" Grid.Column="0" Foreground="{DynamicResource ForegroundBlackBrushSecondary}" />
                 <ComboBox Name="SendItineraryComboBox" Width="80" Grid.Column="1" SelectionChanged="SendItineraryComboBox_SelectionChanged" >
                     <ComboBoxItem>Email</ComboBoxItem>
                     <ComboBoxItem>Print</ComboBoxItem>

@@ -12,40 +12,40 @@
         Closing="MainWindow_Closing">
 
     <DockPanel >
-        <Menu DockPanel.Dock="Top" FontWeight="DemiBold" Background="{StaticResource MainMenuBrush}">
-            <MenuItem Header="_Booking" Click="BookingMenu_Click">
+        <Menu DockPanel.Dock="Top" FontWeight="DemiBold" Margin="0,0,0,3" Padding="0,3,0,3" Background="{DynamicResource MainMenuBrush}">
+            <MenuItem Header="_Booking" Click="BookingMenu_Click" Foreground="{DynamicResource ForegroundBlackBrushSecondary}">
             </MenuItem>
 
-            <MenuItem Header="_Reservation">
+            <MenuItem Header="_Reservation" Foreground="{DynamicResource ForegroundBlackBrushSecondary}">
             </MenuItem>
 
-            <MenuItem Header="_End Record">
+            <MenuItem Header="_End Record" Foreground="{DynamicResource ForegroundBlackBrushSecondary}">
             </MenuItem>
 
-            <MenuItem Header="_PNR Retrieve">
+            <MenuItem Header="_PNR Retrieve" Foreground="{DynamicResource ForegroundBlackBrushSecondary}">
             </MenuItem>
 
-            <MenuItem Header="_Help">
-                <MenuItem Header="_About Sky Speed" Click="AboutSkySpeed_Click"/>
+            <MenuItem Header="_Help" Foreground="{DynamicResource ForegroundBlackBrushSecondary}">
+                <MenuItem Header="_About Sky Speed" Click="AboutSkySpeed_Click" Foreground="Black"/>
             </MenuItem>
 
-            <MenuItem Header="_Calculator" Click="Calculator_Click">
+            <MenuItem Header="_Calculator" Click="Calculator_Click" Foreground="{DynamicResource ForegroundBlackBrushSecondary}">
             </MenuItem>
 
-            <MenuItem Header="_Notepad" Click="Notepad_Click">
+            <MenuItem Header="_Notepad" Click="Notepad_Click" Foreground="{DynamicResource ForegroundBlackBrushSecondary}">
             </MenuItem>
         </Menu>
 
-        <Grid DockPanel.Dock="Left" Width="200" Margin="3,0,0,0" Background="{StaticResource SectionBackgroundBrush}">
+        <Grid DockPanel.Dock="Left" Width="200" Margin="3,0,0,3" Background="{DynamicResource SectionBackgroundBrush}">
             <StackPanel>
 
-                <Grid Background="{StaticResource SectionBackgroundBrush}">
+                <Grid Background="{DynamicResource SectionBackgroundBrush}" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
 
-                    <Label Content="Reservation" FontWeight="DemiBold" Foreground="White" Background="{StaticResource HeaderBackgroundBrush}" Grid.Row="0" />
+                    <Label Content="Reservation" FontWeight="DemiBold" Foreground="{DynamicResource ForegroundWhiteBrush}" Background="{DynamicResource HeaderBackgroundBrush}" Grid.Row="0" />
 
                     <Grid Grid.Row="1" >
                         <Grid.ColumnDefinitions>
@@ -57,50 +57,50 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <Label Content="Booking:" FontWeight="DemiBold" Grid.Column="0"  Grid.Row="0"/>
-                        <Label Content="Creating" Name="BookingLabel" Grid.Column="1" Grid.Row="0"/>
+                        <Label Content="Booking:" Foreground="{DynamicResource ForegroundBlackBrushSecondary}" FontWeight="DemiBold" Grid.Column="0"  Grid.Row="0"/>
+                        <Label Content="Creating" Foreground="{DynamicResource ForegroundBlackBrushSecondary}" Name="BookingLabel" Grid.Column="1" Grid.Row="0"/>
 
-                        <Label Content="Payment:" FontWeight="DemiBold" Grid.Column="0" Grid.Row="1"/>
-                        <Label Content="Not Available" Name="PaymentLabel" Grid.Column="1" Grid.Row="1"/>
+                        <Label Content="Payment:" Foreground="{DynamicResource ForegroundBlackBrushSecondary}" FontWeight="DemiBold" Grid.Column="0" Grid.Row="1"/>
+                        <Label Content="Not Available" Foreground="{DynamicResource ForegroundBlackBrushSecondary}" Name="PaymentLabel" Grid.Column="1" Grid.Row="1"/>
 
                     </Grid>
                 </Grid>
 
-                <Border Margin="0,3,0,0" BorderBrush="{StaticResource HeaderBackgroundBrush}" BorderThickness="1">
-                    <StackPanel Background="{StaticResource SectionBackgroundBrush}">
-                        <Expander Header="Flight Information" IsExpanded="True" FontWeight="DemiBold" Foreground="White" Background="{StaticResource HeaderBackgroundBrush}">
+                <Border Margin="0,3,0,0" BorderBrush="{DynamicResource HeaderBackgroundBrush}" BorderThickness="1">
+                    <StackPanel Background="{DynamicResource SectionBackgroundBrush}">
+                        <Expander Header="Flight Information" IsExpanded="True" FontWeight="DemiBold" Foreground="{DynamicResource ForegroundWhiteBrush}" Background="{DynamicResource HeaderBackgroundBrush}">
                             <TextBlock Text=""  Name="FlightInformationExpanderTextBlock" Foreground="Black" Background="White" TextWrapping="Wrap" MinHeight="40"/>
                         </Expander>
                     </StackPanel>
                 </Border>
 
-                <Border Margin="0,3,0,0" BorderBrush="{StaticResource HeaderBackgroundBrush}" BorderThickness="1">
-                    <StackPanel Background="{StaticResource SectionBackgroundBrush}">
-                        <Expander Header="Passengers" IsExpanded="True" FontWeight="DemiBold" Foreground="White" Background="{StaticResource HeaderBackgroundBrush}">
+                <Border Margin="0,3,0,0" BorderBrush="{DynamicResource HeaderBackgroundBrush}" BorderThickness="1">
+                    <StackPanel Background="{DynamicResource SectionBackgroundBrush}">
+                        <Expander Header="Passengers" IsExpanded="True" FontWeight="DemiBold" Foreground="{DynamicResource ForegroundWhiteBrush}" Background="{DynamicResource HeaderBackgroundBrush}">
                             <TextBlock Text="" Name="PassengersExpanderTextBlock" Foreground="Black" Background="White" TextWrapping="Wrap" MinHeight="40" />
                         </Expander>
                     </StackPanel>
                 </Border>
 
-                <Border Margin="0,3,0,0" BorderBrush="{StaticResource HeaderBackgroundBrush}" BorderThickness="1">
-                    <StackPanel Background="{StaticResource SectionBackgroundBrush}">
-                        <Expander Header="Contact Information" IsExpanded="True" FontWeight="DemiBold" Foreground="White" Background="{StaticResource HeaderBackgroundBrush}">
+                <Border Margin="0,3,0,0" BorderBrush="{DynamicResource HeaderBackgroundBrush}" BorderThickness="1">
+                    <StackPanel Background="{DynamicResource SectionBackgroundBrush}">
+                        <Expander Header="Contact Information" IsExpanded="True" FontWeight="DemiBold" Foreground="{DynamicResource ForegroundWhiteBrush}" Background="{DynamicResource HeaderBackgroundBrush}">
                             <TextBlock Text=""  Name="ContactExpanderTextBlock" Foreground="Black" Background="White" TextWrapping="Wrap" MinHeight="40"/>
                         </Expander>
                     </StackPanel>
                 </Border>
 
-                <Border Margin="0,3,0,0" BorderBrush="{StaticResource HeaderBackgroundBrush}" BorderThickness="1">
-                    <StackPanel Background="{StaticResource SectionBackgroundBrush}">
-                        <Expander Header="Payments" IsExpanded="True" FontWeight="DemiBold" Foreground="White" Background="{StaticResource HeaderBackgroundBrush}">
+                <Border Margin="0,3,0,0" BorderBrush="{DynamicResource HeaderBackgroundBrush}" BorderThickness="1">
+                    <StackPanel Background="{DynamicResource SectionBackgroundBrush}">
+                        <Expander Header="Payments" IsExpanded="True" FontWeight="DemiBold" Foreground="{DynamicResource ForegroundWhiteBrush}" Background="{DynamicResource HeaderBackgroundBrush}">
                             <TextBlock Text="" Foreground="Black" Background="White" TextWrapping="Wrap" />
                         </Expander>
                     </StackPanel>
                 </Border>
 
-                <Border Margin="0,3,0,0" BorderBrush="{StaticResource HeaderBackgroundBrush}" BorderThickness="1">
-                    <StackPanel Background="{StaticResource SectionBackgroundBrush}">
-                        <Expander Header="Comments" IsExpanded="True" FontWeight="DemiBold" Foreground="White" Background="{StaticResource HeaderBackgroundBrush}">
+                <Border Margin="0,3,0,0" BorderBrush="{DynamicResource HeaderBackgroundBrush}" BorderThickness="1">
+                    <StackPanel Background="{DynamicResource SectionBackgroundBrush}">
+                        <Expander Header="Comments" IsExpanded="True" FontWeight="DemiBold" Foreground="{DynamicResource ForegroundWhiteBrush}" Background="{DynamicResource HeaderBackgroundBrush}">
                             <TextBlock Text="" Foreground="Black" Background="White" TextWrapping="Wrap" />
                         </Expander>
                     </StackPanel>
@@ -109,8 +109,8 @@
             </StackPanel>
         </Grid>
 
-        <Grid DockPanel.Dock="Right" Width="Auto" Margin="0,0,3,0" Background="{StaticResource SectionBackgroundBrush}" >
-            <Label Content="Coming Soon" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Grid DockPanel.Dock="Right" Width="Auto" Margin="0,0,3,3" Background="{DynamicResource SectionBackgroundBrush}" >
+            <Label Content="Coming Soon" Foreground="{DynamicResource ForegroundBlackBrushSecondary}" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
         </Grid>
 
         <Grid DockPanel.Dock="Bottom" Margin="0,0,3,5" HorizontalAlignment="Right">
@@ -125,7 +125,7 @@
 
         <!---Add pages-->
         <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-            <Grid Margin="3,0,3,3" Background="{StaticResource SectionBackgroundBrush}">
+            <Grid Margin="3,0,3,3" Background="{DynamicResource SectionBackgroundBrush}">
                 <Frame Name="NavigationFrame" NavigationUIVisibility="Hidden" />
             </Grid>
         </ScrollViewer>

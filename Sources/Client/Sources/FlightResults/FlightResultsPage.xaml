@@ -5,18 +5,19 @@
       Title="FlightResultsPage">
 
     <StackPanel>
-        <Label Content="Flight Results" FontWeight="SemiBold" FontSize="14" Background="{StaticResource HeaderBackgroundBrush}" />
-        <Border Margin="0,3,0,0" BorderBrush="{StaticResource HeaderBackgroundBrush}" BorderThickness="1">
-            <StackPanel Background="{StaticResource SectionBackgroundBrush}">
-                <Label Content="Flight" FontWeight="DemiBold" Foreground="White" Background="{StaticResource HeaderBackgroundBrush}" />
+        <Label Content="Flight Results" FontWeight="SemiBold" FontSize="14" Background="{DynamicResource HeaderBackgroundBrush}" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
+        <Border Margin="0,3,0,0" BorderBrush="{DynamicResource HeaderBackgroundBrush}" BorderThickness="1">
+            <StackPanel Background="{DynamicResource SectionBackgroundBrush}">
+                <Label Content="Flight" FontWeight="DemiBold" Foreground="{DynamicResource ForegroundWhiteBrush}" Background="{DynamicResource HeaderBackgroundBrush}" />
                 <DataGrid GridLinesVisibility="None" IsReadOnly="True" SelectionChanged="FlightDetailsGrid_SelectionChanged" Name="FlightDetailsGrid" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" MaxHeight="500" MinHeight="200">
                     <DataGrid.Resources>
                         <Style TargetType="DataGridCell">
                             <Style.Triggers>
                                 <Trigger Property="IsSelected" Value="True">
-                                    <Setter Property="FontWeight" Value="SemiBold"/>
-                                    <Setter Property="FontSize" Value="15"/>
-                                    <Setter Property="Background" Value="{StaticResource HeaderBackgroundBrush}"/>
+                                    <Setter Property="FontWeight" Value="Bold"/>
+                                    <Setter Property="FontSize" Value="13"/>
+                                    <Setter Property="Background" Value="{DynamicResource HeaderBackgroundBrush}"/>
+                                    <Setter Property="Foreground" Value="{DynamicResource ForegroundBlackBrushSecondary}"/>
                                 </Trigger>
                             </Style.Triggers>
                         </Style>
@@ -43,14 +44,14 @@
             </StackPanel>
         </Border>
 
-        <Grid Margin="0,3,0,0" Background="{StaticResource SectionBackgroundBrush}">
+        <Grid Margin="0,3,0,0" Background="{DynamicResource SectionBackgroundBrush}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <Label Content="Details" FontWeight="DemiBold" Foreground="White" Background="{StaticResource HeaderBackgroundBrush}" Grid.Row="0" />
+            <Label Content="Details" FontWeight="DemiBold" Foreground="{DynamicResource ForegroundWhiteBrush}" Background="{DynamicResource HeaderBackgroundBrush}" Grid.Row="0" />
 
             <Grid Grid.Row="1" Margin="0,5,0,0">
                 <Grid.ColumnDefinitions>
@@ -60,11 +61,11 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
-                <Label Content="Total Passengers:" FontWeight="DemiBold" Grid.Column="0" />
-                <Label Content="0"  Name="NumberOfPassengersLabel" FontWeight="DemiBold" HorizontalAlignment="Left" Margin="100,0,0,0" Width="17" />
+                <Label Content="Total Passengers:" FontWeight="DemiBold" Grid.Column="0" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
+                <Label Content="0"  Name="NumberOfPassengersLabel" FontWeight="DemiBold" HorizontalAlignment="Left" Margin="100,0,0,0" Width="17" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
 
-                <Label Content="Price per ADT:" FontWeight="DemiBold" Grid.Column="2" />
-                <Label Content="0 INR" Name="PricePerADTLabel" FontWeight="DemiBold" Grid.Column="3" />
+                <Label Content="Price per ADT:" FontWeight="DemiBold" Grid.Column="2" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
+                <Label Content="0 INR" Name="PricePerADTLabel" FontWeight="DemiBold" Grid.Column="3" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
             </Grid>
 
             <Grid Grid.Row="2" Margin="0,0,0,5">
@@ -73,7 +74,7 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
-                <Label Content="Total Cost:" FontWeight="DemiBold" Grid.Column="0" />
+                <Label Content="Total Cost:" FontWeight="DemiBold" Grid.Column="0" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
                 <Label Content="0 INR" Name="TotalCostLabel" Foreground="Red" FontWeight="DemiBold" Grid.Column="1" />
             </Grid>
         </Grid>

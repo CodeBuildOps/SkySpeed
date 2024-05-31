@@ -3,14 +3,14 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:local="clr-namespace:SkySpeed.SeatMap">
 
-    <DockPanel Background="{StaticResource SectionBackgroundBrush}">
-        <Label DockPanel.Dock="Top" Content="Seat Map" FontWeight="SemiBold" FontSize="14" Background="{StaticResource HeaderBackgroundBrush}" />
+    <DockPanel Background="{DynamicResource SectionBackgroundBrush}">
+        <Label DockPanel.Dock="Top" Content="Seat Map" FontWeight="SemiBold" FontSize="14" Background="{DynamicResource HeaderBackgroundBrush}" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
 
         <Grid Margin="0,3,0,0" DockPanel.Dock="Left" Width="220">
             <StackPanel>
-                <Border BorderBrush="{StaticResource HeaderBackgroundBrush}" BorderThickness="1">
-                    <StackPanel Background="{StaticResource SectionBackgroundBrush}">
-                        <Label Content="Passenger Seat List" FontWeight="DemiBold" Foreground="White" Background="{StaticResource HeaderBackgroundBrush}" />
+                <Border BorderBrush="{DynamicResource HeaderBackgroundBrush}" BorderThickness="1">
+                    <StackPanel Background="{DynamicResource SectionBackgroundBrush}">
+                        <Label Content="Passenger Seat List" FontWeight="DemiBold" Foreground="{DynamicResource ForegroundWhiteBrush}" Background="{DynamicResource HeaderBackgroundBrush}" />
                         <DataGrid GridLinesVisibility="None" IsReadOnly="True" Height="150" Name="PassengerSeatListDetailsGrid" SelectionChanged="PassengerSeatListDetailsGrid_SelectionChanged" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" MaxHeight="300" MinHeight="100">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Id" Binding="{Binding PassengerId}" />
@@ -21,9 +21,9 @@
                         </DataGrid>
                     </StackPanel>
                 </Border>
-                <Border Margin="0,3,0,0" BorderBrush="{StaticResource HeaderBackgroundBrush}" BorderThickness="1">
-                    <StackPanel Background="{StaticResource SectionBackgroundBrush}">
-                        <Label Content="Seat Groups" FontWeight="DemiBold" Foreground="White" Background="{StaticResource HeaderBackgroundBrush}" />
+                <Border Margin="0,3,0,0" BorderBrush="{DynamicResource HeaderBackgroundBrush}" BorderThickness="1">
+                    <StackPanel Background="{DynamicResource SectionBackgroundBrush}">
+                        <Label Content="Seat Groups" FontWeight="DemiBold" Foreground="{DynamicResource ForegroundWhiteBrush}" Background="{DynamicResource HeaderBackgroundBrush}" />
                         <DataGrid GridLinesVisibility="None" IsReadOnly="True" Name="SeatGroupDetailsGrid" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" MaxHeight="200" MinHeight="100">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Seat Group" Binding="{Binding Seat}" />
@@ -40,7 +40,7 @@
                 <ImageBrush ImageSource="..\Images\clouds.jpg" Stretch="UniformToFill"/>
             </Grid.Background>
             <StackPanel>
-                <Label Content="Select seat" FontWeight="DemiBold" Foreground="White" Background="{StaticResource HeaderBackgroundBrush}"/>
+                <Label Content="Select seat" FontWeight="DemiBold" Foreground="{DynamicResource ForegroundWhiteBrush}" Background="{DynamicResource HeaderBackgroundBrush}"/>
                     <Grid Height="650" Width="250">
                         <Grid.Background>
                             <ImageBrush ImageSource="..\Images\SeatLayout.png" Stretch="Fill"/>
@@ -49,7 +49,7 @@
                         <Grid.Resources>
                             <Style TargetType="Button">
                                  <!--Default style-->
-                                <Setter Property="Background" Value="{StaticResource HeaderBackgroundBrush}"/>
+                                <Setter Property="Background" Value="{DynamicResource HeaderBackgroundBrush}"/>
                                 <Setter Property="Foreground" Value="White"/>
 
                                 <Setter Property="BorderBrush" Value="Black"/>

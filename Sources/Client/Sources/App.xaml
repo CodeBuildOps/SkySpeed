@@ -4,7 +4,10 @@
              xmlns:local="clr-namespace:SkySpeed"
              StartupUri="Login.xaml">
     <Application.Resources>
-        <ResourceDictionary Source="Resources.xaml" />
-
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

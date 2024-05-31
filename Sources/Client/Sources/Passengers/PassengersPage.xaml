@@ -3,14 +3,14 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:local="clr-namespace:SkySpeed.Passengers">
     <StackPanel>
-        <Label Content="Passengers" FontWeight="SemiBold" FontSize="14" Background="{StaticResource HeaderBackgroundBrush}" />
+        <Label Content="Passengers" FontWeight="SemiBold" FontSize="14" Background="{DynamicResource HeaderBackgroundBrush}" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
 
-        <Grid Margin="0,3,0,0" Background="{StaticResource SectionBackgroundBrush}">
+        <Grid Margin="0,3,0,0" Background="{DynamicResource SectionBackgroundBrush}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <Label Content="Passengers" Name="PassengersLabel" FontWeight="DemiBold" Foreground="White" Background="{StaticResource HeaderBackgroundBrush}" />
+            <Label Content="Passengers" Name="PassengersLabel" FontWeight="DemiBold" Foreground="{DynamicResource ForegroundWhiteBrush}" Background="{DynamicResource HeaderBackgroundBrush}" />
 
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
@@ -18,8 +18,8 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <Border Grid.Row="0" Grid.Column="0" Margin="3,3,0,0" BorderBrush="{StaticResource HeaderBackgroundBrush}" BorderThickness="1">
-                    <StackPanel Background="{StaticResource SectionBackgroundBrush}">
+                <Border Grid.Row="0" Grid.Column="0" Margin="3,3,0,0" BorderBrush="{DynamicResource HeaderBackgroundBrush}" BorderThickness="1">
+                    <StackPanel Background="{DynamicResource SectionBackgroundBrush}">
                         <DataGrid GridLinesVisibility="None" IsReadOnly="True" SelectionChanged="PassengerDetailsGrid_SelectionChanged" Height="150" Name="PassengersDetailsGrid" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" MaxHeight="300">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Id" Binding="{Binding PassengerId}" />
@@ -59,13 +59,13 @@
             </Grid>
         </Grid>
 
-        <Grid Margin="0,3,0,0" Background="{StaticResource SectionBackgroundBrush}">
+        <Grid Margin="0,3,0,0" Background="{DynamicResource SectionBackgroundBrush}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <Label Content="Add/Edit Passenger" Name="Add_Edit_Passenger" FontWeight="DemiBold" Foreground="White" Background="{StaticResource HeaderBackgroundBrush}" Grid.Row="0" />
+            <Label Content="Add/Edit Passenger" Name="Add_Edit_Passenger" FontWeight="DemiBold" Foreground="{DynamicResource ForegroundWhiteBrush}" Background="{DynamicResource HeaderBackgroundBrush}" Grid.Row="0" />
 
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
@@ -78,7 +78,7 @@
                 </Grid.RowDefinitions>
 
                 <Grid Margin="5" Grid.Row="0" Grid.Column="0">
-                    <GroupBox Name="PassengerDetailsGroupBox" Header="Passenger Details">
+                    <GroupBox Name="PassengerDetailsGroupBox" Header="Passenger Details" Foreground="{DynamicResource ForegroundBlackBrushSecondary}">
                         <Grid Margin="5">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
@@ -95,32 +95,32 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <Label Content="Last Name:" Grid.Row="0" Grid.Column="0" />
+                            <Label Content="Last Name:" Grid.Row="0" Grid.Column="0" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
                             <TextBox Name="LastNameTextBox" Width="150" Grid.Row="0" Grid.Column="1" />
 
-                            <Label Content="First Name:" Grid.Row="1" Grid.Column="0" Margin="0,5,0,0" />
+                            <Label Content="First Name:" Grid.Row="1" Grid.Column="0" Margin="0,5,0,0" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
                             <TextBox Name="FirstNameTextBox" Width="150" Grid.Row="1" Grid.Column="1" Margin="0,5,0,0"/>
 
-                            <Label Content="Middle Name:" Grid.Row="2" Grid.Column="0" Margin="0,5,0,0" />
+                            <Label Content="Middle Name:" Grid.Row="2" Grid.Column="0" Margin="0,5,0,0" Foreground="{DynamicResource ForegroundBlackBrushSecondary}" />
                             <TextBox Name="MiddleNameTextBox" Width="150" Grid.Row="2" Grid.Column="1" Margin="0,5,0,0"/>
 
-                            <Label Content="Title:" Grid.Row="3" Grid.Column="0" Margin="0,5,0,0" />
+                            <Label Content="Title:" Grid.Row="3" Grid.Column="0" Margin="0,5,0,0" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
                             <ComboBox Name="TitleComboBox" Width="150" Grid.Row="3" Grid.Column="1" Margin="0,5,0,0">
                                 <ComboBoxItem>Mr</ComboBoxItem>
                                 <ComboBoxItem>Mrs</ComboBoxItem>
                             </ComboBox>
 
-                            <Label Content="Gender:" Grid.Row="0" Grid.Column="2" />
+                            <Label Content="Gender:" Grid.Row="0" Grid.Column="2" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
                             <ComboBox Name="GenderComboBox" Width="150" Grid.Row="0" Grid.Column="3">
                                 <ComboBoxItem>Male</ComboBoxItem>
                                 <ComboBoxItem>Female</ComboBoxItem>
                                 <ComboBoxItem>Others</ComboBoxItem>
                             </ComboBox>
 
-                            <Label Content="Date of Birth:" Grid.Row="1" Grid.Column="2" />
+                            <Label Content="Date of Birth:" Grid.Row="1" Grid.Column="2" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
                             <DatePicker SelectedDate="{Binding DateHelper}" IsTodayHighlighted="True" Name="DOBDatePicker" Width="150" Grid.Row="1" Grid.Column="3" />
 
-                            <Label Content="Country:" Grid.Row="0" Grid.Column="4" />
+                            <Label Content="Country:" Grid.Row="0" Grid.Column="4" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
                             <ComboBox Name="CountryComboBox" Width="150" Grid.Row="0" Grid.Column="5"/>
 
                         </Grid>
@@ -128,7 +128,7 @@
                 </Grid>
 
                 <Grid Margin="5" Grid.Row="1" Grid.Column="0">
-                    <GroupBox Name="InfantDetailsGroupBox" Header="Infant Details">
+                    <GroupBox Name="InfantDetailsGroupBox" Header="Infant Details" Foreground="{DynamicResource ForegroundBlackBrushSecondary}">
                         <Grid Margin="5">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
@@ -145,32 +145,32 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <Label Content="Last Name:" Grid.Row="0" Grid.Column="0" />
+                            <Label Content="Last Name:" Grid.Row="0" Grid.Column="0" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
                             <TextBox Name="InfantLastNameTextBox" Width="150" Grid.Row="0" Grid.Column="1" />
 
-                            <Label Content="First Name:" Grid.Row="1" Grid.Column="0" Margin="0,5,0,0" />
+                            <Label Content="First Name:" Grid.Row="1" Grid.Column="0" Margin="0,5,0,0" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
                             <TextBox Name="InfantFirstNameTextBox" Width="150" Grid.Row="1" Grid.Column="1" Margin="0,5,0,0"/>
 
-                            <Label Content="Middle Name:" Grid.Row="2" Grid.Column="0" Margin="0,5,0,0" />
+                            <Label Content="Middle Name:" Grid.Row="2" Grid.Column="0" Margin="0,5,0,0" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
                             <TextBox Name="InfantMiddleNameTextBox" Width="150" Grid.Row="2" Grid.Column="1" Margin="0,5,0,0"/>
 
-                            <Label Content="Title:" Grid.Row="3" Grid.Column="0" Margin="0,5,0,0" />
+                            <Label Content="Title:" Grid.Row="3" Grid.Column="0" Margin="0,5,0,0" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
                             <ComboBox Name="InfantTitleComboBox" Width="150" Grid.Row="3" Grid.Column="1" Margin="0,5,0,0">
                                 <ComboBoxItem>Mr</ComboBoxItem>
                                 <ComboBoxItem>Mrs</ComboBoxItem>
                             </ComboBox>
 
-                            <Label Content="Gender:" Grid.Row="0" Grid.Column="2" />
+                            <Label Content="Gender:" Grid.Row="0" Grid.Column="2" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
                             <ComboBox Name="InfantGenderComboBox" Width="150" Grid.Row="0" Grid.Column="3">
                                 <ComboBoxItem>Male</ComboBoxItem>
                                 <ComboBoxItem>Female</ComboBoxItem>
                                 <ComboBoxItem>Others</ComboBoxItem>
                             </ComboBox>
 
-                            <Label Content="Date of Birth:" Grid.Row="1" Grid.Column="2" />
+                            <Label Content="Date of Birth:" Grid.Row="1" Grid.Column="2" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
                             <DatePicker SelectedDate="{Binding DateHelper}" IsTodayHighlighted="True" Name="InfantDOBDatePicker" Width="150" Grid.Row="1" Grid.Column="3" />
 
-                            <Label Content="Country:" Grid.Row="0" Grid.Column="4" />
+                            <Label Content="Country:" Grid.Row="0" Grid.Column="4" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
                             <ComboBox Name="InfantCountryComboBox" Width="150" Grid.Row="0" Grid.Column="5"/>
 
                         </Grid>
