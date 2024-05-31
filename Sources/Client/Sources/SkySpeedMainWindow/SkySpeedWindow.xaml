@@ -138,14 +138,14 @@
                         </StackPanel>
                         <ControlTemplate.Resources>
                             <Storyboard x:Key="MoveLeft">
-                                <ThicknessAnimation Storyboard.TargetProperty="Margin" Storyboard.TargetName="RoundButton" Duration="0:0:0.4" From="0,0,0,0" To="13,0,0,0">
+                                <ThicknessAnimation Storyboard.TargetProperty="Margin" Storyboard.TargetName="RoundButton" Duration="0:0:0.4" From="0,0,0,0" To="18,0,0,0">
                                     <ThicknessAnimation.EasingFunction>
                                         <CircleEase EasingMode="EaseOut"/>
                                     </ThicknessAnimation.EasingFunction>
                                 </ThicknessAnimation>
                             </Storyboard>
                             <Storyboard x:Key="MoveRight">
-                                <ThicknessAnimation Storyboard.TargetProperty="Margin" Storyboard.TargetName="RoundButton" Duration="0:0:0.4" From="13,0,0,0" To="0,0,0,0">
+                                <ThicknessAnimation Storyboard.TargetProperty="Margin" Storyboard.TargetName="RoundButton" Duration="0:0:0.4" From="18,0,0,0" To="0,0,0,0">
                                     <ThicknessAnimation.EasingFunction>
                                         <CircleEase EasingMode="EaseOut"/>
                                     </ThicknessAnimation.EasingFunction>
