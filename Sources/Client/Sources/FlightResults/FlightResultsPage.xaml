@@ -5,7 +5,7 @@
       Title="FlightResultsPage">
 
     <StackPanel>
-        <Label Content="Flight Results" FontWeight="SemiBold" FontSize="14" Background="{DynamicResource HeaderBackgroundBrush}" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
+        <Label Content="Flight Results" FontWeight="SemiBold" FontSize="14" Background="{DynamicResource HeaderBackgroundBrush}" Foreground="{DynamicResource ForegroundBlackBrush}"/>
         <Border Margin="0,3,0,0" BorderBrush="{DynamicResource HeaderBackgroundBrush}" BorderThickness="1">
             <StackPanel Background="{DynamicResource SectionBackgroundBrush}">
                 <Label Content="Flight" FontWeight="DemiBold" Foreground="{DynamicResource ForegroundWhiteBrush}" Background="{DynamicResource HeaderBackgroundBrush}" />
@@ -17,7 +17,7 @@
                                     <Setter Property="FontWeight" Value="Bold"/>
                                     <Setter Property="FontSize" Value="13"/>
                                     <Setter Property="Background" Value="{DynamicResource HeaderBackgroundBrush}"/>
-                                    <Setter Property="Foreground" Value="{DynamicResource ForegroundBlackBrushSecondary}"/>
+                                    <Setter Property="Foreground" Value="{DynamicResource ForegroundBlackBrush}"/>
                                 </Trigger>
                             </Style.Triggers>
                         </Style>
@@ -61,11 +61,11 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
-                <Label Content="Total Passengers:" FontWeight="DemiBold" Grid.Column="0" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
-                <Label Content="0"  Name="NumberOfPassengersLabel" FontWeight="DemiBold" HorizontalAlignment="Left" Margin="100,0,0,0" Width="17" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
+                <Label Content="Total Passengers:" FontWeight="DemiBold" Grid.Column="0" Foreground="{DynamicResource ForegroundBlackBrush}"/>
+                <Label Content="0"  Name="NumberOfPassengersLabel" FontWeight="DemiBold" HorizontalAlignment="Left" Margin="100,0,0,0" Width="17" Foreground="{DynamicResource ForegroundBlackBrush}"/>
 
-                <Label Content="Price per ADT:" FontWeight="DemiBold" Grid.Column="2" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
-                <Label Content="0 INR" Name="PricePerADTLabel" FontWeight="DemiBold" Grid.Column="3" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
+                <Label Content="Price per ADT:" FontWeight="DemiBold" Grid.Column="2" Foreground="{DynamicResource ForegroundBlackBrush}"/>
+                <Label Content="0 INR" Name="PricePerADTLabel" FontWeight="DemiBold" Grid.Column="3" Foreground="{DynamicResource ForegroundBlackBrush}"/>
             </Grid>
 
             <Grid Grid.Row="2" Margin="0,0,0,5">
@@ -74,7 +74,7 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
-                <Label Content="Total Cost:" FontWeight="DemiBold" Grid.Column="0" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
+                <Label Content="Total Cost:" FontWeight="DemiBold" Grid.Column="0" Foreground="{DynamicResource ForegroundBlackBrush}"/>
                 <Label Content="0 INR" Name="TotalCostLabel" Foreground="Red" FontWeight="DemiBold" Grid.Column="1" />
             </Grid>
         </Grid>

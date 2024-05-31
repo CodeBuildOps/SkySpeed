@@ -4,7 +4,7 @@
       xmlns:local="clr-namespace:SkySpeed.SeatMap">
 
     <DockPanel Background="{DynamicResource SectionBackgroundBrush}">
-        <Label DockPanel.Dock="Top" Content="Seat Map" FontWeight="SemiBold" FontSize="14" Background="{DynamicResource HeaderBackgroundBrush}" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
+        <Label DockPanel.Dock="Top" Content="Seat Map" FontWeight="SemiBold" FontSize="14" Background="{DynamicResource HeaderBackgroundBrush}" Foreground="{DynamicResource ForegroundBlackBrush}"/>
 
         <Grid Margin="0,3,0,0" DockPanel.Dock="Left" Width="220">
             <StackPanel>

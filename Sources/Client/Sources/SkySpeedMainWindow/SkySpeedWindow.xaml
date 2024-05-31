@@ -13,27 +13,17 @@
 
     <DockPanel >
         <Menu DockPanel.Dock="Top" FontWeight="DemiBold" Margin="0,0,0,3" Padding="0,3,0,3" Background="{DynamicResource MainMenuBrush}">
-            <MenuItem Header="_Booking" Click="BookingMenu_Click" Foreground="{DynamicResource ForegroundBlackBrushSecondary}">
-            </MenuItem>
-
-            <MenuItem Header="_Reservation" Foreground="{DynamicResource ForegroundBlackBrushSecondary}">
-            </MenuItem>
-
-            <MenuItem Header="_End Record" Foreground="{DynamicResource ForegroundBlackBrushSecondary}">
-            </MenuItem>
-
-            <MenuItem Header="_PNR Retrieve" Foreground="{DynamicResource ForegroundBlackBrushSecondary}">
-            </MenuItem>
-
-            <MenuItem Header="_Help" Foreground="{DynamicResource ForegroundBlackBrushSecondary}">
+            <MenuItem Header="_Booking" Click="BookingMenu_Click" Foreground="{DynamicResource ForegroundBlackBrush}"/>
+            <MenuItem Header="_Reservation" Foreground="{DynamicResource ForegroundBlackBrush}"/>
+            <MenuItem Header="_End Record" Foreground="{DynamicResource ForegroundBlackBrush}"/>
+            <MenuItem Header="_PNR Retrieve" Foreground="{DynamicResource ForegroundBlackBrush}"/>
+            <MenuItem Header="_Help" Foreground="{DynamicResource ForegroundBlackBrush}">
                 <MenuItem Header="_About Sky Speed" Click="AboutSkySpeed_Click" Foreground="Black"/>
             </MenuItem>
+            <MenuItem Header="_Calculator" Click="Calculator_Click" Foreground="{DynamicResource ForegroundBlackBrush}"/>
+            <MenuItem Header="_Notepad" Click="Notepad_Click" Foreground="{DynamicResource ForegroundBlackBrush}"/>
 
-            <MenuItem Header="_Calculator" Click="Calculator_Click" Foreground="{DynamicResource ForegroundBlackBrushSecondary}">
-            </MenuItem>
-
-            <MenuItem Header="_Notepad" Click="Notepad_Click" Foreground="{DynamicResource ForegroundBlackBrushSecondary}">
-            </MenuItem>
+            <CheckBox DockPanel.Dock="Top" Name="ThemeCheckboxButton" Click="ThemeCheckboxButton_Checked"/>
         </Menu>
 
         <Grid DockPanel.Dock="Left" Width="200" Margin="3,0,0,3" Background="{DynamicResource SectionBackgroundBrush}">
@@ -57,11 +47,11 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <Label Content="Booking:" Foreground="{DynamicResource ForegroundBlackBrushSecondary}" FontWeight="DemiBold" Grid.Column="0"  Grid.Row="0"/>
-                        <Label Content="Creating" Foreground="{DynamicResource ForegroundBlackBrushSecondary}" Name="BookingLabel" Grid.Column="1" Grid.Row="0"/>
+                        <Label Content="Booking:" Foreground="{DynamicResource ForegroundBlackBrush}" FontWeight="DemiBold" Grid.Column="0"  Grid.Row="0"/>
+                        <Label Content="Creating" Foreground="{DynamicResource ForegroundBlackBrush}" Name="BookingLabel" Grid.Column="1" Grid.Row="0"/>
 
-                        <Label Content="Payment:" Foreground="{DynamicResource ForegroundBlackBrushSecondary}" FontWeight="DemiBold" Grid.Column="0" Grid.Row="1"/>
-                        <Label Content="Not Available" Foreground="{DynamicResource ForegroundBlackBrushSecondary}" Name="PaymentLabel" Grid.Column="1" Grid.Row="1"/>
+                        <Label Content="Payment:" Foreground="{DynamicResource ForegroundBlackBrush}" FontWeight="DemiBold" Grid.Column="0" Grid.Row="1"/>
+                        <Label Content="Not Available" Foreground="{DynamicResource ForegroundBlackBrush}" Name="PaymentLabel" Grid.Column="1" Grid.Row="1"/>
 
                     </Grid>
                 </Grid>
@@ -110,7 +100,7 @@
         </Grid>
 
         <Grid DockPanel.Dock="Right" Width="Auto" Margin="0,0,3,3" Background="{DynamicResource SectionBackgroundBrush}" >
-            <Label Content="Coming Soon" Foreground="{DynamicResource ForegroundBlackBrushSecondary}" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <Label Content="Coming Soon" Foreground="{DynamicResource ForegroundBlackBrush}" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
         </Grid>
 
         <Grid DockPanel.Dock="Bottom" Margin="0,0,3,5" HorizontalAlignment="Right">
@@ -130,4 +120,57 @@
             </Grid>
         </ScrollViewer>
     </DockPanel>
+
+    <Window.Resources>
+        <Style TargetType="CheckBox">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="CheckBox">
+                        <StackPanel Orientation="Horizontal">
+                            <Grid>
+                                <Border Width="25" Height="12" Background="LightGray" CornerRadius="6" Margin="3,0,0,0"/>
+                                <Border Name="RoundButton" Height="15" Width="15" CornerRadius="8" HorizontalAlignment="Left"/>
+                            </Grid>
+                        </StackPanel>
+                        <ControlTemplate.Resources>
+                            <Storyboard x:Key="MoveLeft">
+                                <ThicknessAnimation Storyboard.TargetProperty="Margin" Storyboard.TargetName="RoundButton" Duration="0:0:0.4" From="0,0,0,0" To="13,0,0,0">
+                                    <ThicknessAnimation.EasingFunction>
+                                        <CircleEase EasingMode="EaseOut"/>
+                                    </ThicknessAnimation.EasingFunction>
+                                </ThicknessAnimation>
+                            </Storyboard>
+                            <Storyboard x:Key="MoveRight">
+                                <ThicknessAnimation Storyboard.TargetProperty="Margin" Storyboard.TargetName="RoundButton" Duration="0:0:0.4" From="13,0,0,0" To="0,0,0,0">
+                                    <ThicknessAnimation.EasingFunction>
+                                        <CircleEase EasingMode="EaseOut"/>
+                                    </ThicknessAnimation.EasingFunction>
+                                </ThicknessAnimation>
+                            </Storyboard>
+                        </ControlTemplate.Resources>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="false">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard Storyboard="{StaticResource MoveRight}"/>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard Storyboard="{StaticResource MoveLeft}"/>
+                                </Trigger.ExitActions>
+                                <Setter TargetName="RoundButton" Property="Background" Value="black"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="true">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard Storyboard="{StaticResource MoveLeft}"/>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard Storyboard="{StaticResource MoveRight}"/>
+                                </Trigger.ExitActions>
+                                <Setter TargetName="RoundButton" Property="Background" Value="skyblue"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
 </Window>

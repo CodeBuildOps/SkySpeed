@@ -13,6 +13,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace SkySpeed.SkySpeedMainWindow
 {
@@ -198,6 +199,40 @@ namespace SkySpeed.SkySpeedMainWindow
             {
                 e.Cancel = true;
             }
+        }
+
+        private void ThemeCheckboxButton_Checked(object sender, RoutedEventArgs e)
+        {
+            // Define colors for Dark mode
+            Color darkHeaderBackground = Colors.Black;
+            Color darkSectionBackground = Color.FromRgb(32, 32, 32);
+            Color darkMainMenu = Color.FromRgb(32, 32, 32);
+            Color darkForeground = Colors.White;
+
+            // Define colors for Light mode
+            Color lightHeaderBackground = Color.FromRgb(102, 153, 204);
+            Color lightSectionBackground = Color.FromRgb(124, 185, 232);
+            Color lightMainMenu = Color.FromRgb(240, 248, 255);
+            Color lightForeground = Colors.Black;
+
+            // Determine the selected mode and apply the corresponding theme
+            if (ThemeCheckboxButton.IsChecked == true)
+            {
+                ApplyTheme(darkHeaderBackground, darkSectionBackground, darkMainMenu, darkForeground);
+            }
+            else
+            {
+                ApplyTheme(lightHeaderBackground, lightSectionBackground, lightMainMenu, lightForeground);
+            }
+        }
+
+        private void ApplyTheme(Color headerBackground, Color sectionBackground, Color mainMenu, Color foreground)
+        {
+            // Update the resource dictionary with the provided colors
+            Application.Current.Resources["HeaderBackgroundBrush"] = new SolidColorBrush(headerBackground);
+            Application.Current.Resources["SectionBackgroundBrush"] = new SolidColorBrush(sectionBackground);
+            Application.Current.Resources["MainMenuBrush"] = new SolidColorBrush(mainMenu);
+            Application.Current.Resources["ForegroundBlackBrush"] = new SolidColorBrush(foreground);
         }
     }
 }

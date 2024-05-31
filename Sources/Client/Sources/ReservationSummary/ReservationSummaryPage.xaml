@@ -3,7 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <StackPanel>
-        <Label Content="Reservation Summary" FontWeight="SemiBold" FontSize="14" Background="{DynamicResource HeaderBackgroundBrush}" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
+        <Label Content="Reservation Summary" FontWeight="SemiBold" FontSize="14" Background="{DynamicResource HeaderBackgroundBrush}" Foreground="{DynamicResource ForegroundBlackBrush}"/>
 
         <Grid Background="{DynamicResource SectionBackgroundBrush}">
             <Grid Margin="0,3,0,3">
@@ -15,7 +15,7 @@
                 <Label Content="Flight Information" FontWeight="DemiBold" Foreground="{DynamicResource ForegroundWhiteBrush}" Background="{DynamicResource HeaderBackgroundBrush}" Grid.Row="0" />
 
                 <Grid Grid.Row="1" >
-                    <TextBlock Name="FlightDetailsTextBlock" Background="White" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
+                    <TextBlock Name="FlightDetailsTextBlock" Background="White" Foreground="{DynamicResource ForegroundBlackBrush}"/>
                 </Grid>
             </Grid>
         </Grid>
@@ -39,7 +39,7 @@
                 <Label Content="Passengers" FontWeight="DemiBold" Foreground="{DynamicResource ForegroundWhiteBrush}" Background="{DynamicResource HeaderBackgroundBrush}" Grid.Row="0" />
 
                 <Grid Grid.Row="1" >
-                    <TextBlock Name="PassengersTextBlock" Background="White" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
+                    <TextBlock Name="PassengersTextBlock" Background="White" Foreground="{DynamicResource ForegroundBlackBrush}"/>
                 </Grid>
             </Grid>
 
@@ -52,7 +52,7 @@
                 <Label Content="Contact Information" FontWeight="DemiBold" Foreground="{DynamicResource ForegroundWhiteBrush}" Background="{DynamicResource HeaderBackgroundBrush}" Grid.Row="0" />
 
                 <Grid Grid.Row="1" >
-                    <TextBlock Name="ContactInformationTextBlock" Background="White" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
+                    <TextBlock Name="ContactInformationTextBlock" Background="White" Foreground="{DynamicResource ForegroundBlackBrush}"/>
                 </Grid>
             </Grid>
 
@@ -65,7 +65,7 @@
                 <Label Content="Payments" FontWeight="DemiBold" Foreground="{DynamicResource ForegroundWhiteBrush}" Background="{DynamicResource HeaderBackgroundBrush}" Grid.Row="0" />
 
                 <Grid Grid.Row="1" >
-                    <TextBlock Name="PaymentTextBlock" Background="White" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
+                    <TextBlock Name="PaymentTextBlock" Background="White" Foreground="{DynamicResource ForegroundBlackBrush}"/>
                 </Grid>
             </Grid>
 
@@ -78,7 +78,7 @@
                 <Label Content="Comments" FontWeight="DemiBold" Foreground="{DynamicResource ForegroundWhiteBrush}" Background="{DynamicResource HeaderBackgroundBrush}" Grid.Row="0" />
 
                 <Grid Grid.Row="1" >
-                    <TextBlock Name="CommentTextBlock" Background="White" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
+                    <TextBlock Name="CommentTextBlock" Background="White" Foreground="{DynamicResource ForegroundBlackBrush}"/>
                 </Grid>
             </Grid>
         </Grid>
@@ -97,7 +97,7 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
-                <Label Content="Total Cost:" FontWeight="DemiBold" Grid.Column="0" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
+                <Label Content="Total Cost:" FontWeight="DemiBold" Grid.Column="0" Foreground="{DynamicResource ForegroundBlackBrush}"/>
                 <Label Content="0 INR" Foreground="Red" Name="TotalCostLabel" FontWeight="DemiBold" Grid.Column="1" HorizontalAlignment="Left" />
             </Grid>
         </Grid>

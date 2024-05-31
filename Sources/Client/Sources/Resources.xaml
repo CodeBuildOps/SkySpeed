@@ -4,7 +4,6 @@
     <SolidColorBrush x:Key="HeaderBackgroundBrush" Color="#FF6699CC"/>
     <SolidColorBrush x:Key="SectionBackgroundBrush" Color="#FF7CB9E8"/>
     <SolidColorBrush x:Key="MainMenuBrush" Color="#FFF0F8FF"/>
-    <SolidColorBrush x:Key="ForegroundBrush" Color="#FF000000"/>
     <SolidColorBrush x:Key="ForegroundWhiteBrush" Color="#FFFFFF"/>
-    <SolidColorBrush x:Key="ForegroundBlackBrushSecondary" Color="#FF000000"/>
+    <SolidColorBrush x:Key="ForegroundBlackBrush" Color="#FF000000"/>
 </ResourceDictionary>

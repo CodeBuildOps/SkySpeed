@@ -5,7 +5,7 @@
       Title="Payments Page">
 
     <StackPanel>
-        <Label Content="Payments" FontWeight="SemiBold" FontSize="14" Background="{DynamicResource HeaderBackgroundBrush}" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
+        <Label Content="Payments" FontWeight="SemiBold" FontSize="14" Background="{DynamicResource HeaderBackgroundBrush}" Foreground="{DynamicResource ForegroundBlackBrush}"/>
 
         <Grid Margin="0,3,0,0" Background="{DynamicResource SectionBackgroundBrush}">
             <Grid.RowDefinitions>
@@ -61,7 +61,7 @@
                 </Grid.RowDefinitions>
 
                 <Grid  Margin="5" Grid.Row="0" Grid.Column="0">
-                    <GroupBox Header="Payment Details" Foreground="{DynamicResource ForegroundBlackBrushSecondary}">
+                    <GroupBox Header="Payment Details" Foreground="{DynamicResource ForegroundBlackBrush}">
                         <Grid Margin="5">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
@@ -75,21 +75,21 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <Label Content="Payment Method:" Grid.Row="0" Grid.Column="0" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
+                            <Label Content="Payment Method:" Grid.Row="0" Grid.Column="0" Foreground="{DynamicResource ForegroundBlackBrush}"/>
                             <ComboBox Name="PaymentMethodComboBox" Width="150" Grid.Row="0" Grid.Column="1"/>
 
-                            <Label Content="Card Number:" Grid.Row="1" Grid.Column="0" Margin="0,5,0,0" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
+                            <Label Content="Card Number:" Grid.Row="1" Grid.Column="0" Margin="0,5,0,0" Foreground="{DynamicResource ForegroundBlackBrush}"/>
                             <TextBox Name="CardNumberTextBox" Width="150" Grid.Row="1" Grid.Column="1" Margin="0,5,0,0"/>
 
-                            <Label Content="Amount:" Grid.Row="2" Grid.Column="0" Margin="0,5,0,0" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
+                            <Label Content="Amount:" Grid.Row="2" Grid.Column="0" Margin="0,5,0,0" Foreground="{DynamicResource ForegroundBlackBrush}"/>
                             <TextBox Text="0 INR" Name="AmountTextBox" FontWeight="Bold" Foreground="Red" Width="150" Grid.Row="2" Grid.Column="1" Margin="0,5,0,0"/>
 
-                            <Label Content="Expiration Date:" Grid.Row="3" Grid.Column="0" Margin="0,5,0,0" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
+                            <Label Content="Expiration Date:" Grid.Row="3" Grid.Column="0" Margin="0,5,0,0" Foreground="{DynamicResource ForegroundBlackBrush}"/>
                             <TextBox Name="ExpiryMonthTextBox" Width="30" HorizontalAlignment="Left" Grid.Row="3" Grid.Column="1" Margin="0,5,0,0"/>
                             <TextBox Name="ExpiryYearTextBox" Width="50" HorizontalAlignment="Left" Grid.Row="3" Grid.Column="1" Margin="32,5,0,0"/>
 
 
-                            <Label Content="Card Holder Name:" Grid.Row="4" Grid.Column="0" Margin="0,5,0,0" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
+                            <Label Content="Card Holder Name:" Grid.Row="4" Grid.Column="0" Margin="0,5,0,0" Foreground="{DynamicResource ForegroundBlackBrush}"/>
                             <TextBox Name="CardHolderNameTextBox" Width="150" Grid.Row="4" Grid.Column="1" Margin="0,5,0,0"/>
 
                         </Grid>

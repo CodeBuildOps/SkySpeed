@@ -4,7 +4,7 @@
       xmlns:local="clr-namespace:SkySpeed.Passengers">
 
     <StackPanel>
-        <Label Content="Contacts" FontWeight="SemiBold" FontSize="14" Background="{DynamicResource HeaderBackgroundBrush}" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
+        <Label Content="Contacts" FontWeight="SemiBold" FontSize="14" Background="{DynamicResource HeaderBackgroundBrush}" Foreground="{DynamicResource ForegroundBlackBrush}"/>
 
         <Grid Margin="0,3,0,0" Background="{DynamicResource SectionBackgroundBrush}">
             <Grid.RowDefinitions>
@@ -67,7 +67,7 @@
                 </Grid.RowDefinitions>
 
                 <Grid  Margin="5" Grid.Row="0" Grid.Column="0">
-                    <GroupBox Header="Contact Details" Name="ContactDetailsGroupBox" Foreground="{DynamicResource ForegroundBlackBrushSecondary}">
+                    <GroupBox Header="Contact Details" Name="ContactDetailsGroupBox" Foreground="{DynamicResource ForegroundBlackBrush}">
                         <Grid Margin="5">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
@@ -87,47 +87,47 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <Label Content="Last Name:" Grid.Row="0" Grid.Column="0" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
+                            <Label Content="Last Name:" Grid.Row="0" Grid.Column="0" Foreground="{DynamicResource ForegroundBlackBrush}"/>
                             <TextBox Name="LastNameTextBox" Width="150" Grid.Row="0" Grid.Column="1" />
 
-                            <Label Content="First Name:" Grid.Row="1" Grid.Column="0" Margin="0,5,0,0" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
+                            <Label Content="First Name:" Grid.Row="1" Grid.Column="0" Margin="0,5,0,0" Foreground="{DynamicResource ForegroundBlackBrush}"/>
                             <TextBox Name="FirstNameTextBox" Width="150" Grid.Row="1" Grid.Column="1" Margin="0,5,0,0"/>
 
-                            <Label Content="Middle Name:" Grid.Row="2" Grid.Column="0" Margin="0,5,0,0" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
+                            <Label Content="Middle Name:" Grid.Row="2" Grid.Column="0" Margin="0,5,0,0" Foreground="{DynamicResource ForegroundBlackBrush}"/>
                             <TextBox Name="MiddleNameTextBox" Width="150" Grid.Row="2" Grid.Column="1" Margin="0,5,0,0"/>
 
-                            <Label Content="Title:" Grid.Row="3" Grid.Column="0" Margin="0,5,0,0" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
+                            <Label Content="Title:" Grid.Row="3" Grid.Column="0" Margin="0,5,0,0" Foreground="{DynamicResource ForegroundBlackBrush}"/>
                             <ComboBox Name="TitleComboBox" Width="150" Grid.Row="3" Grid.Column="1" Margin="0,5,0,0">
                                 <ComboBoxItem>Mr</ComboBoxItem>
                                 <ComboBoxItem>Mrs</ComboBoxItem>
                             </ComboBox>
 
-                            <Label Content="Address:" Grid.Row="0" Grid.Column="2" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
+                            <Label Content="Address:" Grid.Row="0" Grid.Column="2" Foreground="{DynamicResource ForegroundBlackBrush}"/>
 
-                            <Label Content="Line 1:" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
+                            <Label Content="Line 1:" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" Foreground="{DynamicResource ForegroundBlackBrush}"/>
                             <TextBox Name="Line1TextBox" Width="150" Grid.Row="1" Grid.Column="3" />
 
-                            <Label Content="Line 2:" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
+                            <Label Content="Line 2:" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center" Foreground="{DynamicResource ForegroundBlackBrush}"/>
                             <TextBox Name="Line2TextBox" Width="150" Grid.Row="2" Grid.Column="3" />
 
-                            <Label Content="Postal:" Grid.Row="3" Grid.Column="2" HorizontalAlignment="Center" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
+                            <Label Content="Postal:" Grid.Row="3" Grid.Column="2" HorizontalAlignment="Center" Foreground="{DynamicResource ForegroundBlackBrush}"/>
                             <TextBox Name="PostalTextBox" Width="150" Grid.Row="3" Grid.Column="3" />
 
-                            <Label Content="Town:" Grid.Row="4" Grid.Column="2" HorizontalAlignment="Center" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
+                            <Label Content="Town:" Grid.Row="4" Grid.Column="2" HorizontalAlignment="Center" Foreground="{DynamicResource ForegroundBlackBrush}"/>
                             <TextBox Name="TownTextBox" Width="150" Grid.Row="4" Grid.Column="3" />
 
-                            <Label Content="State:" Grid.Row="5" Grid.Column="2" HorizontalAlignment="Center" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
+                            <Label Content="State:" Grid.Row="5" Grid.Column="2" HorizontalAlignment="Center" Foreground="{DynamicResource ForegroundBlackBrush}"/>
                             <TextBox Name="AddressStateTextBox" Width="150" Grid.Row="5" Grid.Column="3" />
 
-                            <Label Content="Country:" Grid.Row="6" Grid.Column="2" HorizontalAlignment="Center" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
+                            <Label Content="Country:" Grid.Row="6" Grid.Column="2" HorizontalAlignment="Center" Foreground="{DynamicResource ForegroundBlackBrush}"/>
                             <ComboBox Name="CountryComboBox" Width="150" Grid.Row="6" Grid.Column="3"/>
 
-                            <Label Content="Phone:" Grid.Row="0" Grid.Column="4" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
+                            <Label Content="Phone:" Grid.Row="0" Grid.Column="4" Foreground="{DynamicResource ForegroundBlackBrush}"/>
 
-                            <Label Content="Mob" Grid.Row="1" Grid.Column="4" HorizontalAlignment="Center" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
+                            <Label Content="Mob" Grid.Row="1" Grid.Column="4" HorizontalAlignment="Center" Foreground="{DynamicResource ForegroundBlackBrush}"/>
                             <TextBox Name="MobileTextBox" Width="150" Grid.Row="1" Grid.Column="5" />
 
-                            <Label Content="Email" Grid.Row="2" Grid.Column="4" HorizontalAlignment="Center" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
+                            <Label Content="Email" Grid.Row="2" Grid.Column="4" HorizontalAlignment="Center" Foreground="{DynamicResource ForegroundBlackBrush}"/>
                             <TextBox Name="EmailTextBox" Width="150" Grid.Row="2" Grid.Column="5" />
 
                         </Grid>

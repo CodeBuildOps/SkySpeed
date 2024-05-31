@@ -4,7 +4,7 @@
       xmlns:local="clr-namespace:SkySpeed.AvailabilityRequest">
 
     <StackPanel>
-        <Label Content="Availability Request" FontWeight="SemiBold" FontSize="14" Background="{DynamicResource HeaderBackgroundBrush}" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
+        <Label Content="Availability Request" FontWeight="SemiBold" FontSize="14" Background="{DynamicResource HeaderBackgroundBrush}" Foreground="{DynamicResource ForegroundBlackBrush}"/>
 
         <Grid Margin="0,3,0,0">
             <Grid.RowDefinitions>
@@ -39,10 +39,10 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <Label Content="From:" Grid.Column="0" Grid.Row="0" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
+                <Label Content="From:" Grid.Column="0" Grid.Row="0" Foreground="{DynamicResource ForegroundBlackBrush}"/>
                 <ComboBox Name="FromComboBox" Width="200" Grid.Column="1" Grid.Row="0" />
 
-                <Label Content="To:" Grid.Column="0" Grid.Row="1" Margin="0,5,0,0" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
+                <Label Content="To:" Grid.Column="0" Grid.Row="1" Margin="0,5,0,0" Foreground="{DynamicResource ForegroundBlackBrush}"/>
                 <ComboBox Name="ToComboBox" Width="200" Grid.Column="1" Grid.Row="1" Margin="0,5,0,0" SelectionChanged="ToComboBox_SelectionChanged"/>
 
             </Grid>
@@ -64,7 +64,7 @@
 
                 <DatePicker SelectedDate="{Binding DateHelper}" IsTodayHighlighted="True" Name="DatePicker" Width="120" Grid.Column="0" />
 
-                <Label Content="Time:" Margin="5,0,0,0" Grid.Column="1" VerticalAlignment="Center" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
+                <Label Content="Time:" Margin="5,0,0,0" Grid.Column="1" VerticalAlignment="Center" Foreground="{DynamicResource ForegroundBlackBrush}"/>
                 <ComboBox Grid.Column="1" IsEditable="True" Width="80" Name="OutboundFlightTime" Margin="50,0,0,0" />
 
             </Grid>
@@ -86,7 +86,7 @@
 
                 <DatePicker SelectedDate="{Binding DateHelper}" IsTodayHighlighted="True" Name="ReturnDatePicker" Width="120" Grid.Column="0" />
 
-                <Label Content="Time:" Margin="5,0,0,0" Grid.Column="1" VerticalAlignment="Center" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
+                <Label Content="Time:" Margin="5,0,0,0" Grid.Column="1" VerticalAlignment="Center" Foreground="{DynamicResource ForegroundBlackBrush}"/>
                 <ComboBox Grid.Column="1" IsEditable="True" Width="80" Name="ReturnFlightTime" Margin="50,0,0,0" />
             </Grid>
         </Grid>
@@ -106,8 +106,8 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
-                <Label Content="Number of Passengers:" FontWeight="DemiBold" Grid.Column="0" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
-                <Label Content="0"  Name="NumberOfPassengersLabel" FontWeight="DemiBold" Grid.Column="1" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
+                <Label Content="Number of Passengers:" FontWeight="DemiBold" Grid.Column="0" Foreground="{DynamicResource ForegroundBlackBrush}"/>
+                <Label Content="0"  Name="NumberOfPassengersLabel" FontWeight="DemiBold" Grid.Column="1" Foreground="{DynamicResource ForegroundBlackBrush}"/>
             </Grid>
 
             <Grid Grid.Row="2" >
@@ -118,10 +118,10 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
-                <Label Content="ADT:" FontWeight="DemiBold" Grid.Column="0" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
+                <Label Content="ADT:" FontWeight="DemiBold" Grid.Column="0" Foreground="{DynamicResource ForegroundBlackBrush}"/>
                 <ComboBox Name="ADTComboBox" Width="40" Grid.Column="1" SelectionChanged="ADTComboBox_SelectionChanged"/>
 
-                <Label Content="CHD:" FontWeight="DemiBold" Grid.Column="2" Foreground="{DynamicResource ForegroundBlackBrushSecondary}"/>
+                <Label Content="CHD:" FontWeight="DemiBold" Grid.Column="2" Foreground="{DynamicResource ForegroundBlackBrush}"/>
                 <ComboBox Name="CHDComboBox" Width="40" Grid.Column="3" SelectionChanged="CHDComboBox_SelectionChanged"/>
 
             </Grid>
