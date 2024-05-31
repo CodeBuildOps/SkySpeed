@@ -11,20 +11,24 @@
         KeyDown="Window_KeyDown"
         Closing="MainWindow_Closing">
 
-    <DockPanel >
-        <Menu DockPanel.Dock="Top" FontWeight="DemiBold" Margin="0,0,0,3" Padding="0,3,0,3" Background="{DynamicResource MainMenuBrush}">
-            <MenuItem Header="_Booking" Click="BookingMenu_Click" Foreground="{DynamicResource ForegroundBlackBrush}"/>
-            <MenuItem Header="_Reservation" Foreground="{DynamicResource ForegroundBlackBrush}"/>
-            <MenuItem Header="_End Record" Foreground="{DynamicResource ForegroundBlackBrush}"/>
-            <MenuItem Header="_PNR Retrieve" Foreground="{DynamicResource ForegroundBlackBrush}"/>
-            <MenuItem Header="_Help" Foreground="{DynamicResource ForegroundBlackBrush}">
-                <MenuItem Header="_About Sky Speed" Click="AboutSkySpeed_Click" Foreground="Black"/>
-            </MenuItem>
-            <MenuItem Header="_Calculator" Click="Calculator_Click" Foreground="{DynamicResource ForegroundBlackBrush}"/>
-            <MenuItem Header="_Notepad" Click="Notepad_Click" Foreground="{DynamicResource ForegroundBlackBrush}"/>
+    <DockPanel>
+        <Grid DockPanel.Dock="Top" Margin="0,0,0,3">
+            <DockPanel Background="{DynamicResource MainMenuBrush}">
+                <Menu DockPanel.Dock="Left" Width="Auto" Padding="3" FontWeight="DemiBold" Background="{DynamicResource MainMenuBrush}" Foreground="{DynamicResource ForegroundBlackBrush}">
+                    <MenuItem Header="_Booking" Click="BookingMenu_Click"/>
+                    <MenuItem Header="_Reservation"/>
+                    <MenuItem Header="_End Record"/>
+                    <MenuItem Header="_PNR Retrieve"/>
+                    <MenuItem Header="_Help">
+                        <MenuItem Header="_About Sky Speed" Click="AboutSkySpeed_Click" Foreground="Black"/>
+                    </MenuItem>
+                    <MenuItem Header="_Calculator" Click="Calculator_Click"/>
+                    <MenuItem Header="_Notepad" Click="Notepad_Click"/>
+                </Menu>
 
-            <CheckBox DockPanel.Dock="Top" Name="ThemeCheckboxButton" Click="ThemeCheckboxButton_Checked"/>
-        </Menu>
+                <CheckBox DockPanel.Dock="Right" Width="Auto" Margin="0,0,20,0" HorizontalAlignment="Right" Name="ThemeCheckboxButton" Click="ThemeCheckboxButton_Checked"/>
+            </DockPanel>
+        </Grid>
 
         <Grid DockPanel.Dock="Left" Width="200" Margin="3,0,0,3" Background="{DynamicResource SectionBackgroundBrush}">
             <StackPanel>
@@ -128,7 +132,7 @@
                     <ControlTemplate TargetType="CheckBox">
                         <StackPanel Orientation="Horizontal">
                             <Grid>
-                                <Border Width="25" Height="12" Background="LightGray" CornerRadius="6" Margin="3,0,0,0"/>
+                                <Border Width="30" Height="12" Background="LightGray" CornerRadius="6" Margin="3,0,0,0"/>
                                 <Border Name="RoundButton" Height="15" Width="15" CornerRadius="8" HorizontalAlignment="Left"/>
                             </Grid>
                         </StackPanel>
