@@ -9,13 +9,15 @@
             <Grid Margin="0,3,0,3">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="80" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
                 <Label Content="Flight Information" FontWeight="DemiBold" Foreground="{DynamicResource ForegroundWhiteBrush}" Background="{DynamicResource HeaderBackgroundBrush}" Grid.Row="0" />
 
                 <Grid Grid.Row="1" >
-                    <TextBlock Name="FlightDetailsTextBlock" Background="White" Foreground="{DynamicResource ForegroundBlackBrush}"/>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="160">
+                        <TextBlock Name="FlightDetailsTextBlock" Foreground="Black" Background="White"  MinHeight="140"/>
+                    </ScrollViewer>
                 </Grid>
             </Grid>
         </Grid>
@@ -33,52 +35,60 @@
             <Grid Grid.Row="0" Grid.Column="0" Background="{DynamicResource SectionBackgroundBrush}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="80" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
                 <Label Content="Passengers" FontWeight="DemiBold" Foreground="{DynamicResource ForegroundWhiteBrush}" Background="{DynamicResource HeaderBackgroundBrush}" Grid.Row="0" />
 
                 <Grid Grid.Row="1" >
-                    <TextBlock Name="PassengersTextBlock" Background="White" Foreground="{DynamicResource ForegroundBlackBrush}"/>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="220">
+                        <TextBlock Name="PassengersTextBlock" Foreground="Black" Background="White" MinHeight="200"/>
+                    </ScrollViewer>
                 </Grid>
             </Grid>
 
             <Grid Grid.Row="0" Grid.Column="1" Margin="3,0,0,0" Background="{DynamicResource SectionBackgroundBrush}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="80" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
                 <Label Content="Contact Information" FontWeight="DemiBold" Foreground="{DynamicResource ForegroundWhiteBrush}" Background="{DynamicResource HeaderBackgroundBrush}" Grid.Row="0" />
 
                 <Grid Grid.Row="1" >
-                    <TextBlock Name="ContactInformationTextBlock" Background="White" Foreground="{DynamicResource ForegroundBlackBrush}"/>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="220">
+                        <TextBlock Name="ContactInformationTextBlock" Foreground="Black" Background="White" MinHeight="200"/>
+                    </ScrollViewer>
                 </Grid>
             </Grid>
 
             <Grid Grid.Row="1" Grid.Column="0" Margin="0,3,0,3" Background="{DynamicResource SectionBackgroundBrush}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="80" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
                 <Label Content="Payments" FontWeight="DemiBold" Foreground="{DynamicResource ForegroundWhiteBrush}" Background="{DynamicResource HeaderBackgroundBrush}" Grid.Row="0" />
 
                 <Grid Grid.Row="1" >
-                    <TextBlock Name="PaymentTextBlock" Background="White" Foreground="{DynamicResource ForegroundBlackBrush}"/>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="140">
+                        <TextBlock Name="PaymentTextBlock" Foreground="Black" Background="White" MinHeight="120"/>
+                    </ScrollViewer>
                 </Grid>
             </Grid>
 
             <Grid Grid.Row="1" Grid.Column="1" Margin="3,3,0,3" Background="{DynamicResource SectionBackgroundBrush}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="80" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
                 <Label Content="Comments" FontWeight="DemiBold" Foreground="{DynamicResource ForegroundWhiteBrush}" Background="{DynamicResource HeaderBackgroundBrush}" Grid.Row="0" />
 
                 <Grid Grid.Row="1" >
-                    <TextBlock Name="CommentTextBlock" Background="White" Foreground="{DynamicResource ForegroundBlackBrush}"/>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="140">
+                        <TextBlock Name="CommentTextBlock" Foreground="Black" Background="White"  MinHeight="120"/>
+                    </ScrollViewer>
                 </Grid>
             </Grid>
         </Grid>
@@ -91,14 +101,29 @@
 
             <Label Content="Cost Summary" FontWeight="DemiBold" Foreground="{DynamicResource ForegroundWhiteBrush}" Background="{DynamicResource HeaderBackgroundBrush}" Grid.Row="0" />
 
-            <Grid Grid.Row="1" HorizontalAlignment="Right">
+            <Grid Grid.Row="1" HorizontalAlignment="Right" Margin="8">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" MinWidth="100" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
-                <Label Content="Total Cost:" FontWeight="DemiBold" Grid.Column="0" Foreground="{DynamicResource ForegroundBlackBrush}"/>
-                <Label Content="0 INR" Foreground="Red" Name="TotalCostLabel" FontWeight="DemiBold" Grid.Column="1" HorizontalAlignment="Left" />
+                <Label Content="Flight price:" FontWeight="DemiBold" Grid.Row="0" Grid.Column="0" Foreground="{DynamicResource ForegroundBlackBrush}"/>
+                <Label Content="0 INR" Foreground="Red" Name="FlightPriceLabel" FontWeight="DemiBold" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" />
+
+                <Label Content="Total Seat price:" FontWeight="DemiBold" Grid.Row="1" Grid.Column="0" Foreground="{DynamicResource ForegroundBlackBrush}"/>
+                <Label Content="0 INR" Foreground="Red" Name="SeatPriceLabel" FontWeight="DemiBold" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" />
+
+                <Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Background="{DynamicResource HeaderBackgroundBrush}" Height="2"/>
+
+                <Label Content="Total cost:" FontWeight="Bold" Grid.Row="3" Grid.Column="0" Foreground="{DynamicResource ForegroundBlackBrush}"/>
+                <Label Content="0 INR" Foreground="Red" Name="TotalCostLabel" FontWeight="Bold" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" />
+
             </Grid>
         </Grid>
 

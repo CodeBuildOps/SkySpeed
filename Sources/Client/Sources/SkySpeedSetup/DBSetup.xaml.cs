@@ -12,9 +12,9 @@ namespace SkySpeedSetup
     /// </summary>
     public partial class DBSetup : Window
     {
-        private DisplayMessage _displayMessage;
-        private INIHandler _iniHandler;
-        private SkySpeedServices _skySpeedServices;
+        private readonly DisplayMessage _displayMessage;
+        private readonly INIHandler _iniHandler;
+        private readonly SkySpeedServices _skySpeedServices;
 
         public DBSetup()
         {

@@ -13,7 +13,7 @@ namespace SkySpeed.Contacts
     /// <summary>
     /// Interaction logic for ContactsPage.xaml
     /// </summary>
-    public partial class ContactsPage : Page
+    partial class ContactsPage : Page
     {
         private readonly DisplayMessage _displayMessage;
         private PassengersDetails _selectedPassenger;

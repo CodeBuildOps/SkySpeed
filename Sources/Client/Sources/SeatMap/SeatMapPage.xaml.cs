@@ -3,6 +3,7 @@ using SkySpeed.MessageLog;
 using SkySpeed.Passengers;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -11,11 +12,11 @@ namespace SkySpeed.SeatMap
     /// <summary>
     /// Interaction logic for SeatMapPage.xaml
     /// </summary>
-    public partial class SeatMapPage : Page
+    partial class SeatMapPage : Page
     {
         private Button _selectedSeat = null;
         private Image _selectedSittingPersonImage = null;
-
+        private Window _parentWindow;
         private readonly DisplayMessage _displayMessage;
         private PassengersDetails _selectedPassenger;
         private List<SeatMapPriceDetails> _seatGroupPrice;
@@ -297,6 +298,33 @@ namespace SkySpeed.SeatMap
             PassengerSeatListDetailsGrid.SelectedItem = null;
 
             SharedDataPage.PassengersDetailsGrid = PassengerSeatListDetailsGrid;
+            UpdateMainParentWindow();
+        }
+
+        private void UpdateMainParentWindow()
+        {
+            if (SharedDataPage.PassengersDetailsGrid != null)
+            {
+                _parentWindow = Window.GetWindow(this);
+                TextBlock textBlock = _parentWindow.FindName("SeatExpanderTextBlock") as TextBlock;
+
+                // Clear the existing text
+                textBlock.Text = string.Empty;
+
+                StringBuilder textBuilder = new StringBuilder();
+                foreach (var rowItem in SharedDataPage.PassengersDetailsGrid.Items)
+                {
+                    if (rowItem is PassengersDetails row)
+                    {
+                        textBuilder.AppendLine($"Passenger - {row.PassengerId}");
+                        textBuilder.AppendLine($"Seat: {row.Seat}\t{row.SeatPrice}");
+                        textBuilder.AppendLine();
+                    }
+                }
+
+                // Update the TextBlock with the new text
+                textBlock.Text = textBuilder.ToString();
+            }
         }
     }
 }

@@ -12,7 +12,7 @@ namespace SkySpeed.FlightResults
     /// <summary>
     /// Interaction logic for FlightResultsPage.xaml
     /// </summary>
-    public partial class FlightResultsPage : Page
+    partial class FlightResultsPage : Page
     {
         private readonly DisplayMessage _displayMessage;
         private SkySpeedServices _skySpeedServices;
@@ -119,7 +119,11 @@ namespace SkySpeed.FlightResults
             if (_parentWindow != null)
             {
                 TextBlock textBlock = (TextBlock)_parentWindow.FindName("FlightInformationExpanderTextBlock");
-                textBlock.Text = $"{_selectedFlight.DayAndDate}\t{_selectedFlight.Fare}\n{_selectedFlight.FlightNumber}  {_selectedFlight.Sector}  {_selectedFlight.DepartArrival}";
+                textBlock.Text = $"{_selectedFlight.DayAndDate}\t{_selectedFlight.Fare}\n" +
+                    $"{_selectedFlight.FlightNumber}   {_selectedFlight.Sector}   {_selectedFlight.DepartArrival}\n" +
+                    $"Duration: {_selectedFlight.Duration}\n" +
+                    $"Seat Left: {_selectedFlight.SeatsLeft}\n" +
+                    $"Stop: {_selectedFlight.Stop}";
             }
             SharedDataPage.FlightDetails = _selectedFlight;
         }

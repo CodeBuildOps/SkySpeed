@@ -12,7 +12,7 @@ namespace SkySpeed.Passengers
     /// <summary>
     /// Interaction logic for PassengersPage.xaml
     /// </summary>
-    public partial class PassengersPage : Page
+    partial class PassengersPage : Page
     {
         private readonly DisplayMessage _displayMessage;
         private PassengersDetails _selectedPassenger;
@@ -310,8 +310,10 @@ namespace SkySpeed.Passengers
                 {
                     if (rowItem is PassengersDetails row)
                     {
+                        textBuilder.AppendLine($"Passenger - {row.PassengerId}");
                         textBuilder.AppendLine($"{row.Type}\t{row.Gender}");
-                        textBuilder.AppendLine($"{row.Title} {row.FirstName} {row.MiddleName} {row.LastName}  {row.DOB}  {row.Country}");
+                        textBuilder.AppendLine($"{row.FullName}");
+                        textBuilder.AppendLine($"DOB: {row.DOB}  {row.Country}");
                         textBuilder.AppendLine();
                     }
                 }
