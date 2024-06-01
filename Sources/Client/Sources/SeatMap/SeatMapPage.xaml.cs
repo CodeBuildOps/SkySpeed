@@ -286,11 +286,6 @@ namespace SkySpeed.SeatMap
                 _selectedPassenger.SeatPrice = seatGroupAndPrice.SeatPrice;
             }
 
-            _displayMessage.ShowSuccessMessageBox($"" +
-                $"Seat: {_selectedPassenger.Seat}\n" +
-                $"SeatPrice: {_selectedPassenger.SeatPrice}\n" +
-                $"Passenger: {_selectedPassenger.FullName}");
-
             // Refresh the DataGrid to reflect the changes
             PassengerSeatListDetailsGrid.Items.Refresh();
 
