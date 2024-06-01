@@ -20,7 +20,7 @@ namespace SkySpeed.SkySpeedMainWindow
     /// <summary>
     /// Interaction logic for SkySpeedWindow.xaml
     /// </summary>
-    public partial class SkySpeedWindow : Window
+    partial class SkySpeedWindow : Window
     {
         private const string README_FILE_NAME = "Readme\\SkySpeed.pptx";
         private readonly string README_FILE_PATH;

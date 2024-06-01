@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media;
 
 namespace SkySpeed.SeatMap
 {
@@ -38,7 +40,7 @@ namespace SkySpeed.SeatMap
                 InitializeSeats();
                 SetPassengerSeatListDetailsGrid();
 
-                // Todo: Populate seat availability
+            // Todo: Populate seat availability
             }
             else
             {
@@ -76,6 +78,8 @@ namespace SkySpeed.SeatMap
                     if (seatButton != null)
                     {
                         seatButton.Click += ButtonSeat_Clicked;
+                        seatButton.MouseEnter += ButtonSeat_MouseEnter;
+                        seatButton.MouseLeave += ButtonSeat_MouseLeave;
 
                         // Calculate seat price based on location
                         double price = CalculateSeatPrice(row, col);
@@ -94,6 +98,51 @@ namespace SkySpeed.SeatMap
             {
                 SeatGroupDetailsGrid.Items.Add(item);
             }
+        }
+
+        private void ButtonSeat_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Button hoverSeat = (Button)sender;
+            var seatGroupAndPrice = GetSeatMapPriceDetails(hoverSeat.Content.ToString());
+            if (seatGroupAndPrice != null)
+            {
+                string seatPriceText = $"{seatGroupAndPrice.SeatPrice} INR";
+                Brush backgroundColor;
+
+                if (seatGroupAndPrice.SeatPrice > 500)
+                {
+                    backgroundColor = Brushes.Red;
+                }
+                else if (seatGroupAndPrice.SeatPrice > 0 && seatGroupAndPrice.SeatPrice <= 500)
+                {
+                    backgroundColor = Brushes.Yellow;
+                }
+                else
+                {
+                    backgroundColor = Brushes.Green;
+                }
+
+                var tooltip = new ToolTip
+                {
+                    Content = new TextBlock
+                    {
+                        Text = seatPriceText,
+                        Padding = new Thickness(5),
+                        Foreground = Brushes.Black,
+                        FontWeight = FontWeights.Bold,
+                        FontSize=14,
+                    },
+                    Background = backgroundColor
+                };
+
+                hoverSeat.ToolTip = tooltip;
+            }
+        }
+
+        private void ButtonSeat_MouseLeave(object sender, MouseEventArgs e)
+        {
+            Button hoverSeat = (Button)sender;
+            hoverSeat.ToolTip = null;
         }
 
         private void AddSeatToGroupList(int row, char col)
@@ -279,7 +328,7 @@ namespace SkySpeed.SeatMap
 
         private void SaveSeat(string selectedSeat)
         {
-            var seatGroupAndPrice = SeatGroupDetailsGrid.Items.Cast<SeatMapPriceDetails>().FirstOrDefault(x => x.Seat == $"Seat{selectedSeat}");
+            var seatGroupAndPrice = GetSeatMapPriceDetails(selectedSeat);
             if (seatGroupAndPrice != null)
             {
                 _selectedPassenger.Seat = selectedSeat;
@@ -294,6 +343,11 @@ namespace SkySpeed.SeatMap
 
             SharedDataPage.PassengersDetailsGrid = PassengerSeatListDetailsGrid;
             UpdateMainParentWindow();
+        }
+
+        private SeatMapPriceDetails GetSeatMapPriceDetails(string selectedSeat)
+        {
+            return SeatGroupDetailsGrid.Items.Cast<SeatMapPriceDetails>().FirstOrDefault(x => x.Seat == $"Seat{selectedSeat}");
         }
 
         private void UpdateMainParentWindow()
