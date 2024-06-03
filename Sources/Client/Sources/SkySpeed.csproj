@@ -94,6 +94,7 @@
     <Compile Include="Passengers\PassengersPage.xaml.cs">
       <DependentUpon>PassengersPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Payments\PaymentDetails.cs" />
     <Compile Include="Payments\PaymentsPage.xaml.cs">
       <DependentUpon>PaymentsPage.xaml</DependentUpon>
     </Compile>

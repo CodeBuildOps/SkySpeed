@@ -1,11 +1,8 @@
 ﻿using SharedData;
 using SkySpeed.FlightResults;
 using SkySpeed.Passengers;
-using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Media.Imaging;
 
 namespace SkySpeed.ReservationSummary
 {
@@ -37,9 +34,8 @@ namespace SkySpeed.ReservationSummary
             GetDetailsFromMainParentWindow("PassengersExpanderTextBlock", PassengersTextBlock);
             GetDetailsFromMainParentWindow("ContactExpanderTextBlock", ContactInformationTextBlock);
             GetDetailsFromMainParentWindow("CommentTextBox", CommentTextBlock);
+            GetDetailsFromMainParentWindow("PaymentExpanderTextBlock", PaymentTextBlock);
             SetCostSummary();
-
-            // SetPaymentInformation();
         }
 
         private void GetDetailsFromMainParentWindow(string parentElementName, FrameworkElement updateElement)
@@ -96,7 +92,7 @@ namespace SkySpeed.ReservationSummary
             }
 
             // Check if PassengersDetailsGrid is available
-            if (SharedDataPage.PassengersDetailsGrid != null)
+            if (SharedDataPage.PassengersDetailsGrid?.Items != null)
             {
                 foreach (var rowItem in SharedDataPage.PassengersDetailsGrid.Items)
                 {

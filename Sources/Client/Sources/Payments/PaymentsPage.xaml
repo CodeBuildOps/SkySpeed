@@ -22,12 +22,10 @@
 
                 <Border Grid.Row="0" Grid.Column="0" Margin="3,3,0,0" BorderBrush="{DynamicResource HeaderBackgroundBrush}" BorderThickness="1">
                     <StackPanel Background="{DynamicResource SectionBackgroundBrush}">
-                        <DataGrid IsReadOnly="True" Height="150" Name="PassengersDetailsGrid" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" MaxHeight="300">
+                        <DataGrid GridLinesVisibility="None" IsReadOnly="True" Height="150" Name="PaymentDetailsGrid" SelectionChanged="PaymentDetailsGrid_SelectionChanged" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" MaxHeight="300">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="ID" Binding="{Binding ID}" />
-                                <DataGridTextColumn Header="Payment Type" Binding="{Binding PaymentType}" />
+                                <DataGridTextColumn Header="Payment Type" Binding="{Binding PaymentMethod}" />
                                 <DataGridTextColumn Header="Amount" Binding="{Binding Amount}" />
-                                <DataGridTextColumn Header="Date" Binding="{Binding Date}" />
                             </DataGrid.Columns>
                         </DataGrid>
                     </StackPanel>
@@ -35,8 +33,8 @@
 
                 <Grid HorizontalAlignment="Left" Margin="0,5,5,0" Grid.Row="0" Grid.Column="1">
                     <StackPanel Orientation="Vertical">
-                        <Button Content="Add" Name="AddPassengerButton" Width="75" Margin="0,0,0,5" />
-                        <Button Content="Edit" Name="EditPassengerButton" Width="75" Margin="0,0,0,0" />
+                        <Button Content="Add" Name="AddPaymentButton" Width="75" Margin="0,0,0,5" Click="AddPaymentButton_Click"/>
+                        <Button Content="Edit" Name="EditPaymentButton" Width="75" Margin="0,0,0,0" Click="EditPaymentButton_Click"/>
                     </StackPanel>
                 </Grid>
             </Grid>
@@ -48,7 +46,7 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <Label Content="Add Payment - INR" FontWeight="DemiBold" Foreground="{DynamicResource ForegroundWhiteBrush}" Background="{DynamicResource HeaderBackgroundBrush}" Grid.Row="0" />
+            <Label Content="Add Payment - INR" Name="Add_Edit_Payment"  FontWeight="DemiBold" Foreground="{DynamicResource ForegroundWhiteBrush}" Background="{DynamicResource HeaderBackgroundBrush}" Grid.Row="0" />
 
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
@@ -61,7 +59,7 @@
                 </Grid.RowDefinitions>
 
                 <Grid  Margin="5" Grid.Row="0" Grid.Column="0">
-                    <GroupBox Header="Payment Details" Foreground="{DynamicResource ForegroundBlackBrush}">
+                    <GroupBox Name ="PaymentDetailsGroupBox" Header="Payment Details" Foreground="{DynamicResource ForegroundBlackBrush}">
                         <Grid Margin="5">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
@@ -76,7 +74,11 @@
                             </Grid.RowDefinitions>
 
                             <Label Content="Payment Method:" Grid.Row="0" Grid.Column="0" Foreground="{DynamicResource ForegroundBlackBrush}"/>
-                            <ComboBox Name="PaymentMethodComboBox" Width="150" Grid.Row="0" Grid.Column="1"/>
+                            <ComboBox Name="PaymentMethodComboBox" Width="150" Grid.Row="0" Grid.Column="1">
+                                <ComboBoxItem>Credit Card</ComboBoxItem>
+                                <ComboBoxItem>Debit Card</ComboBoxItem>
+                                <ComboBoxItem IsEnabled="False">UPI Card</ComboBoxItem>
+                            </ComboBox>
 
                             <Label Content="Card Number:" Grid.Row="1" Grid.Column="0" Margin="0,5,0,0" Foreground="{DynamicResource ForegroundBlackBrush}"/>
                             <TextBox Name="CardNumberTextBox" Width="150" Grid.Row="1" Grid.Column="1" Margin="0,5,0,0"/>
@@ -98,8 +100,7 @@
 
                 <Grid HorizontalAlignment="Left" Margin="0,10,5,0" Grid.Row="0" Grid.Column="1">
                     <StackPanel Orientation="Vertical">
-                        <Button Content="Save" Name="SaveButton" Width="75" Margin="0,0,0,5" />
-                        <Button Content="Cancel" Name="CancelButton" Width="75" Margin="0,0,0,0" />
+                        <Button Content="Save" Name="SaveButton" Click="SaveButton_Click" Width="75" Margin="0,0,0,5" />
                     </StackPanel>
                 </Grid>
             </Grid>

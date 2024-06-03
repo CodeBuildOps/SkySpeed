@@ -35,7 +35,7 @@ namespace SkySpeed.SeatMap
 
             _displayMessage = new DisplayMessage("Seat Map");
 
-            if (SharedDataPage.PassengersDetailsGrid != null)
+            if (SharedDataPage.PassengersDetailsGrid?.Items != null)
             {
                 InitializeSeats();
                 SetPassengerSeatListDetailsGrid();
@@ -352,7 +352,7 @@ namespace SkySpeed.SeatMap
 
         private void UpdateMainParentWindow()
         {
-            if (SharedDataPage.PassengersDetailsGrid != null)
+            if (SharedDataPage.PassengersDetailsGrid?.Items != null)
             {
                 _parentWindow = Window.GetWindow(this);
                 TextBlock textBlock = _parentWindow.FindName("SeatExpanderTextBlock") as TextBlock;

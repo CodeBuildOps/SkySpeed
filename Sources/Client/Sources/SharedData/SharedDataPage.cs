@@ -8,7 +8,6 @@ namespace SharedData
         public static int NumberOfADT { get; set; }
         public static int NumberOfCHD { get; set; }
         public static DataGrid PassengersDetailsGrid { get; set; }
-        public static DataGrid ContactDetailsGrid { get; set; }
         public static object FlightDetails { get; set; }
     }
 }

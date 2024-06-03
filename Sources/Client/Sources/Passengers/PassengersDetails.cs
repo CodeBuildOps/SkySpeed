@@ -1,4 +1,6 @@
-﻿namespace SkySpeed.Passengers
+﻿using SkySpeed.Payments;
+
+namespace SkySpeed.Passengers
 {
     class PassengersDetails
     {
@@ -28,6 +30,13 @@
         // From SeatMapPage
         public string Seat { get; set; }
         public double SeatPrice { get; set; }
+
+        // From PaymentPage
+        public string PaymentMethod { get; set; }
+        public string Amount { get; set; }
+
+        // From PaymentPage
+        public PaymentDetails PaymentDetailsObject { get; set; }
 
         public PassengersDetails(int passengerId, string type, string gender, string title, string firstName, string middleName, string lastName, string dob, string country,
             string addressLine1 = null, string addressLine2 = null, string addressPostal = null, string addressTown = null, string addressState = null, string addressCountry = null, string mobile = null, string email = null,
@@ -59,6 +68,14 @@
             // For SeatMapPage
             Seat = seat;
             SeatPrice = seatPrice;
+        }
+
+        // For PaymentPage
+        public PassengersDetails(string paymentMethod, string cardNumber, string amount, string expirationMonth, string expirationYear, string cardHolderName)
+        {
+            PaymentMethod = paymentMethod;
+            Amount = amount;
+            PaymentDetailsObject = new PaymentDetails(PaymentMethod, cardNumber, Amount, expirationMonth, expirationYear, cardHolderName);
         }
     }
 }

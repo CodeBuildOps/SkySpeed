@@ -25,7 +25,7 @@ namespace SkySpeed.Contacts
 
             _displayMessage = new DisplayMessage("Contact");
 
-            if (SharedDataPage.PassengersDetailsGrid != null)
+            if (SharedDataPage.PassengersDetailsGrid?.Items != null)
                 SetContactDetailsGrid();
 
             SetComboBoxWithCountries();
@@ -48,42 +48,41 @@ namespace SkySpeed.Contacts
 
         private void SetContactDetailsGrid()
         {
-            var passengerDetailsList = new List<PassengersDetails>();
-            if (SharedDataPage.PassengersDetailsGrid != null)
+            var passengerUpdatedDetailsList = new List<PassengersDetails>();
+
+            foreach (var rowItem in SharedDataPage.PassengersDetailsGrid.Items)
             {
-                foreach (var rowItem in SharedDataPage.PassengersDetailsGrid.Items)
+                if (rowItem is PassengersDetails row)
                 {
-                    if (rowItem is PassengersDetails row)
-                    {
-                        passengerDetailsList.Add(
-                            new PassengersDetails(
-                                row.PassengerId,
-                                row.Type,
-                                row.Gender,
-                                row.Title,
-                                row.FirstName,
-                                row.MiddleName,
-                                row.LastName,
-                                row.DOB,
-                                row.Country,
+                    passengerUpdatedDetailsList.Add(
+                        new PassengersDetails(
+                            row.PassengerId,
+                            row.Type,
+                            row.Gender,
+                            row.Title,
+                            row.FirstName,
+                            row.MiddleName,
+                            row.LastName,
+                            row.DOB,
+                            row.Country,
 
-                                row.AddressLine1,
-                                row.AddressLine2,
-                                row.AddressPostal,
-                                row.AddressTown,
-                                row.AddressState,
-                                row.AddressCountry,
-                                row.Mobile,
-                                row.Email,
+                            row.AddressLine1,
+                            row.AddressLine2,
+                            row.AddressPostal,
+                            row.AddressTown,
+                            row.AddressState,
+                            row.AddressCountry,
+                            row.Mobile,
+                            row.Email,
 
-                                row.Seat,
-                                row.SeatPrice
-                                )
-                        );
-                    }
+                            row.Seat,
+                            row.SeatPrice
+                            )
+                    );
                 }
-                FillContactDetailsGrid(passengerDetailsList);
             }
+
+            FillContactDetailsGrid(passengerUpdatedDetailsList);
         }
 
         private void FillContactDetailsGrid(List<PassengersDetails> passengerData)
@@ -104,42 +103,46 @@ namespace SkySpeed.Contacts
         {
             SaveButton.IsEnabled = true;
             ContactDetailsGroupBox.IsEnabled = true;
-            PopulateContactDetailsInFields(_selectedPassenger);
+            PopulateContactDetailsInFields();
         }
 
-        private void PopulateContactDetailsInFields(PassengersDetails selectedPassenger)
+        private void PopulateContactDetailsInFields()
         {
-            LastNameTextBox.Text = selectedPassenger.LastName;
-            FirstNameTextBox.Text = selectedPassenger.FirstName;
-            MiddleNameTextBox.Text = selectedPassenger.MiddleName;
-            TitleComboBox.Text = selectedPassenger.Title;
+            LastNameTextBox.Text = _selectedPassenger.LastName;
+            FirstNameTextBox.Text = _selectedPassenger.FirstName;
+            MiddleNameTextBox.Text = _selectedPassenger.MiddleName;
+            TitleComboBox.Text = _selectedPassenger.Title;
 
-            Line1TextBox.Text = selectedPassenger.AddressLine1;
-            Line2TextBox.Text = selectedPassenger.AddressLine2;
-            PostalTextBox.Text = selectedPassenger.AddressPostal;
-            TownTextBox.Text = selectedPassenger.AddressTown;
-            AddressStateTextBox.Text = selectedPassenger.AddressState;
-            CountryComboBox.Text = selectedPassenger.AddressCountry;
-            MobileTextBox.Text = selectedPassenger.Mobile;
-            EmailTextBox.Text = selectedPassenger.Email;
+            Line1TextBox.Text = _selectedPassenger.AddressLine1;
+            Line2TextBox.Text = _selectedPassenger.AddressLine2;
+            PostalTextBox.Text = _selectedPassenger.AddressPostal;
+            TownTextBox.Text = _selectedPassenger.AddressTown;
+            AddressStateTextBox.Text = _selectedPassenger.AddressState;
+            CountryComboBox.Text = _selectedPassenger.AddressCountry;
+            MobileTextBox.Text = _selectedPassenger.Mobile;
+            EmailTextBox.Text = _selectedPassenger.Email;
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            if (!ValidatePassengerFields(Line1TextBox.Text, Line2TextBox.Text, PostalTextBox.Text, TownTextBox.Text, AddressStateTextBox.Text, CountryComboBox.Text,
+            if (!ValidateFields(Line1TextBox.Text, Line2TextBox.Text, PostalTextBox.Text, TownTextBox.Text, AddressStateTextBox.Text, CountryComboBox.Text,
             MobileTextBox.Text, EmailTextBox.Text))
                 return;
 
-            SaveContact(EmailTextBox.Text, MobileTextBox.Text, Line1TextBox.Text, Line2TextBox.Text, PostalTextBox.Text, TownTextBox.Text, AddressStateTextBox.Text, CountryComboBox.Text);
+            SaveOrUpdate(EmailTextBox.Text, MobileTextBox.Text, Line1TextBox.Text, Line2TextBox.Text, PostalTextBox.Text, TownTextBox.Text, AddressStateTextBox.Text, CountryComboBox.Text);
 
-            ClearAllFields();
+            ClearAllFields(LastNameTextBox, FirstNameTextBox, MiddleNameTextBox, TitleComboBox,
+                Line1TextBox, Line2TextBox, PostalTextBox, TownTextBox, AddressStateTextBox, CountryComboBox, MobileTextBox, EmailTextBox);
 
-            SharedDataPage.ContactDetailsGrid = ContactDetailsGrid;
+            ContactDetailsGroupBox.IsEnabled = false;
+            SaveButton.IsEnabled = false;
+            EditContactButton.IsEnabled = false;
+
             SharedDataPage.PassengersDetailsGrid = ContactDetailsGrid;
             UpdateMainParentWindow();
         }
 
-        private bool ValidatePassengerFields(string addressLine1, string addressLine2, string addressPostal, string addressTown, string addressState, string addressCountry,
+        private bool ValidateFields(string addressLine1, string addressLine2, string addressPostal, string addressTown, string addressState, string addressCountry,
             string mobile, string email)
         {
             if (string.IsNullOrEmpty(addressLine1) || string.IsNullOrEmpty(addressLine2))
@@ -190,7 +193,7 @@ namespace SkySpeed.Contacts
             return true;
         }
 
-        private void SaveContact(string email, string mobile, string addressLine1, string addressLine2, string addressPostal, string addressTown, string addressState, string addressCountry)
+        private void SaveOrUpdate(string email, string mobile, string addressLine1, string addressLine2, string addressPostal, string addressTown, string addressState, string addressCountry)
         {
             var selectedPassengerInContactDetailGrid = ContactDetailsGrid.Items[ContactDetailsGrid.SelectedIndex] as PassengersDetails;
             selectedPassengerInContactDetailGrid.AddressLine1 = addressLine1;
@@ -209,17 +212,7 @@ namespace SkySpeed.Contacts
             ContactDetailsGrid.SelectedItem = null;
         }
 
-        private void ClearAllFields()
-        {
-            ClearContactFields(LastNameTextBox, FirstNameTextBox, MiddleNameTextBox, TitleComboBox,
-                Line1TextBox, Line2TextBox, PostalTextBox, TownTextBox, AddressStateTextBox, CountryComboBox, MobileTextBox, EmailTextBox);
-
-            ContactDetailsGroupBox.IsEnabled = false;
-            SaveButton.IsEnabled = false;
-            EditContactButton.IsEnabled = false;
-        }
-
-        private void ClearContactFields(params Control[] controls)
+        private void ClearAllFields(params Control[] controls)
         {
             foreach (var control in controls)
             {
@@ -236,7 +229,7 @@ namespace SkySpeed.Contacts
 
         private void UpdateMainParentWindow()
         {
-            if (SharedDataPage.ContactDetailsGrid != null)
+            if (SharedDataPage.PassengersDetailsGrid != null)
             {
                 _parentWindow = Window.GetWindow(this);
                 TextBlock textBlock = _parentWindow.FindName("ContactExpanderTextBlock") as TextBlock;
@@ -245,7 +238,7 @@ namespace SkySpeed.Contacts
                 textBlock.Text = string.Empty;
 
                 StringBuilder textBuilder = new StringBuilder();
-                foreach (var rowItem in SharedDataPage.ContactDetailsGrid.Items)
+                foreach (var rowItem in SharedDataPage.PassengersDetailsGrid.Items)
                 {
                     if (rowItem is PassengersDetails row)
                     {
