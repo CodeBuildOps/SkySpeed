@@ -195,7 +195,7 @@ namespace SkySpeed.SkySpeedMainWindow
         private void MainWindow_Closing(object sender, CancelEventArgs e)
         {
             // Cancel the closing event
-            if (_displayMessage.ShowQuestionMessageBox("Do you want to end your SkySpeed session?") == MessageBoxResult.No)
+            if (_displayMessage.ShowQuestionMessageBox("Closing the application may cause data loss.\nDo you want to end your SkySpeed session?") == MessageBoxResult.No)
             {
                 e.Cancel = true;
             }

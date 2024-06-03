@@ -2,6 +2,7 @@
 using SkySpeed.FlightResults;
 using SkySpeed.MessageLog;
 using SkySpeed.Passengers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,6 +28,8 @@ namespace SkySpeed.Payments
 
             if (SharedDataPage.PassengersDetailsGrid?.Items != null)
             {
+                SetComboBoxWithNumberOfMonths();
+                SetComboBoxWithNumberOfYears();
                 SetCostSummary();
                 SetPaymentDetailsGrid();
             }
@@ -36,6 +39,25 @@ namespace SkySpeed.Payments
             PaymentDetailsGroupBox.IsEnabled = false;
             EditPaymentButton.IsEnabled = false;
             SaveButton.IsEnabled = false;
+        }
+
+        private void SetComboBoxWithNumberOfMonths()
+        {
+            for (int month = 1; month <= 12; month++)
+            {
+                if (month < 10)
+                    ExpiryMonthComboBox.Items.Add($"0{month}");
+                else
+                    ExpiryMonthComboBox.Items.Add(month);
+            }
+        }
+
+        private void SetComboBoxWithNumberOfYears()
+        {
+            for (int year = DateTime.Now.Year; year <= (DateTime.Now.Year + 10); year++)
+            {
+                ExpiryYearComboBox.Items.Add(year);
+            }
         }
 
         private void SetCostSummary()
@@ -116,12 +138,13 @@ namespace SkySpeed.Payments
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            if (!ValidateFields((PaymentMethodComboBox.SelectedItem as ComboBoxItem).Content?.ToString(), CardNumberTextBox.Text, ExpiryMonthTextBox.Text, ExpiryYearTextBox.Text, CardHolderNameTextBox.Text))
+
+            if (!ValidateFields((PaymentMethodComboBox.SelectedItem as ComboBoxItem).Content?.ToString(), CardNumberTextBox.Text, ExpiryMonthComboBox.SelectedItem?.ToString(), ExpiryYearComboBox.SelectedItem?.ToString(), CardHolderNameTextBox.Text))
                 return;
 
-            SaveOrUpdate((PaymentMethodComboBox.SelectedItem as ComboBoxItem).Content?.ToString(), CardNumberTextBox.Text, AmountTextBox.Text, ExpiryMonthTextBox.Text, ExpiryYearTextBox.Text, CardHolderNameTextBox.Text);
+            SaveOrUpdate((PaymentMethodComboBox.SelectedItem as ComboBoxItem).Content?.ToString(), CardNumberTextBox.Text, AmountTextBox.Text, ExpiryMonthComboBox.SelectedItem?.ToString(), ExpiryYearComboBox.SelectedItem?.ToString(), CardHolderNameTextBox.Text);
 
-            ClearAllFields(CardNumberTextBox, AmountTextBox, ExpiryMonthTextBox, ExpiryYearTextBox, CardHolderNameTextBox);
+            ClearAllFields(CardNumberTextBox, AmountTextBox, ExpiryMonthComboBox, ExpiryYearComboBox, CardHolderNameTextBox);
 
             PaymentDetailsGroupBox.IsEnabled = false;
             SaveButton.IsEnabled = false;
@@ -290,8 +313,8 @@ namespace SkySpeed.Payments
             PaymentMethodComboBox.Text = _selectedPassenger.PaymentDetailsObject.PaymentMethod;
             CardNumberTextBox.Text = _selectedPassenger.PaymentDetailsObject.CardNumber;
             AmountTextBox.Text = _selectedPassenger.PaymentDetailsObject.Amount;
-            ExpiryMonthTextBox.Text = _selectedPassenger.PaymentDetailsObject.ExpirationMonth;
-            ExpiryYearTextBox.Text = _selectedPassenger.PaymentDetailsObject.ExpirationYear;
+            ExpiryMonthComboBox.Text = _selectedPassenger.PaymentDetailsObject.ExpirationMonth;
+            ExpiryYearComboBox.Text = _selectedPassenger.PaymentDetailsObject.ExpirationYear;
             CardHolderNameTextBox.Text = _selectedPassenger.PaymentDetailsObject.CardHolderName;
         }
     }
