@@ -93,18 +93,29 @@ namespace SkySpeed.Payments
             {
                 if (rowItem is PassengersDetails row && row.PaymentDetailsObject != null)
                 {
-                    passengerUpdatedDetailsList.Add(new PassengersDetails(
-                        row.PaymentDetailsObject.PaymentMethod,
-                        row.PaymentDetailsObject.CardNumber,
-                        row.PaymentDetailsObject.Amount,
-                        row.PaymentDetailsObject.ExpirationMonth,
-                        row.PaymentDetailsObject.ExpirationYear,
-                        row.PaymentDetailsObject.CardHolderName
-                    ));
+                    if (double.TryParse(row.PaymentDetailsObject.Amount.Replace("INR", "").Trim(), out double totalCostFromPaymentGrid) &&
+                        double.TryParse(AmountTextBox.Text.Replace("INR", "").Trim(), out double totalCostFromAmountTextBox))
+                    {
+                        string totalCost = totalCostFromPaymentGrid < totalCostFromAmountTextBox
+                            ? $"{totalCostFromAmountTextBox:F} INR"
+                            : $"{totalCostFromPaymentGrid:F} INR";
 
-                    // Payment details are the same for all passengers, break after first valid entry
-                    break;
+                        var updatedPaymentDetails = new PaymentDetails(
+                            row.PaymentDetailsObject.PaymentMethod,
+                            row.PaymentDetailsObject.CardNumber,
+                            totalCost,
+                            row.PaymentDetailsObject.ExpirationMonth,
+                            row.PaymentDetailsObject.ExpirationYear,
+                            row.PaymentDetailsObject.CardHolderName
+                        );
+
+                        passengerUpdatedDetailsList.Add(new PassengersDetails(updatedPaymentDetails));
+
+                        // Payment details are the same for all passengers, break after first valid entry
+                        break;
+                    }
                 }
+
             }
 
             FillDetailsGrid(passengerUpdatedDetailsList);
@@ -206,14 +217,14 @@ namespace SkySpeed.Payments
             else
             {
                 FillDetailsGrid(new List<PassengersDetails>() {
-                    new PassengersDetails (
-                        paymentMethod,
-                        cardNumber,
-                        amount,
-                        expiryMonth,
-                        expiryYear,
-                        cardHolderName
-                     )
+                    new PassengersDetails (new PaymentDetails(
+                    paymentMethod,
+                    cardNumber,
+                    amount,
+                    expiryMonth,
+                    expiryYear,
+                    cardHolderName
+                    ))
                 });
             }
         }

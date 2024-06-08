@@ -218,7 +218,10 @@ namespace SkySpeed.SeatMap
                         row.Email,
 
                         row.Seat,
-                        row.SeatPrice));
+                        row.SeatPrice,
+
+                        row.PaymentDetailsObject
+                        ));
                 }
             }
 

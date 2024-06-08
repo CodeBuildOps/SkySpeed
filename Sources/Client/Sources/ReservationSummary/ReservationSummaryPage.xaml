@@ -16,7 +16,7 @@
 
                 <Grid Grid.Row="1" >
                     <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="160">
-                        <TextBlock Name="FlightDetailsTextBlock" Foreground="Black" Background="White"  MinHeight="140"/>
+                        <TextBlock Padding="10" Name="FlightDetailsTextBlock" Foreground="Black" Background="White"  MinHeight="140"/>
                     </ScrollViewer>
                 </Grid>
             </Grid>
@@ -42,7 +42,7 @@
 
                 <Grid Grid.Row="1" >
                     <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="220">
-                        <TextBlock Name="PassengersTextBlock" Foreground="Black" Background="White" MinHeight="200"/>
+                        <TextBlock Padding="10" Name="PassengersTextBlock" Foreground="Black" Background="White" MinHeight="200"/>
                     </ScrollViewer>
                 </Grid>
             </Grid>
@@ -57,7 +57,7 @@
 
                 <Grid Grid.Row="1" >
                     <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="220">
-                        <TextBlock Name="ContactInformationTextBlock" Foreground="Black" Background="White" MinHeight="200"/>
+                        <TextBlock Padding="10" Name="ContactInformationTextBlock" Foreground="Black" Background="White" MinHeight="200"/>
                     </ScrollViewer>
                 </Grid>
             </Grid>
@@ -72,7 +72,7 @@
 
                 <Grid Grid.Row="1" >
                     <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="140">
-                        <TextBlock Name="PaymentTextBlock" Foreground="Black" Background="White" MinHeight="120"/>
+                        <TextBlock Padding="10" Name="PaymentTextBlock" Foreground="Black" Background="White" MinHeight="120"/>
                     </ScrollViewer>
                 </Grid>
             </Grid>
@@ -87,7 +87,7 @@
 
                 <Grid Grid.Row="1" >
                     <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="140">
-                        <TextBlock Name="CommentTextBlock" Foreground="Black" Background="White"  MinHeight="120"/>
+                        <TextBlock Padding="10" Name="CommentTextBlock" Foreground="Black" Background="White"  MinHeight="120"/>
                     </ScrollViewer>
                 </Grid>
             </Grid>

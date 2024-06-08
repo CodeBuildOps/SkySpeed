@@ -4,6 +4,8 @@ namespace SkySpeed.Passengers
 {
     class PassengersDetails
     {
+        // These will be used to bind the Datagrid columns across all pages
+
         // From PassengerPage
         public int PassengerId { get; set; }
         public string Type { get; set; }
@@ -34,13 +36,11 @@ namespace SkySpeed.Passengers
         // From PaymentPage
         public string PaymentMethod { get; set; }
         public string Amount { get; set; }
-
-        // From PaymentPage
         public PaymentDetails PaymentDetailsObject { get; set; }
 
         public PassengersDetails(int passengerId, string type, string gender, string title, string firstName, string middleName, string lastName, string dob, string country,
             string addressLine1 = null, string addressLine2 = null, string addressPostal = null, string addressTown = null, string addressState = null, string addressCountry = null, string mobile = null, string email = null,
-            string seat = null, double seatPrice = 0)
+            string seat = null, double seatPrice = 0, PaymentDetails paymentDetailsObject = null)
         {
             // For PassengerPage
             PassengerId = passengerId;
@@ -68,14 +68,17 @@ namespace SkySpeed.Passengers
             // For SeatMapPage
             Seat = seat;
             SeatPrice = seatPrice;
+
+            // For PaymentPage
+            PaymentDetailsObject = paymentDetailsObject;
         }
 
         // For PaymentPage
-        public PassengersDetails(string paymentMethod, string cardNumber, string amount, string expirationMonth, string expirationYear, string cardHolderName)
+        public PassengersDetails(PaymentDetails paymentDetailsObject)
         {
-            PaymentMethod = paymentMethod;
-            Amount = amount;
-            PaymentDetailsObject = new PaymentDetails(PaymentMethod, cardNumber, Amount, expirationMonth, expirationYear, cardHolderName);
+            PaymentMethod = paymentDetailsObject.PaymentMethod;
+            Amount = paymentDetailsObject.Amount;
+            PaymentDetailsObject = paymentDetailsObject;
         }
     }
 }
