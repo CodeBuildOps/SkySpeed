@@ -1,49 +1,42 @@
 ﻿using System;
-using System.IO;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
 using HtmlToOpenXml;
 using DocumentFormat.OpenXml;
-using SkySpeedService.PNR;
+using System.Diagnostics;
 
 namespace SkySpeedService.Print
 {
-    class DocumentPrinter : HTMLBody
+    class DocumentPrinter
     {
-        private const string _docxFile = "PNR.docx";
-
-        public bool PrintDocument()
+        public bool PrintWordDocument(string pnrFilePath, string htmlContent)
         {
             try
             {
-                GenerateWordDocument(Path.Combine(Environment.CurrentDirectory, _docxFile));
+                using (WordprocessingDocument wordDoc = WordprocessingDocument.Create(pnrFilePath, WordprocessingDocumentType.Document))
+                {
+                    MainDocumentPart mainPart = wordDoc.AddMainDocumentPart();
+
+                    mainPart.Document = new Document();
+                    Body body = new Body();
+                    mainPart.Document.Append(body);
+
+                    HtmlConverter converter = new HtmlConverter(mainPart);
+                    var paragraphs = converter.Parse(htmlContent);
+
+                    foreach (var paragraph in paragraphs)
+                    {
+                        body.Append(paragraph);
+                    }
+
+                    mainPart.Document.Save();
+                    Process.Start(pnrFilePath);
+                }
                 return true;
             }
             catch (Exception)
             {
                 return false;
-            }
-        }
-
-        private void GenerateWordDocument(string filePath)
-        {
-            using (WordprocessingDocument wordDoc = WordprocessingDocument.Create(filePath, WordprocessingDocumentType.Document))
-            {
-                MainDocumentPart mainPart = wordDoc.AddMainDocumentPart();
-
-                mainPart.Document = new Document();
-                Body body = new Body();
-                mainPart.Document.Append(body);
-
-                HtmlConverter converter = new HtmlConverter(mainPart);
-                var paragraphs = converter.Parse(_htmlBody);
-
-                foreach (var paragraph in paragraphs)
-                {
-                    body.Append(paragraph);
-                }
-
-                mainPart.Document.Save();
             }
         }
     }

@@ -5,6 +5,7 @@ using SkySpeedService.Handler;
 using SkySpeedService.SignupAndLogin;
 using System.Collections.Generic;
 using SkySpeedService.Print;
+using SkySpeedService.PNR;
 
 namespace SkySpeedService
 {
@@ -57,16 +58,23 @@ namespace SkySpeedService
             return flightDetails.GetAllFlightDetails();
         }
 
-        public bool SendEmail(string toMail)
+        // Todo: Handle multiple passengers Name with their seat
+        public string GenerateHtml(List<string> passengerNames, string takeOff, string takeOffAirport, string landing, string landingAirport, string flightDuration, string flightNumber, List<string> seats, string pnr)
         {
-            var sendEmail = new SendEmail(toMail);
-            return sendEmail.IsEmailSent();
+            var htmlBody = new HTMLBody();
+            return htmlBody.GenerateHtml(passengerNames[0], takeOff, takeOffAirport, landing, landingAirport, flightDuration, flightNumber, seats[0], pnr);
         }
 
-        public bool PrintDocument()
+        public bool PrintDocument(string pnrFilePath, string htmlContent)
         {
             var documentPrinter = new DocumentPrinter();
-            return documentPrinter.PrintDocument();
+            return documentPrinter.PrintWordDocument(pnrFilePath, htmlContent);
+        }
+
+        public bool SendEmail(string toMail, string htmlContent)
+        {
+            var sendEmail = new SendEmail();
+            return sendEmail.EmailSend(toMail, htmlContent);
         }
     }
 }
