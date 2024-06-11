@@ -59,10 +59,10 @@ namespace SkySpeedService
         }
 
         // Todo: Handle multiple passengers Name with their seat
-        public string GenerateHtml(List<string> passengerNames, string takeOff, string takeOffAirport, string landing, string landingAirport, string flightDuration, string flightNumber, List<string> seats, string pnr)
+        public string GenerateHtml(Dictionary<string, string> passengerDetails, string takeOff, string takeOffAirport, string landing, string landingAirport, string flightDuration, string flightNumber, string pnr)
         {
             var htmlBody = new HTMLBody();
-            return htmlBody.GenerateHtml(passengerNames[0], takeOff, takeOffAirport, landing, landingAirport, flightDuration, flightNumber, seats[0], pnr);
+            return htmlBody.GenerateHtml(passengerDetails, takeOff, takeOffAirport, landing, landingAirport, flightDuration, flightNumber, pnr);
         }
 
         public bool PrintDocument(string pnrFilePath, string htmlContent)
