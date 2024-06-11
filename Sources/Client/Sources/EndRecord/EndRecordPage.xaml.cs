@@ -8,7 +8,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Input;
 
 namespace SkySpeed.EndRecords
@@ -22,8 +21,7 @@ namespace SkySpeed.EndRecords
         private SkySpeedServices _skySpeedServices;
         private const string _docxFile = "PNR.docx";
         private string _toMail;
-        private List<string> _passengerNames;
-        private List<string> _seats;
+        private Dictionary<string,string> _passengerSeatsNames;
         private string _pnr;
         private string _flightNumber;
         private string _flightDuration;
@@ -36,8 +34,7 @@ namespace SkySpeed.EndRecords
         {
             InitializeComponent();
 
-            _passengerNames = new List<string>();
-            _seats = new List<string>();;
+            _passengerSeatsNames = new Dictionary<string, string>();
             _displayMessage = new DisplayMessage("End record");
             GetEmailId();
             GenerateRandomPNR(6);
@@ -58,14 +55,13 @@ namespace SkySpeed.EndRecords
 
             _skySpeedServices = new SkySpeedServices();
             string htmlContent = _skySpeedServices.GenerateHtml(
-                _passengerNames,
+                _passengerSeatsNames,
                 _takeOff,
                 _takeOffAirport,
                 _landing,
                 _landingAirport,
                 _flightDuration,
                 _flightNumber,
-                _seats,
                 _pnr
                 );
             switch (selectedItemControl.Content.ToString().ToUpper())
@@ -101,8 +97,7 @@ namespace SkySpeed.EndRecords
                 {
                     if (rowItem is PassengersDetails row)
                     {
-                        _passengerNames.Add(row.FullName);
-                        _seats.Add(row.Seat);
+                        _passengerSeatsNames[row.Seat] = row.FullName;
                     }
                 }
             }
