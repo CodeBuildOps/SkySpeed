@@ -18,10 +18,10 @@ namespace SkySpeed.EndRecords
     public partial class EndRecordPage : Page
     {
         private readonly DisplayMessage _displayMessage;
-        private SkySpeedServices _skySpeedServices;
+        private readonly SkySpeedServices _skySpeedServices;
         private const string _docxFile = "PNR.docx";
         private string _toMail;
-        private Dictionary<string,string> _passengerSeatsNames;
+        private readonly Dictionary<string,string> _passengerSeatsNames;
         private string _pnr;
         private string _flightNumber;
         private string _flightDuration;
@@ -36,6 +36,7 @@ namespace SkySpeed.EndRecords
 
             _passengerSeatsNames = new Dictionary<string, string>();
             _displayMessage = new DisplayMessage("End record");
+            _skySpeedServices = new SkySpeedServices();
             GetEmailId();
             GenerateRandomPNR(6);
             GetAllPassengersDetails();
@@ -53,7 +54,7 @@ namespace SkySpeed.EndRecords
             if (!(SendItineraryComboBox.SelectedItem is ContentControl selectedItemControl))
                 return;
 
-            _skySpeedServices = new SkySpeedServices();
+            Cursor = Cursors.Wait;
             string htmlContent = _skySpeedServices.GenerateHtml(
                 _passengerSeatsNames,
                 _takeOff,
@@ -73,6 +74,58 @@ namespace SkySpeed.EndRecords
                     HandleEndRecordSelection("Would you like to print?", () => _skySpeedServices.PrintDocument(Path.Combine(Environment.CurrentDirectory, _docxFile), htmlContent));
                     break;
             }
+            InsertRecordsInTables();
+            Cursor = Cursors.Arrow;
+        }
+
+        // Todo: Add Flight details object and PNR details in the Passenger grid
+        private bool InsertRecordsInTables()
+        {
+            var details = new Dictionary<string, List<string>>
+            {
+                ["FLIGHT"] = new List<string> { _flightNumber },
+                ["PNR"] = new List<string> { _pnr }
+            };
+
+            foreach (var rowItem in SharedDataPage.PassengersDetailsGrid.Items)
+            {
+                if (rowItem is PassengersDetails row && row.PaymentDetailsObject != null)
+                {
+                    details["PASSENGERS"] = new List<string>
+                    {
+                        row.PassengerId.ToString(),
+                        row.Type,
+                        row.FullName,
+                        row.Gender,
+                        row.DOB,
+                        row.Country
+                    };
+                    details["CONTACT"] = new List<string>
+                    {
+                        row.Mobile,
+                        row.Email,
+                        row.FullAddress
+                    };
+                    details["SEAT"] = new List<string>
+                    {
+                        row.Seat,
+                        row.SeatPrice.ToString()
+                    };
+                    details["PAYMENT"] = new List<string>
+                    {
+                        row.PaymentDetailsObject.PaymentMethod,
+                        row.PaymentDetailsObject.Amount
+                    };
+
+                    if (!_skySpeedServices.InsertRecordsInTables(details))
+                    {
+                        _displayMessage.ShowErrorMessageBox($"Error while inserting the record into the database. Contact support.");
+                        return false;
+                    }
+                }
+            }
+
+            return true;
         }
 
         private void GenerateRandomPNR(int length)
@@ -122,9 +175,7 @@ namespace SkySpeed.EndRecords
         {
             if (_displayMessage.ShowQuestionMessageBox(message) == MessageBoxResult.Yes)
             {
-                Cursor = Cursors.Wait;
                 action();
-                Cursor = Cursors.Arrow;
             }
             SendItineraryComboBox.SelectedItem = null;
         }
