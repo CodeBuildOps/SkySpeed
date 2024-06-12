@@ -105,7 +105,7 @@
                             <TextBox Name="MiddleNameTextBox" Width="150" Grid.Row="2" Grid.Column="1" Margin="0,5,0,0"/>
 
                             <Label Content="Title:" Grid.Row="3" Grid.Column="0" Margin="0,5,0,0" Foreground="{DynamicResource ForegroundBlackBrush}"/>
-                            <ComboBox Name="TitleComboBox" Width="150" Grid.Row="3" Grid.Column="1" Margin="0,5,0,0">
+                            <ComboBox Name="TitleComboBox" SelectionChanged="TitleComboBox_SelectionChanged" Width="150" Grid.Row="3" Grid.Column="1" Margin="0,5,0,0">
                                 <ComboBoxItem>Mr</ComboBoxItem>
                                 <ComboBoxItem>Mrs</ComboBoxItem>
                             </ComboBox>
@@ -155,7 +155,7 @@
                             <TextBox Name="InfantMiddleNameTextBox" Width="150" Grid.Row="2" Grid.Column="1" Margin="0,5,0,0"/>
 
                             <Label Content="Title:" Grid.Row="3" Grid.Column="0" Margin="0,5,0,0" Foreground="{DynamicResource ForegroundBlackBrush}"/>
-                            <ComboBox Name="InfantTitleComboBox" Width="150" Grid.Row="3" Grid.Column="1" Margin="0,5,0,0">
+                            <ComboBox Name="InfantTitleComboBox" SelectionChanged="InfantTitleComboBox_SelectionChanged"  Width="150" Grid.Row="3" Grid.Column="1" Margin="0,5,0,0">
                                 <ComboBoxItem>Mr</ComboBoxItem>
                                 <ComboBoxItem>Mrs</ComboBoxItem>
                             </ComboBox>

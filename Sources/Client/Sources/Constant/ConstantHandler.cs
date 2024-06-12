@@ -2,6 +2,12 @@
 {
     public class ConstantHandler
     {
+        public enum Gender
+        {
+            Male = 0,
+            Female = 1
+        }
+
         public enum Countries
         {
             China,

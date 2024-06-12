@@ -324,5 +324,31 @@ namespace SkySpeed.Passengers
                 textBlock.Text = textBuilder.ToString();
             }
         }
+
+        private void TitleComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            SetGenderBasedOnTitle(TitleComboBox, GenderComboBox);
+        }
+
+        private void InfantTitleComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            SetGenderBasedOnTitle(InfantTitleComboBox, InfantGenderComboBox);
+        }
+
+        private void SetGenderBasedOnTitle(ComboBox titleComboBox, ComboBox genderComboBox)
+        {
+            switch (titleComboBox.SelectedIndex)
+            {
+                case 0:
+                    genderComboBox.SelectedIndex = (int)ConstantHandler.Gender.Male;
+                    break;
+                case 1:
+                    genderComboBox.SelectedIndex = (int)ConstantHandler.Gender.Female;
+                    break;
+                default:
+                    genderComboBox.SelectedIndex = -1;
+                    break;
+            }
+        }
     }
 }
