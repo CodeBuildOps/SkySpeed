@@ -8,10 +8,10 @@ namespace SkySpeedService.Flight
 {
     class FlightDetails : ExecuteQueries
     {
-        private const string FLIGHT_RESULTS_TABLE = "FLIGHT_RESULTS";
+        private const string FLIGHT_TABLE = "FLIGHT";
         public Dictionary<int, Dictionary<string, object>> GetAllFlightDetails()
         {
-            string query = $"SELECT * FROM {FLIGHT_RESULTS_TABLE};";
+            string query = $"SELECT * FROM {FLIGHT_TABLE};";
             return ExecuteReaderQuery(query, DatabaseHandler.DBParam);
         }
 
@@ -22,7 +22,7 @@ namespace SkySpeedService.Flight
 
             // Create the insert query
             StringBuilder insertQuery = new StringBuilder();
-            insertQuery.AppendLine($"INSERT INTO {FLIGHT_RESULTS_TABLE} (");
+            insertQuery.AppendLine($"INSERT INTO {FLIGHT_TABLE} (");
             insertQuery.AppendLine("    FLIGHT_NUMBER,");
             insertQuery.AppendLine("    DESIGNATOR,");
             insertQuery.AppendLine("    DAY_DATE,");

@@ -58,7 +58,6 @@ namespace SkySpeedService
             return flightDetails.GetAllFlightDetails();
         }
 
-        // Todo: Handle multiple passengers Name with their seat
         public string GenerateHtml(Dictionary<string, string> passengerDetails, string takeOff, string takeOffAirport, string landing, string landingAirport, string flightDuration, string flightNumber, string pnr)
         {
             var htmlBody = new HTMLBody();
@@ -75,6 +74,13 @@ namespace SkySpeedService
         {
             var sendEmail = new SendEmail();
             return sendEmail.EmailSend(toMail, htmlContent);
+        }
+
+        public bool InsertRecordsInTables(Dictionary<string, List<string>> details)
+        {
+            var insertRecordsInTables = new InsertRecordsInTables();
+            insertRecordsInTables.InsertRecords(details);
+            return true;
         }
     }
 }
