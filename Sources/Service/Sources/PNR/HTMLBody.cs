@@ -3,7 +3,7 @@ using System.Text;
 
 namespace SkySpeedService.PNR
 {
-    class HTMLBody
+    internal class HTMLBody
     {
         private readonly string HtmlBody = @"
         <!DOCTYPE html>
@@ -115,7 +115,7 @@ namespace SkySpeedService.PNR
         {
             StringBuilder passengerListHtml = new StringBuilder();
 
-            foreach (var passenger in passengersDetails)
+            foreach (KeyValuePair<string, string> passenger in passengersDetails)
             {
                 passengerListHtml.AppendFormat("<tr><td>{0}</td><td>{1}</td></tr>", passenger.Key, passenger.Value);
             }

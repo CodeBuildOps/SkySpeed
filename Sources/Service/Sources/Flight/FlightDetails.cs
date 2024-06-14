@@ -6,7 +6,7 @@ using System.Text;
 
 namespace SkySpeedService.Flight
 {
-    class FlightDetails : ExecuteQueries
+    internal class FlightDetails : ExecuteQueries
     {
         private const string FLIGHT_TABLE = "FLIGHT";
         public Dictionary<int, Dictionary<string, object>> GetAllFlightDetails()
@@ -18,7 +18,7 @@ namespace SkySpeedService.Flight
         public bool InsertFlightDetails(string flightDetailFilePath)
         {
             // Read flight details values from the text file
-            var lines = File.ReadAllLines(flightDetailFilePath);
+            string[] lines = File.ReadAllLines(flightDetailFilePath);
 
             // Create the insert query
             StringBuilder insertQuery = new StringBuilder();
@@ -37,7 +37,7 @@ namespace SkySpeedService.Flight
             // Process each line and add it to the query
             for (int i = 0; i < lines.Length; i++)
             {
-                var line = lines[i].Trim();
+                string line = lines[i].Trim();
                 if (!string.IsNullOrEmpty(line))
                 {
                     insertQuery.Append(line);

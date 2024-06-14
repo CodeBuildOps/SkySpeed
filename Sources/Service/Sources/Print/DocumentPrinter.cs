@@ -1,43 +1,37 @@
-﻿using System;
+﻿using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
 using HtmlToOpenXml;
-using DocumentFormat.OpenXml;
 using System.Diagnostics;
 
 namespace SkySpeedService.Print
 {
-    class DocumentPrinter
+    internal class DocumentPrinter
     {
         public bool PrintWordDocument(string pnrFilePath, string htmlContent)
         {
-            try
+            bool isDocPrinted = false;
+            using (WordprocessingDocument wordDoc = WordprocessingDocument.Create(pnrFilePath, WordprocessingDocumentType.Document))
             {
-                using (WordprocessingDocument wordDoc = WordprocessingDocument.Create(pnrFilePath, WordprocessingDocumentType.Document))
+                MainDocumentPart mainPart = wordDoc.AddMainDocumentPart();
+
+                mainPart.Document = new Document();
+                Body body = new Body();
+                mainPart.Document.Append(body);
+
+                HtmlConverter converter = new HtmlConverter(mainPart);
+                var paragraphs = converter.Parse(htmlContent);
+
+                foreach (OpenXmlCompositeElement paragraph in paragraphs)
                 {
-                    MainDocumentPart mainPart = wordDoc.AddMainDocumentPart();
-
-                    mainPart.Document = new Document();
-                    Body body = new Body();
-                    mainPart.Document.Append(body);
-
-                    HtmlConverter converter = new HtmlConverter(mainPart);
-                    var paragraphs = converter.Parse(htmlContent);
-
-                    foreach (var paragraph in paragraphs)
-                    {
-                        body.Append(paragraph);
-                    }
-
-                    mainPart.Document.Save();
-                    Process.Start(pnrFilePath);
+                    body.Append(paragraph);
                 }
-                return true;
+
+                mainPart.Document.Save();
+                Process.Start(pnrFilePath);
+                isDocPrinted = true;
             }
-            catch (Exception)
-            {
-                return false;
-            }
+            return isDocPrinted;
         }
     }
 }

@@ -3,15 +3,15 @@ using System.Text;
 
 namespace SkySpeedService.Handler
 {
-    class INIHandler
+    internal class INIHandler
     {
         private readonly string INIFilePath;
 
         [DllImport("kernel32", CharSet = CharSet.Unicode)]
-        static extern long WritePrivateProfileString(string section, string key, string value, string filePath);
+        private static extern long WritePrivateProfileString(string section, string key, string value, string filePath);
 
         [DllImport("kernel32", CharSet = CharSet.Unicode)]
-        static extern int GetPrivateProfileString(string section, string key, string defaultValue, StringBuilder retVal, int size, string filePath);
+        private static extern int GetPrivateProfileString(string section, string key, string defaultValue, StringBuilder retVal, int size, string filePath);
 
         public INIHandler(string iniFilePath)
         {
@@ -25,7 +25,7 @@ namespace SkySpeedService.Handler
 
         public string Read(string section, string key, string defaultValue = "")
         {
-            var retVal = new StringBuilder(255);
+            StringBuilder retVal = new StringBuilder(255);
             GetPrivateProfileString(section, key, defaultValue, retVal, 255, INIFilePath);
             return retVal.ToString();
         }

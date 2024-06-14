@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace SkySpeedService.SignupAndLogin
 {
-    class RegistrationAndLogin : ExecuteQueries
+    internal class RegistrationAndLogin : ExecuteQueries
     {
         private string UserId { get; set; }
         private string EmpPassword { get; set; }
@@ -28,7 +28,7 @@ namespace SkySpeedService.SignupAndLogin
             string query = $"SELECT * FROM SIGNUP WHERE USER_ID = '{UserId}';";
 
             Dictionary<int, Dictionary<string, object>> getLoginDetails = ExecuteReaderQuery(query, DatabaseHandler.DBParam);
-            foreach (var kvp in getLoginDetails)
+            foreach (KeyValuePair<int, Dictionary<string, object>> kvp in getLoginDetails)
             {
                 if (kvp.Value.TryGetValue("EMP_PASSWORD", out object empPassword))
                 {

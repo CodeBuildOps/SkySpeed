@@ -2,10 +2,10 @@
 using SkySpeedService.Email;
 using SkySpeedService.Flight;
 using SkySpeedService.Handler;
+using SkySpeedService.PNR;
+using SkySpeedService.Print;
 using SkySpeedService.SignupAndLogin;
 using System.Collections.Generic;
-using SkySpeedService.Print;
-using SkySpeedService.PNR;
 
 namespace SkySpeedService
 {
@@ -24,63 +24,62 @@ namespace SkySpeedService
             _dbHandler = new DatabaseHandler(iniFilePath);
             _dbHandler.ReadINI();
 
-            var dBSetup = new DBSetup();
+            DBSetup dBSetup = new DBSetup();
             return dBSetup.IsDatabaseExist();
         }
 
         public bool CreateDBSetup()
         {
-            var dBSetup = new DBSetup();
+            DBSetup dBSetup = new DBSetup();
             return dBSetup.CreateDBSetup();
         }
 
         public bool CreateRegistration(string userId, string empPassword, string empName)
         {
-            var registration = new RegistrationAndLogin(userId, empPassword, empName);
+            RegistrationAndLogin registration = new RegistrationAndLogin(userId, empPassword, empName);
             return registration.CreateRegistration();
         }
 
         public bool InsertFlightDetails(string flightDetailFilePath)
         {
-            var flightDetails = new FlightDetails();
+            FlightDetails flightDetails = new FlightDetails();
             return flightDetails.InsertFlightDetails(flightDetailFilePath);
         }
 
         public bool DoLogin(string userId, string empPassword)
         {
-            var login = new RegistrationAndLogin(userId, empPassword, null);
+            RegistrationAndLogin login = new RegistrationAndLogin(userId, empPassword, null);
             return login.DoLogin();
         }
 
         public Dictionary<int, Dictionary<string, object>> GetAllFlightDetails()
         {
-            var flightDetails = new FlightDetails();
+            FlightDetails flightDetails = new FlightDetails();
             return flightDetails.GetAllFlightDetails();
         }
 
         public string GenerateHtml(Dictionary<string, string> passengerDetails, string takeOff, string takeOffAirport, string landing, string landingAirport, string flightDuration, string flightNumber, string pnr)
         {
-            var htmlBody = new HTMLBody();
+            HTMLBody htmlBody = new HTMLBody();
             return htmlBody.GenerateHtml(passengerDetails, takeOff, takeOffAirport, landing, landingAirport, flightDuration, flightNumber, pnr);
         }
 
         public bool PrintDocument(string pnrFilePath, string htmlContent)
         {
-            var documentPrinter = new DocumentPrinter();
+            DocumentPrinter documentPrinter = new DocumentPrinter();
             return documentPrinter.PrintWordDocument(pnrFilePath, htmlContent);
         }
 
         public bool SendEmail(string toMail, string htmlContent)
         {
-            var sendEmail = new SendEmail();
+            SendEmail sendEmail = new SendEmail();
             return sendEmail.EmailSend(toMail, htmlContent);
         }
 
         public bool InsertRecordsInTables(Dictionary<string, List<string>> details)
         {
-            var insertRecordsInTables = new InsertRecordsInTables();
-            insertRecordsInTables.InsertRecords(details);
-            return true;
+            InsertRecordsInTables insertRecordsInTables = new InsertRecordsInTables();
+            return insertRecordsInTables.InsertRecords(details);
         }
     }
 }

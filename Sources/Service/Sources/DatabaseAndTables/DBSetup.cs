@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace SkySpeedService.DatabaseAndTables
 {
-    class DBSetup : ExecuteQueries
+    internal class DBSetup : ExecuteQueries
     {
         public bool CreateDBSetup()
         {
@@ -36,7 +36,7 @@ namespace SkySpeedService.DatabaseAndTables
                 $"DURATION VARCHAR(10) NOT NULL);",
 
                 $"CREATE TABLE PASSENGERS (" +
-                $"PNR VARCHAR(10) PRIMARY KEY," +
+                $"PNR VARCHAR(10)," +
                 $"FLIGHT_NUMBER VARCHAR(10) NOT NULL," +
                 $"PASSENGER_ID INT NOT NULL," +
                 $"TYPE VARCHAR(3) NOT NULL," +
@@ -54,12 +54,16 @@ namespace SkySpeedService.DatabaseAndTables
                 $"FOREIGN KEY (FLIGHT_NUMBER) REFERENCES FLIGHT (FLIGHT_NUMBER));"
         };
 
-            foreach (var tableQuery in tableCreationQueries)
+            foreach (string tableQuery in tableCreationQueries)
             {
                 if (isDBTablesCreated)
+                {
                     isDBTablesCreated = ExecuteNonQuery(tableQuery, DatabaseHandler.DBParam);
+                }
                 else
+                {
                     break;
+                }
             }
 
             return isDBTablesCreated;

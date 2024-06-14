@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace SkySpeedService.DatabaseAndTables
 {
-    class InsertRecordsInTables : ExecuteQueries
+    internal class InsertRecordsInTables : ExecuteQueries
     {
         public bool InsertRecords(Dictionary<string, List<string>> details)
         {
@@ -16,7 +16,7 @@ namespace SkySpeedService.DatabaseAndTables
             string paymentMethod = null, amount = null;
             string pnr = null;
 
-            foreach (var entry in details)
+            foreach (KeyValuePair<string, List<string>> entry in details)
             {
                 switch (entry.Key)
                 {

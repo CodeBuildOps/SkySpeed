@@ -2,9 +2,9 @@
 
 namespace SkySpeedService.Handler
 {
-    class DatabaseHandler
+    internal class DatabaseHandler
     {
-        private INIHandler _iniFile;
+        private readonly INIHandler _iniFile;
         public const string DATABASENAME = "SKYSPEED";
         private string ServerUserId { get; set; }
         private string ServerName { get; set; }
@@ -30,7 +30,7 @@ namespace SkySpeedService.Handler
 
         public bool CreateINI()
         {
-            var entries = new List<(string Key, string Value)>
+            List<(string Key, string Value)> entries = new List<(string Key, string Value)>
             {
                 ("SERVERUSERID", ServerUserId),
                 ("SERVERNAME", ServerName),
@@ -42,7 +42,7 @@ namespace SkySpeedService.Handler
 
             bool isIniCreated = true;
 
-            foreach (var (key, value) in entries)
+            foreach ((string key, string value) in entries)
             {
                 if (!_iniFile.Write("DATABASE", key, value))
                 {
@@ -56,7 +56,7 @@ namespace SkySpeedService.Handler
 
         public Dictionary<string, string> ReadINI()
         {
-            var iniValues = new Dictionary<string, string>();
+            Dictionary<string, string> iniValues = new Dictionary<string, string>();
 
             ServerUserId = iniValues["SERVERUSERID"] = _iniFile.Read("DATABASE", "SERVERUSERID");
             ServerName = iniValues["SERVERNAME"] = _iniFile.Read("DATABASE", "SERVERNAME");
