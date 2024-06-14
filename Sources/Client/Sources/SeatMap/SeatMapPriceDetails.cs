@@ -1,6 +1,6 @@
 ﻿namespace SkySpeed.SeatMap
 {
-    class SeatMapPriceDetails
+    internal class SeatMapPriceDetails
     {
         public string Seat { get; set; }
         public double SeatPrice { get; set; }

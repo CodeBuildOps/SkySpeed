@@ -16,7 +16,7 @@ namespace SkySpeed
     public partial class Login : Window
     {
         private Signup _signup;
-        private DisplayMessage _displayMessage;
+        private readonly DisplayMessage _displayMessage;
         private SkySpeedServices _skySpeedServices;
         private SkySpeedWindow _mainSkySpeed;
 
@@ -25,7 +25,7 @@ namespace SkySpeed
             InitializeComponent();
 
             // Simply to initialize
-            var iniHandler = new INIHandler();
+            _ = new INIHandler();
             _displayMessage = new DisplayMessage("SkySpeed");
         }
 

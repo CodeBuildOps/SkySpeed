@@ -47,22 +47,22 @@ namespace SkySpeed.FlightResults
         private List<FlightDetails> GetFlightDetails()
         {
             int flightIndex = 0;
-            var flightDetailsList = new List<FlightDetails>();
+            List<FlightDetails> flightDetailsList = new List<FlightDetails>();
             _skySpeedServices = new SkySpeedServices();
 
-            foreach (var kvp in _skySpeedServices.GetAllFlightDetails())
+            foreach (KeyValuePair<int, Dictionary<string, object>> kvp in _skySpeedServices.GetAllFlightDetails())
             {
-                var flightData = kvp.Value;
+                Dictionary<string, object> flightData = kvp.Value;
 
-                string flightNumber = flightData.TryGetValue("FLIGHT_NUMBER", out var flightNumberObj) && flightNumberObj is string flightNumberStr ? flightNumberStr : null;
-                string designator = flightData.TryGetValue("DESIGNATOR", out var designatorObj) && designatorObj is string designatorStr ? designatorStr : null;
-                string dayDate = flightData.TryGetValue("DAY_DATE", out var dayDateObj) && dayDateObj is string dayDateStr ? dayDateStr : null;
-                string sector = flightData.TryGetValue("SECTOR", out var sectorObj) && sectorObj is string sectorStr ? sectorStr : null;
-                string departArrival = flightData.TryGetValue("DEPART_ARRIVAL", out var departArrivalObj) && departArrivalObj is string departArrivalStr ? departArrivalStr : null;
-                string stop = flightData.TryGetValue("STOP", out var stopObj) && stopObj is string stopStr ? stopStr : null;
-                string seatLeft = flightData.TryGetValue("SEATSLEFT", out var seatLeftObj) && seatLeftObj is string seatLeftStr ? seatLeftStr : null;
-                string fare = flightData.TryGetValue("FARE", out var fareObj) && fareObj is string fareStr ? fareStr : null;
-                string duration = flightData.TryGetValue("DURATION", out var durationObj) && durationObj is string durationStr ? durationStr : null;
+                string flightNumber = flightData.TryGetValue("FLIGHT_NUMBER", out object flightNumberObj) && flightNumberObj is string flightNumberStr ? flightNumberStr : null;
+                string designator = flightData.TryGetValue("DESIGNATOR", out object designatorObj) && designatorObj is string designatorStr ? designatorStr : null;
+                string dayDate = flightData.TryGetValue("DAY_DATE", out object dayDateObj) && dayDateObj is string dayDateStr ? dayDateStr : null;
+                string sector = flightData.TryGetValue("SECTOR", out object sectorObj) && sectorObj is string sectorStr ? sectorStr : null;
+                string departArrival = flightData.TryGetValue("DEPART_ARRIVAL", out object departArrivalObj) && departArrivalObj is string departArrivalStr ? departArrivalStr : null;
+                string stop = flightData.TryGetValue("STOP", out object stopObj) && stopObj is string stopStr ? stopStr : null;
+                string seatLeft = flightData.TryGetValue("SEATSLEFT", out object seatLeftObj) && seatLeftObj is string seatLeftStr ? seatLeftStr : null;
+                string fare = flightData.TryGetValue("FARE", out object fareObj) && fareObj is string fareStr ? fareStr : null;
+                string duration = flightData.TryGetValue("DURATION", out object durationObj) && durationObj is string durationStr ? durationStr : null;
 
                 flightDetailsList.Add(
                     new FlightDetails(
@@ -90,7 +90,7 @@ namespace SkySpeed.FlightResults
                 return;
             }
 
-            foreach (var item in flightData)
+            foreach (FlightDetails item in flightData)
             {
                 FlightDetailsGrid.Items.Add(item);
             }
@@ -100,13 +100,17 @@ namespace SkySpeed.FlightResults
         {
             _selectedFlight = FlightDetailsGrid.SelectedItem as FlightDetails;
             if (_selectedFlight != null)
+            {
                 CalculateTotalCost();
+            }
         }
 
         private void CalculateTotalCost()
         {
             if (_selectedFlight == null)
+            {
                 return;
+            }
 
             if (double.TryParse(_selectedFlight.Fare.Replace("INR", "").Trim(), out double fareAmount))
             {

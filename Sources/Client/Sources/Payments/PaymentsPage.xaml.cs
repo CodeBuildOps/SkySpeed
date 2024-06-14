@@ -46,9 +46,13 @@ namespace SkySpeed.Payments
             for (int month = 1; month <= 12; month++)
             {
                 if (month < 10)
+                {
                     ExpiryMonthComboBox.Items.Add($"0{month}");
+                }
                 else
+                {
                     ExpiryMonthComboBox.Items.Add(month);
+                }
             }
         }
 
@@ -67,7 +71,7 @@ namespace SkySpeed.Payments
             // Check if FlightDetails is available and parse the flight cost
             if (SharedDataPage.FlightDetails is FlightDetails flightDetails && double.TryParse(flightDetails.Fare.Replace("INR", "").Trim(), out double flightCost))
             {
-                foreach (var rowItem in SharedDataPage.PassengersDetailsGrid.Items)
+                foreach (object rowItem in SharedDataPage.PassengersDetailsGrid.Items)
                 {
                     if (rowItem is PassengersDetails row)
                     {
@@ -87,9 +91,9 @@ namespace SkySpeed.Payments
 
         private void SetPaymentDetailsGrid()
         {
-            var passengerUpdatedDetailsList = new List<PassengersDetails>();
+            List<PassengersDetails> passengerUpdatedDetailsList = new List<PassengersDetails>();
 
-            foreach (var rowItem in SharedDataPage.PassengersDetailsGrid.Items)
+            foreach (object rowItem in SharedDataPage.PassengersDetailsGrid.Items)
             {
                 if (rowItem is PassengersDetails row && row.PaymentDetailsObject != null)
                 {
@@ -100,7 +104,7 @@ namespace SkySpeed.Payments
                             ? $"{totalCostFromAmountTextBox:F} INR"
                             : $"{totalCostFromPaymentGrid:F} INR";
 
-                        var updatedPaymentDetails = new PaymentDetails(
+                        PaymentDetails updatedPaymentDetails = new PaymentDetails(
                             row.PaymentDetailsObject.PaymentMethod,
                             row.PaymentDetailsObject.CardNumber,
                             totalCost,
@@ -123,7 +127,7 @@ namespace SkySpeed.Payments
 
         private void FillDetailsGrid(List<PassengersDetails> passengerData)
         {
-            foreach (var item in passengerData)
+            foreach (PassengersDetails item in passengerData)
             {
                 PaymentDetailsGrid.Items.Add(item);
             }
@@ -151,7 +155,9 @@ namespace SkySpeed.Payments
         {
 
             if (!ValidateFields((PaymentMethodComboBox.SelectedItem as ComboBoxItem).Content?.ToString(), CardNumberTextBox.Text, ExpiryMonthComboBox.SelectedItem?.ToString(), ExpiryYearComboBox.SelectedItem?.ToString(), CardHolderNameTextBox.Text))
+            {
                 return;
+            }
 
             SaveOrUpdate((PaymentMethodComboBox.SelectedItem as ComboBoxItem).Content?.ToString(), CardNumberTextBox.Text, AmountTextBox.Text, ExpiryMonthComboBox.SelectedItem?.ToString(), ExpiryYearComboBox.SelectedItem?.ToString(), CardHolderNameTextBox.Text);
 
@@ -200,7 +206,7 @@ namespace SkySpeed.Payments
             // Update the selected payment's data
             if (_selectedPassenger != null)
             {
-                var selectedPassengerInPaymentDetailGrid = PaymentDetailsGrid.Items[PaymentDetailsGrid.SelectedIndex] as PassengersDetails;
+                PassengersDetails selectedPassengerInPaymentDetailGrid = PaymentDetailsGrid.Items[PaymentDetailsGrid.SelectedIndex] as PassengersDetails;
                 selectedPassengerInPaymentDetailGrid.PaymentDetailsObject.PaymentMethod = paymentMethod;
                 selectedPassengerInPaymentDetailGrid.PaymentDetailsObject.CardNumber = cardNumber;
                 selectedPassengerInPaymentDetailGrid.PaymentDetailsObject.Amount = amount;
@@ -242,7 +248,7 @@ namespace SkySpeed.Payments
                         textBlock.Text = string.Empty;
 
                         StringBuilder textBuilder = new StringBuilder();
-                        foreach (var rowItem in SharedDataPage.PassengersDetailsGrid.Items)
+                        foreach (object rowItem in SharedDataPage.PassengersDetailsGrid.Items)
                         {
                             if (rowItem is PassengersDetails row && row.PaymentDetailsObject != null)
                             {
@@ -264,10 +270,10 @@ namespace SkySpeed.Payments
         {
             if (PaymentDetailsGrid?.Items != null)
             {
-                var paymentDetailsGridItems = PaymentDetailsGrid.Items.Cast<PassengersDetails>().ToList();
-                var paymentDetails = paymentDetailsGridItems[0].PaymentDetailsObject;
+                List<PassengersDetails> paymentDetailsGridItems = PaymentDetailsGrid.Items.Cast<PassengersDetails>().ToList();
+                PaymentDetails paymentDetails = paymentDetailsGridItems[0].PaymentDetailsObject;
 
-                var paymentDetailObject = new PaymentDetails(
+                PaymentDetails paymentDetailObject = new PaymentDetails(
                     paymentDetails.PaymentMethod,
                     paymentDetails.CardNumber,
                     paymentDetails.Amount,
@@ -276,7 +282,7 @@ namespace SkySpeed.Payments
                     paymentDetails.CardHolderName
                 );
 
-                foreach (var rowItem in SharedDataPage.PassengersDetailsGrid.Items)
+                foreach (object rowItem in SharedDataPage.PassengersDetailsGrid.Items)
                 {
                     if (rowItem is PassengersDetails row)
                     {
@@ -288,7 +294,7 @@ namespace SkySpeed.Payments
 
         private void ClearAllFields(params Control[] controls)
         {
-            foreach (var control in controls)
+            foreach (Control control in controls)
             {
                 if (control is TextBox textBox)
                 {

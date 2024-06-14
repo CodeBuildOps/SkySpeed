@@ -1,10 +1,10 @@
-﻿using SkySpeed.MessageLog;
+﻿using SkySpeed.Handler;
+using SkySpeed.MessageLog;
 using SkySpeedService;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using SkySpeed.Handler;
-using System.IO;
 
 namespace SkySpeed.Registration
 {
@@ -13,7 +13,7 @@ namespace SkySpeed.Registration
     /// </summary>
     public partial class Signup : Window
     {
-        private DisplayMessage _displayMessage;
+        private readonly DisplayMessage _displayMessage;
         private SkySpeedServices _skySpeedServices;
 
         public Signup()

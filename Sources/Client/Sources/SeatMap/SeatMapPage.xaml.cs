@@ -40,7 +40,7 @@ namespace SkySpeed.SeatMap
                 InitializeSeats();
                 SetPassengerSeatListDetailsGrid();
 
-            // Todo: Populate seat availability
+                // Todo: Populate seat availability
             }
             else
             {
@@ -72,7 +72,7 @@ namespace SkySpeed.SeatMap
                     string seatName = $"Seat{row}{col}";
 
                     // Get the Button object using FindName
-                    Button seatButton = (Button)this.FindName(seatName);
+                    Button seatButton = (Button)FindName(seatName);
 
                     // Check if seatButton is found
                     if (seatButton != null)
@@ -94,7 +94,7 @@ namespace SkySpeed.SeatMap
             }
 
             // Add seat details to the grid
-            foreach (var item in _seatGroupPrice)
+            foreach (SeatMapPriceDetails item in _seatGroupPrice)
             {
                 SeatGroupDetailsGrid.Items.Add(item);
             }
@@ -103,7 +103,7 @@ namespace SkySpeed.SeatMap
         private void ButtonSeat_MouseEnter(object sender, MouseEventArgs e)
         {
             Button hoverSeat = (Button)sender;
-            var seatGroupAndPrice = GetSeatMapPriceDetails(hoverSeat.Content.ToString());
+            SeatMapPriceDetails seatGroupAndPrice = GetSeatMapPriceDetails(hoverSeat.Content.ToString());
             if (seatGroupAndPrice != null)
             {
                 string seatPriceText = $"{seatGroupAndPrice.SeatPrice} INR";
@@ -113,16 +113,12 @@ namespace SkySpeed.SeatMap
                 {
                     backgroundColor = Brushes.Red;
                 }
-                else if (seatGroupAndPrice.SeatPrice > 0 && seatGroupAndPrice.SeatPrice <= 500)
-                {
-                    backgroundColor = Brushes.Yellow;
-                }
                 else
                 {
-                    backgroundColor = Brushes.Green;
+                    backgroundColor = seatGroupAndPrice.SeatPrice > 0 && seatGroupAndPrice.SeatPrice <= 500 ? Brushes.Yellow : (Brush)Brushes.Green;
                 }
 
-                var tooltip = new ToolTip
+                ToolTip tooltip = new ToolTip
                 {
                     Content = new TextBlock
                     {
@@ -130,7 +126,7 @@ namespace SkySpeed.SeatMap
                         Padding = new Thickness(5),
                         Foreground = Brushes.Black,
                         FontWeight = FontWeights.Bold,
-                        FontSize=14,
+                        FontSize = 14,
                     },
                     Background = backgroundColor
                 };
@@ -150,23 +146,35 @@ namespace SkySpeed.SeatMap
             if (row >= 1 && row <= 5)
             {
                 if (col >= 'A' && col <= 'C')
+                {
                     _seatLeftTop.Add($"{row}{col}");
+                }
                 else if (col >= 'D' && col <= 'F')
+                {
                     _seatRightTop.Add($"{row}{col}");
+                }
             }
             else if (row == 0)
             {
                 if (col >= 'A' && col <= 'C')
+                {
                     _seatLeftMiddle.Add($"{row}{col}");
+                }
                 else if (col >= 'D' && col <= 'F')
+                {
                     _seatRightMiddle.Add($"{row}{col}");
+                }
             }
             else if (row >= 6 && row <= 9)
             {
                 if (col >= 'A' && col <= 'C')
+                {
                     _seatLeftBottom.Add($"{row}{col}");
+                }
                 else if (col >= 'D' && col <= 'F')
+                {
                     _seatRightBottom.Add($"{row}{col}");
+                }
             }
         }
 
@@ -178,22 +186,17 @@ namespace SkySpeed.SeatMap
                 return 1000;
             }
             // Window seats
-            else if (col == 'A' || col == 'F')
-            {
-                return 500;
-            }
-            // Other seats
             else
             {
-                return 0;
+                return col == 'A' || col == 'F' ? 500 : 0;
             }
         }
 
         private void SetPassengerSeatListDetailsGrid()
         {
-            var detailsList = new List<PassengersDetails>();
+            List<PassengersDetails> detailsList = new List<PassengersDetails>();
 
-            foreach (var rowItem in SharedDataPage.PassengersDetailsGrid.Items)
+            foreach (object rowItem in SharedDataPage.PassengersDetailsGrid.Items)
             {
                 if (rowItem is PassengersDetails row)
                 {
@@ -230,13 +233,13 @@ namespace SkySpeed.SeatMap
 
         private void FillPassengerSeatListDetailsGrid(List<PassengersDetails> passengerData)
         {
-            foreach (var item in passengerData)
+            foreach (PassengersDetails item in passengerData)
             {
                 if (item.Seat != null)
                 {
                     // Preserve the spot where the seating person image will be set for each passenger.
                     // Locate the button
-                    Button seatButton = (Button)this.FindName($"Seat{item.Seat}");
+                    Button seatButton = (Button)FindName($"Seat{item.Seat}");
                     GetSittingPersonImage(seatButton);
                     SetSittingPersonImage(seatButton);
                 }
@@ -288,7 +291,7 @@ namespace SkySpeed.SeatMap
         private void GetSittingPersonImage(Button seat)
         {
             // Combined dictionary to map seat lists to their corresponding images
-            var seatImageMap = new Dictionary<List<string>, Image>()
+            Dictionary<List<string>, Image> seatImageMap = new Dictionary<List<string>, Image>()
             {
                 { _seatLeftTop, sittingPersonImageLeftTop },
                 { _seatRightTop, sittingPersonImageRightTop },
@@ -302,7 +305,7 @@ namespace SkySpeed.SeatMap
             _selectedSittingPersonImage = null;
 
             // Search in all seat lists
-            foreach (var kvp in seatImageMap)
+            foreach (KeyValuePair<List<string>, Image> kvp in seatImageMap)
             {
                 if (kvp.Key.Contains(seat.Content.ToString()))
                 {
@@ -331,7 +334,7 @@ namespace SkySpeed.SeatMap
 
         private void SaveSeat(string selectedSeat)
         {
-            var seatGroupAndPrice = GetSeatMapPriceDetails(selectedSeat);
+            SeatMapPriceDetails seatGroupAndPrice = GetSeatMapPriceDetails(selectedSeat);
             if (seatGroupAndPrice != null)
             {
                 _selectedPassenger.Seat = selectedSeat;
@@ -364,7 +367,7 @@ namespace SkySpeed.SeatMap
                 textBlock.Text = string.Empty;
 
                 StringBuilder textBuilder = new StringBuilder();
-                foreach (var rowItem in SharedDataPage.PassengersDetailsGrid.Items)
+                foreach (object rowItem in SharedDataPage.PassengersDetailsGrid.Items)
                 {
                     if (rowItem is PassengersDetails row)
                     {

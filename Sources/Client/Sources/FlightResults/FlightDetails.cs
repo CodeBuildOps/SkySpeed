@@ -1,6 +1,6 @@
 ﻿namespace SkySpeed.FlightResults
 {
-    class FlightDetails
+    internal class FlightDetails
     {
         public int SelectedFlightIndex { get; set; }
         public string Designator { get; set; }

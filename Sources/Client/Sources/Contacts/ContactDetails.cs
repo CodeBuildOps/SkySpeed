@@ -1,6 +1,6 @@
 ﻿namespace SkySpeed.Contacts
 {
-    class ContactDetails
+    internal class ContactDetails
     {
         public int PassengerId { get; set; }
         public string AddressLine1 { get; set; }

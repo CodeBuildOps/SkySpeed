@@ -2,7 +2,7 @@
 
 namespace SkySpeed.Passengers
 {
-    class PassengersDetails
+    internal class PassengersDetails
     {
         // These will be used to bind the Datagrid columns across all pages
 

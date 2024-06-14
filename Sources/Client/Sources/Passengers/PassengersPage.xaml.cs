@@ -27,7 +27,9 @@ namespace SkySpeed.Passengers
             _displayMessage = new DisplayMessage("Passenger");
 
             if (SharedDataPage.PassengersDetailsGrid?.Items != null)
+            {
                 SetPassengersDetailsGrid();
+            }
 
             SetComboBoxWithCountries();
             SetDatePickerDateRanges();
@@ -44,9 +46,9 @@ namespace SkySpeed.Passengers
 
         private void SetPassengersDetailsGrid()
         {
-            var passengerUpdatedDetailsList = new List<PassengersDetails>();
+            List<PassengersDetails> passengerUpdatedDetailsList = new List<PassengersDetails>();
 
-            foreach (var rowItem in SharedDataPage.PassengersDetailsGrid.Items)
+            foreach (object rowItem in SharedDataPage.PassengersDetailsGrid.Items)
             {
                 if (rowItem is PassengersDetails row)
                 {
@@ -85,14 +87,14 @@ namespace SkySpeed.Passengers
 
         private void SetComboBoxWithCountries()
         {
-            var countries = Enum.GetNames(typeof(ConstantHandler.Countries));
+            string[] countries = Enum.GetNames(typeof(ConstantHandler.Countries));
             CountryComboBox.ItemsSource = countries;
             InfantCountryComboBox.ItemsSource = countries;
         }
 
         private void SetDatePickerDateRanges()
         {
-            var oneHundredYearsAgo = DateTime.Today.AddYears(-100);
+            DateTime oneHundredYearsAgo = DateTime.Today.AddYears(-100);
 
             DOBDatePicker.DisplayDateStart = oneHundredYearsAgo;
             DOBDatePicker.DisplayDateEnd = DateTime.Today;
@@ -127,7 +129,9 @@ namespace SkySpeed.Passengers
             if (SharedDataPage.NumberOfADT > 0)
             {
                 if (!ValidateFields(LastNameTextBox.Text, FirstNameTextBox.Text, TitleComboBox.Text, GenderComboBox.Text))
+                {
                     return;
+                }
 
                 SaveOrUpdate("ADT", LastNameTextBox.Text, FirstNameTextBox.Text, MiddleNameTextBox.Text,
                                       TitleComboBox.Text, GenderComboBox.Text, DOBDatePicker.Text, CountryComboBox.SelectedItem?.ToString());
@@ -137,7 +141,9 @@ namespace SkySpeed.Passengers
             if (SharedDataPage.NumberOfCHD > 0)
             {
                 if (!ValidateFields(InfantLastNameTextBox.Text, InfantFirstNameTextBox.Text, InfantTitleComboBox.Text, InfantGenderComboBox.Text))
+                {
                     return;
+                }
 
                 SaveOrUpdate("CHD", InfantLastNameTextBox.Text, InfantFirstNameTextBox.Text, InfantMiddleNameTextBox.Text,
                                       InfantTitleComboBox.Text, InfantGenderComboBox.Text, InfantDOBDatePicker.Text, InfantCountryComboBox.SelectedItem?.ToString());
@@ -218,7 +224,7 @@ namespace SkySpeed.Passengers
 
         private void FillDetailsGrid(List<PassengersDetails> passengerData)
         {
-            foreach (var item in passengerData)
+            foreach (PassengersDetails item in passengerData)
             {
                 PassengersDetailsGrid.Items.Add(item);
             }
@@ -280,7 +286,7 @@ namespace SkySpeed.Passengers
 
         private void ClearPassengerFields(params Control[] controls)
         {
-            foreach (var control in controls)
+            foreach (Control control in controls)
             {
                 if (control is TextBox textBox)
                 {
@@ -308,7 +314,7 @@ namespace SkySpeed.Passengers
                 textBlock.Text = string.Empty;
 
                 StringBuilder textBuilder = new StringBuilder();
-                foreach (var rowItem in SharedDataPage.PassengersDetailsGrid.Items)
+                foreach (object rowItem in SharedDataPage.PassengersDetailsGrid.Items)
                 {
                     if (rowItem is PassengersDetails row)
                     {

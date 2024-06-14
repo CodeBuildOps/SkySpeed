@@ -1,8 +1,8 @@
 ﻿using SkySpeed.Handler;
 using SkySpeed.MessageLog;
 using SkySpeedService;
-using System.Windows;
 using System.IO;
+using System.Windows;
 using System.Windows.Input;
 
 namespace SkySpeedSetup
@@ -99,9 +99,13 @@ namespace SkySpeedSetup
             bool isDBExists = _skySpeedServices.DatabaseExists(INIHandler.INIFilePath);
             Cursor = Cursors.Arrow;
             if (isDBExists)
+            {
                 _displayMessage.ShowSuccessMessageBox("Connected successfully.");
+            }
             else
+            {
                 _displayMessage.ShowWarningMessageBox("Can't connect with database.");
+            }
         }
     }
 }

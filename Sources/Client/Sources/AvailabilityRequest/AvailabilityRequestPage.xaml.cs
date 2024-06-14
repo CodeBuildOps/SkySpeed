@@ -33,7 +33,7 @@ namespace SkySpeed.AvailabilityRequest
 
         private void SetDatePickerDateRanges()
         {
-            var twoMonthsFromToday = DateTime.Today.AddMonths(2);
+            DateTime twoMonthsFromToday = DateTime.Today.AddMonths(2);
 
             DatePicker.DisplayDateStart = DateTime.Today;
             DatePicker.DisplayDateEnd = twoMonthsFromToday;
@@ -47,14 +47,14 @@ namespace SkySpeed.AvailabilityRequest
 
         private void SetComboBoxWithCaptials()
         {
-            var capitals = Enum.GetNames(typeof(ConstantHandler.Capital));
+            string[] capitals = Enum.GetNames(typeof(ConstantHandler.Capital));
             FromComboBox.ItemsSource = capitals;
             ToComboBox.ItemsSource = capitals;
         }
 
         private void SetComboBoxWithTime()
         {
-            var times = GetTimes();
+            List<string> times = GetTimes();
             OutboundFlightTime.ItemsSource = times;
             ReturnFlightTime.ItemsSource = times;
         }

@@ -48,9 +48,13 @@ namespace SkySpeed.SkySpeedMainWindow
         private void AboutSkySpeed_Click(object sender, RoutedEventArgs e)
         {
             if (File.Exists(README_FILE_PATH))
+            {
                 Process.Start(README_FILE_PATH);
+            }
             else
+            {
                 _displayMessage.ShowErrorMessageBox("ReadMe file not found.");
+            }
         }
 
         private void Calculator_Click(object sender, RoutedEventArgs e)

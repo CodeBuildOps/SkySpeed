@@ -16,7 +16,7 @@ namespace SkySpeed.ReservationSummary
         public ReservationSummaryPage()
         {
             InitializeComponent();
-            this.Loaded += Page_Loaded;
+            Loaded += Page_Loaded;
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
@@ -40,9 +40,12 @@ namespace SkySpeed.ReservationSummary
 
         private void GetDetailsFromMainParentWindow(string parentElementName, FrameworkElement updateElement)
         {
-            if (_parentWindow == null) return;
+            if (_parentWindow == null)
+            {
+                return;
+            }
 
-            var parentElement = _parentWindow.FindName(parentElementName) as FrameworkElement;
+            FrameworkElement parentElement = _parentWindow.FindName(parentElementName) as FrameworkElement;
 
             string textContent = null;
 
@@ -72,19 +75,11 @@ namespace SkySpeed.ReservationSummary
         {
             double flightCost = 0;
             double totalSeatCost = 0;
-            double totalCost = 0;
 
             // Check if FlightDetails is available
             if (SharedDataPage.FlightDetails is FlightDetails flightDetails)
             {
-                if (double.TryParse(flightDetails.Fare.Replace("INR", "").Trim(), out flightCost))
-                {
-                    FlightPriceLabel.Content = $"{flightCost:F} INR";
-                }
-                else
-                {
-                    FlightPriceLabel.Content = "N/A";
-                }
+                FlightPriceLabel.Content = double.TryParse(flightDetails.Fare.Replace("INR", "").Trim(), out flightCost) ? $"{flightCost:F} INR" : (object)"N/A";
             }
             else
             {
@@ -94,7 +89,7 @@ namespace SkySpeed.ReservationSummary
             // Check if PassengersDetailsGrid is available
             if (SharedDataPage.PassengersDetailsGrid?.Items != null)
             {
-                foreach (var rowItem in SharedDataPage.PassengersDetailsGrid.Items)
+                foreach (object rowItem in SharedDataPage.PassengersDetailsGrid.Items)
                 {
                     if (rowItem is PassengersDetails row)
                     {
@@ -108,7 +103,7 @@ namespace SkySpeed.ReservationSummary
                 SeatPriceLabel.Content = "N/A";
             }
 
-            totalCost = flightCost + totalSeatCost;
+            double totalCost = flightCost + totalSeatCost;
             TotalCostLabel.Content = $"{totalCost:F} INR";
         }
     }

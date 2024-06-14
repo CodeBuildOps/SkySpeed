@@ -21,7 +21,7 @@ namespace SkySpeed.EndRecords
         private readonly SkySpeedServices _skySpeedServices;
         private const string _docxFile = "PNR.docx";
         private string _toMail;
-        private readonly Dictionary<string,string> _passengerSeatsNames;
+        private readonly Dictionary<string, string> _passengerSeatsNames;
         private string _pnr;
         private string _flightNumber;
         private string _flightDuration;
@@ -52,7 +52,9 @@ namespace SkySpeed.EndRecords
         private void SendItineraryComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (!(SendItineraryComboBox.SelectedItem is ContentControl selectedItemControl))
+            {
                 return;
+            }
 
             Cursor = Cursors.Wait;
             string htmlContent = _skySpeedServices.GenerateHtml(
@@ -81,13 +83,13 @@ namespace SkySpeed.EndRecords
         // Todo: Add Flight details object and PNR details in the Passenger grid
         private bool InsertRecordsInTables()
         {
-            var details = new Dictionary<string, List<string>>
+            Dictionary<string, List<string>> details = new Dictionary<string, List<string>>
             {
                 ["FLIGHT"] = new List<string> { _flightNumber },
                 ["PNR"] = new List<string> { _pnr }
             };
 
-            foreach (var rowItem in SharedDataPage.PassengersDetailsGrid.Items)
+            foreach (object rowItem in SharedDataPage.PassengersDetailsGrid.Items)
             {
                 if (rowItem is PassengersDetails row && row.PaymentDetailsObject != null)
                 {
@@ -146,7 +148,7 @@ namespace SkySpeed.EndRecords
         {
             if (SharedDataPage.PassengersDetailsGrid?.Items != null)
             {
-                foreach (var rowItem in SharedDataPage.PassengersDetailsGrid.Items)
+                foreach (object rowItem in SharedDataPage.PassengersDetailsGrid.Items)
                 {
                     if (rowItem is PassengersDetails row)
                     {

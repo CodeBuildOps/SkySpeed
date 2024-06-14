@@ -1,6 +1,6 @@
 ﻿namespace SkySpeed.Payments
 {
-    class PaymentDetails
+    internal class PaymentDetails
     {
         public string PaymentMethod { get; set; }
         public string CardNumber { get; set; }
