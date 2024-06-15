@@ -18,11 +18,15 @@ namespace SkySpeedService
             _dbHandler = new DatabaseHandler(serverUserId, serverName, serverPassword, iniFilePath);
             return _dbHandler.CreateINI();
         }
+        public Dictionary<string, string> ReadINI(string iniFilePath)
+        {
+            _dbHandler = new DatabaseHandler(iniFilePath);
+            return _dbHandler.ReadINI();
+        }
 
         public bool DatabaseExists(string iniFilePath)
         {
-            _dbHandler = new DatabaseHandler(iniFilePath);
-            _dbHandler.ReadINI();
+            ReadINI(iniFilePath);
 
             DBSetup dBSetup = new DBSetup();
             return dBSetup.IsDatabaseExist();
