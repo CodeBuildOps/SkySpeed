@@ -80,8 +80,8 @@
                 <Border Margin="0,3,0,0" BorderBrush="{DynamicResource HeaderBackgroundBrush}" BorderThickness="1">
                     <StackPanel Background="{DynamicResource SectionBackgroundBrush}">
                         <Expander Header="Passengers" IsExpanded="True" FontWeight="DemiBold" Foreground="{DynamicResource ForegroundWhiteBrush}" Background="{DynamicResource HeaderBackgroundBrush}">
-                            <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="180">
-                                <TextBlock Padding="5" Name="PassengersExpanderTextBlock" Foreground="Black" Background="White" TextWrapping="Wrap" FontSize="10" MinHeight="150"/>
+                            <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="150">
+                                <TextBlock Padding="5" Name="PassengersExpanderTextBlock" Foreground="Black" Background="White" TextWrapping="Wrap" FontSize="10" MinHeight="130"/>
                             </ScrollViewer>
                         </Expander>
                     </StackPanel>
@@ -90,8 +90,8 @@
                 <Border Margin="0,3,0,0" BorderBrush="{DynamicResource HeaderBackgroundBrush}" BorderThickness="1">
                     <StackPanel Background="{DynamicResource SectionBackgroundBrush}">
                         <Expander Header="Contact Information" IsExpanded="True" FontWeight="DemiBold" Foreground="{DynamicResource ForegroundWhiteBrush}" Background="{DynamicResource HeaderBackgroundBrush}">
-                            <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="180">
-                                <TextBlock Padding="5" Name="ContactExpanderTextBlock" Foreground="Black" Background="White" TextWrapping="Wrap" FontSize="10" MinHeight="150"/>
+                            <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="150">
+                                <TextBlock Padding="5" Name="ContactExpanderTextBlock" Foreground="Black" Background="White" TextWrapping="Wrap" FontSize="10" MinHeight="130"/>
                             </ScrollViewer>
                         </Expander>
                     </StackPanel>
@@ -110,8 +110,8 @@
                 <Border Margin="0,3,0,0" BorderBrush="{DynamicResource HeaderBackgroundBrush}" BorderThickness="1">
                     <StackPanel Background="{DynamicResource SectionBackgroundBrush}">
                         <Expander Header="Payments" IsExpanded="True" FontWeight="DemiBold" Foreground="{DynamicResource ForegroundWhiteBrush}" Background="{DynamicResource HeaderBackgroundBrush}">
-                            <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="80">
-                                <TextBlock  Padding="5" Name="PaymentExpanderTextBlock" Foreground="Black" Background="White" TextWrapping="Wrap" FontSize="10" MinHeight="80" />
+                            <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="60">
+                                <TextBlock  Padding="5" Name="PaymentExpanderTextBlock" Foreground="Black" Background="White" TextWrapping="Wrap" FontSize="10" MinHeight="50" />
                             </ScrollViewer>
                         </Expander>
                     </StackPanel>

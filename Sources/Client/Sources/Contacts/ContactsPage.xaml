@@ -23,7 +23,7 @@
                     <StackPanel Background="{DynamicResource SectionBackgroundBrush}">
                         <DataGrid GridLinesVisibility="None" IsReadOnly="True" Height="150" Name="ContactDetailsGrid" SelectionChanged="ContactDetailsGrid_SelectionChanged" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" MaxHeight="300">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Id" Binding="{Binding PassengerId}" />
+                                <DataGridTextColumn Visibility="Hidden" Header="Id" Binding="{Binding PassengerId}" />
                                 <DataGridTextColumn Header="FullName" Binding="{Binding FullName}" />
                                 <DataGridTextColumn Header="Email" Binding="{Binding Email}" />
                                 <DataGridTextColumn Header="Mobile" Binding="{Binding Mobile}" />
