@@ -1,6 +1,7 @@
 ﻿using SkySpeed.Handler;
 using SkySpeed.MessageLog;
 using SkySpeedService;
+using System.Collections.Generic;
 using System.IO;
 using System.Windows;
 using System.Windows.Input;
@@ -20,9 +21,20 @@ namespace SkySpeedSetup
         {
             InitializeComponent();
 
+            Loaded += Page_Loaded;
             _displayMessage = new DisplayMessage("SkySpeed");
             _iniHandler = new INIHandler();
             _skySpeedServices = new SkySpeedServices();
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (File.Exists(INIHandler.INIFilePath))
+            {
+                Dictionary<string, string> iniValues = _skySpeedServices.ReadINI(INIHandler.INIFilePath);
+                ServerNameTextBox.Text = iniValues["SERVERNAME"];
+                ServerPasswordBox.Password = iniValues["SERVERPASSWORD"];
+            }
         }
 
         private void ApplyButton_Click(object sender, RoutedEventArgs e)
