@@ -86,7 +86,8 @@ namespace SkySpeed.EndRecords
             Dictionary<string, List<string>> details = new Dictionary<string, List<string>>
             {
                 ["FLIGHT"] = new List<string> { _flightNumber },
-                ["PNR"] = new List<string> { _pnr }
+                ["PNR"] = new List<string> { _pnr },
+                ["COMMENT"] = new List<string> { GetDetailsFromMainParentWindow("CommentTextBox") }
             };
 
             foreach (object rowItem in SharedDataPage.PassengersDetailsGrid.Items)
@@ -128,6 +129,23 @@ namespace SkySpeed.EndRecords
             }
 
             return true;
+        }
+
+        private string GetDetailsFromMainParentWindow(string parentElementName)
+        {
+            string commentContent = null;
+            Window parentWindow = Window.GetWindow(this);
+
+            if (parentWindow != null)
+            {
+                FrameworkElement parentElement = parentWindow.FindName(parentElementName) as FrameworkElement;
+                if (parentElement is TextBox parentTextBlock)
+                {
+                    commentContent = parentTextBlock.Text;
+                }
+            }
+
+            return commentContent;
         }
 
         private void GenerateRandomPNR(int length)
