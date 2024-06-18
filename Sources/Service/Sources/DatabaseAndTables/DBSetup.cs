@@ -36,21 +36,22 @@ namespace SkySpeedService.DatabaseAndTables
                 $"DURATION VARCHAR(10) NOT NULL);",
 
                 $"CREATE TABLE PASSENGERS (" +
-                $"PNR VARCHAR(10)," +
+                $"PNR VARCHAR(10) NOT NULL," +
                 $"FLIGHT_NUMBER VARCHAR(10) NOT NULL," +
                 $"PASSENGER_ID INT NOT NULL," +
                 $"TYPE VARCHAR(3) NOT NULL," +
-                $"FULLNAME VARCHAR(25)," +
+                $"FULLNAME VARCHAR(25) NOT NULL," +
                 $"GENDER VARCHAR(6) NOT NULL," +
                 $"DOB VARCHAR(10)," +
                 $"COUNTRY VARCHAR(15)," +
                 $"MOBILE VARCHAR(12)," +
                 $"EMAIL VARCHAR(25)," +
-                $"FULLADDRESS VARCHAR(255) NOT NULL," +
+                $"FULLADDRESS VARCHAR(255)," +
                 $"SEAT VARCHAR(2) NOT NULL," +
                 $"SEAT_PRICE VARCHAR(4) NOT NULL," +
                 $"PAYMENT_METHOD VARCHAR(15) NOT NULL," +
                 $"AMOUNT VARCHAR(15) NOT NULL," +
+                 $"COMMENT VARCHAR(255)," +
                 $"FOREIGN KEY (FLIGHT_NUMBER) REFERENCES FLIGHT (FLIGHT_NUMBER));"
         };
 
