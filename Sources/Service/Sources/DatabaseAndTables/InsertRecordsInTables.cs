@@ -15,6 +15,7 @@ namespace SkySpeedService.DatabaseAndTables
             string seat = null, seatPrice = null;
             string paymentMethod = null, amount = null;
             string pnr = null;
+            string comment = null;
 
             foreach (KeyValuePair<string, List<string>> entry in details)
             {
@@ -47,12 +48,15 @@ namespace SkySpeedService.DatabaseAndTables
                     case "PNR":
                         pnr = entry.Value[0];
                         break;
+                    case "COMMENT":
+                        comment = entry.Value[0];
+                        break;
                 }
             }
 
             string query = $"INSERT INTO PASSENGERS (" +
-                $"PNR, FLIGHT_NUMBER, PASSENGER_ID, TYPE, FULLNAME, GENDER, DOB, COUNTRY, MOBILE, EMAIL, FULLADDRESS, SEAT, SEAT_PRICE, PAYMENT_METHOD, AMOUNT) VALUES(" +
-                $"'{pnr}', '{flightNumber}', '{passengerId}', '{type}', '{fullName}', '{gender}', '{dob}', '{country}', '{mobile}', '{email}', '{fullAddress}', '{seat}', '{seatPrice}', '{paymentMethod}', '{amount}');";
+                $"PNR, FLIGHT_NUMBER, PASSENGER_ID, TYPE, FULLNAME, GENDER, DOB, COUNTRY, MOBILE, EMAIL, FULLADDRESS, SEAT, SEAT_PRICE, PAYMENT_METHOD, AMOUNT, COMMENT) VALUES(" +
+                $"'{pnr}', '{flightNumber}', '{passengerId}', '{type}', '{fullName}', '{gender}', '{dob}', '{country}', '{mobile}', '{email}', '{fullAddress}', '{seat}', '{seatPrice}', '{paymentMethod}', '{amount}', '{comment}');";
 
             return ExecuteNonQuery(query, DatabaseHandler.DBParam);
         }
